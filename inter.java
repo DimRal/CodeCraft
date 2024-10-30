@@ -1,5 +1,4 @@
 public class inter {
-    
-       System.out.println("iokasti");
-    
+    System.out.println(42);
 }
+
