@@ -2,6 +2,6 @@ public class AI {
     public void ai (){
         System.out.println("geia");
         //12dfknfnffj
-        //2
+        //ush origi 
     }
 }
