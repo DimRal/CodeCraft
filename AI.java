@@ -1,7 +1,72 @@
-public class AI {
-    public void ai (){
-        System.out.println("geia");
-        //12dfknfnffj
-        //ush origi 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
+
+public class AI{
+
+    public static void main(String[] args) throws URISyntaxException {
+        System.out.println(chatGPT("Hello"));
     }
+
+    public static String chatGPT(String message) throws URISyntaxException {
+        String url = "https://api.openai.com/v1/chat/completions";
+        //TODO: put your key
+        String apiKey = "KEY"; // Replace with your actual API key
+        String model = "gpt-4o";
+
+        try {
+            URI uri = new URI(url);
+            URL obj = uri.toURL();
+            HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+            con.setRequestMethod("POST");
+            con.setRequestProperty("Authorization", "Bearer " + apiKey);
+            con.setRequestProperty("Content-Type", "application/json");
+
+            String body = "{\"model\": \"" + model + "\", \"messages\": [{\"role\": \"user\", \"content\": \"" + message + "\"}]}";
+            con.setDoOutput(true);
+
+            try (OutputStreamWriter writer = new OutputStreamWriter(con.getOutputStream())) {
+                writer.write(body);
+                writer.flush();
+            }
+
+            int responseCode = con.getResponseCode();
+
+            if (responseCode == HttpURLConnection.HTTP_OK) { // HTTP 200
+                BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+                String inputLine;
+                StringBuilder response = new StringBuilder();
+                while ((inputLine = in.readLine()) != null) {
+                    response.append(inputLine);
+                }
+                in.close();
+                return extractContentFromResponse(response.toString());
+            }   else {
+                    BufferedReader errorStream = new BufferedReader(new InputStreamReader(con.getErrorStream()));
+                    String inputLine;
+                    StringBuilder errorResponse = new StringBuilder();
+
+                    while ((inputLine = errorStream.readLine()) != null) {
+                        errorResponse.append(inputLine);
+                    }
+                    errorStream.close();
+                        throw new RuntimeException("Request failed with HTTP code " + responseCode + ": " + errorResponse);
+                }
+
+        }
+                catch (IOException e) {
+                    throw new RuntimeException("Connection error: " + e.getMessage(), e);
+                }
+    }
+
+            public static String extractContentFromResponse(String response) {
+                int startMarker = response.indexOf("content") + 11;
+                int endMarker = response.indexOf("\"", startMarker);
+                return response.substring(startMarker, endMarker);
+            }
 }
