@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -11,11 +12,11 @@ public class AI {
 
     public static void main(String[] args) throws URISyntaxException {
         System.out.println(chatGPT("No you have to update"));
-    }
 
     public static String chatGPT(String message) throws URISyntaxException {
         String url = "https://api.openai.com/v1/chat/completions";
-        String apiKey = "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"; // Replace with your actual API key
+        //TODO: put your key
+        String apiKey = "KEY"; // Replace with your actual API key
         String model = "gpt-4o";
 
         try {
