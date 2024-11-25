@@ -1,73 +1,61 @@
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
+import java.io.*;
 import java.net.HttpURLConnection;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.net.URL;
 
-public class AI{
+public class AI {
 
-    public static void main(String[] args) throws URISyntaxException {
-        System.out.println(chatGPT("Hello"));
-    }
-
-    public static String chatGPT(String message) throws URISyntaxException {
-        String url = "https://api.openai.com/v1/chat/completions";
-        //TODO: put your key
-        String apiKey = "KEY"; // Replace with your actual API key
-        String model = "gpt-4o";
+    @SuppressWarnings("deprecation")
+    public static String generateChatGPTResponse(String userPrompt) {
+        String apiURL = "https://api.openai.com/v1/chat/completions";
+        String apiKey = "key"; // put your key here
+        String LLMname = "gpt-3.5-turbo";
 
         try {
-            URI uri = new URI(url);
-            URL obj = uri.toURL();
-            HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-            con.setRequestMethod("POST");
-            con.setRequestProperty("Authorization", "Bearer " + apiKey);
-            con.setRequestProperty("Content-Type", "application/json");
+            // Create URL object
+            URL url = new URL(apiURL);
+            // Open connection
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
-            String body = "{\"model\": \"" + model + "\", \"messages\": [{\"role\": \"user\", \"content\": \"" + message + "\"}]}";
-            con.setDoOutput(true);
+            // Set the request method to POST
+            connection.setRequestMethod("POST");
+            // Set request headers
+            connection.setRequestProperty("Authorization", "Bearer " + apiKey);
+            connection.setRequestProperty("Content-Type", "application/json");
 
-            try (OutputStreamWriter writer = new OutputStreamWriter(con.getOutputStream())) {
-                writer.write(body);
+            // Create the request body
+            String requestBody = "{\"model\": \"" + LLMname + "\", \"messages\": [{\"role\": \"user\", \"content\": \"" + userPrompt + "\"}]}";
+
+            // Enable input/output streams
+            connection.setDoOutput(true);
+            // Write the request body
+            try (OutputStreamWriter writer = new OutputStreamWriter(connection.getOutputStream())) {
+                writer.write(requestBody);
                 writer.flush();
             }
 
-            int responseCode = con.getResponseCode();
-
-            if (responseCode == HttpURLConnection.HTTP_OK) { // HTTP 200
-                BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
-                String inputLine;
+            // Read the response
+            try (BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
                 StringBuilder response = new StringBuilder();
-                while ((inputLine = in.readLine()) != null) {
-                    response.append(inputLine);
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    response.append(line);
                 }
-                in.close();
-                return extractContentFromResponse(response.toString());
-            }   else {
-                    BufferedReader errorStream = new BufferedReader(new InputStreamReader(con.getErrorStream()));
-                    String inputLine;
-                    StringBuilder errorResponse = new StringBuilder();
-
-                    while ((inputLine = errorStream.readLine()) != null) {
-                        errorResponse.append(inputLine);
-                    }
-                    errorStream.close();
-                        throw new RuntimeException("Request failed with HTTP code " + responseCode + ": " + errorResponse);
-                }
-
+                return getLLMResponse(response.toString());
+            }
+        } catch (IOException e) {
+            throw new RuntimeException("Error interacting with the ChatGPT API: " + e.getMessage(), e);
         }
-                catch (IOException e) {
-                    throw new RuntimeException("Connection error: " + e.getMessage(), e);
-                }
     }
 
-            public static String extractContentFromResponse(String response) {
-                int startMarker = response.indexOf("content") + 11;
-                int endMarker = response.indexOf("\"", startMarker);
-                return response.substring(startMarker, endMarker);
-            }
+    private static String getLLMResponse(String response) {
+        int firstChar = response.indexOf("content") + 11;
+        int lastChar = response.indexOf("\"", firstChar);
+        return response.substring(firstChar, lastChar);
+    }
+
+    public static void main(String[] args) {
+        String userPrompt = "Hi robot, this is my first API call! I'm so excited! Tell me a joke!";
+        String chatGPTResponse = generateChatGPTResponse(userPrompt);
+        System.out.println(chatGPTResponse);
+    }
 }
