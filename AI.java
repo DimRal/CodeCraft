@@ -1,61 +1,106 @@
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.ArrayList;
+
 
 public class AI {
 
-    @SuppressWarnings("deprecation")
-    public static String generateChatGPTResponse(String userPrompt) {
-        String apiURL = "https://api.openai.com/v1/chat/completions";
-        String apiKey = "key"; // put your key here
-        String LLMname = "gpt-3.5-turbo";
+    public static void main(String[] args) throws URISyntaxException {
+        ArrayList<String> myList = new ArrayList<>();
+
+        String name_brunch_1 = chatGPT(geumata(1));
+        String ylika = (chatGPT(geumata(2) + name_brunch_1));
+        String onoma = (chatGPT(geumata(3) + name_brunch_1));
+        int x = 0;
+        for (int i = 0; i < ylika.length(); i++) {
+            String ylika1 = ylika;
+            if (",".equals(String.valueOf(ylika1.charAt(i)))) {
+                System.out.println(ylika1.substring(x, i));
+                x = i + 2;
+            } else if (".".equals(String.valueOf(ylika1.charAt(i)))) {
+                System.out.println(ylika1.substring(x, i));
+                x = i + 2;
+            }
+        }
+
+
+
+    }
+
+    public static String chatGPT(String message) throws URISyntaxException {
+        String url = "https://api.openai.com/v1/chat/completions";
+        //TODO: put your key
+        String apiKey = "key"; // Replace with your actual API key
+        String model = "gpt-4o";
 
         try {
-            // Create URL object
-            URL url = new URL(apiURL);
-            // Open connection
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            URI uri = new URI(url);
+            URL obj = uri.toURL();
+            HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+            con.setRequestMethod("POST");
+            con.setRequestProperty("Authorization", "Bearer " + apiKey);
+            con.setRequestProperty("Content-Type", "application/json");
 
-            // Set the request method to POST
-            connection.setRequestMethod("POST");
-            // Set request headers
-            connection.setRequestProperty("Authorization", "Bearer " + apiKey);
-            connection.setRequestProperty("Content-Type", "application/json");
+            String body = "{\"model\": \"" + model + "\", \"messages\": [{\"role\": \"user\", \"content\": \"" + message + "\"}]}";
+            con.setDoOutput(true);
 
-            // Create the request body
-            String requestBody = "{\"model\": \"" + LLMname + "\", \"messages\": [{\"role\": \"user\", \"content\": \"" + userPrompt + "\"}]}";
-
-            // Enable input/output streams
-            connection.setDoOutput(true);
-            // Write the request body
-            try (OutputStreamWriter writer = new OutputStreamWriter(connection.getOutputStream())) {
-                writer.write(requestBody);
+            try (OutputStreamWriter writer = new OutputStreamWriter(con.getOutputStream())) {
+                writer.write(body);
                 writer.flush();
             }
 
-            // Read the response
-            try (BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
+            int responseCode = con.getResponseCode();
+
+            if (responseCode == HttpURLConnection.HTTP_OK) { // HTTP 200
+                BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+                String inputLine;
                 StringBuilder response = new StringBuilder();
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    response.append(line);
+                while ((inputLine = in.readLine()) != null) {
+                    response.append(inputLine);
                 }
-                return getLLMResponse(response.toString());
+                in.close();
+                return extractContentFromResponse(response.toString());
+            } else {
+                BufferedReader errorStream = new BufferedReader(new InputStreamReader(con.getErrorStream()));
+                String inputLine;
+                StringBuilder errorResponse = new StringBuilder();
+
+                while ((inputLine = errorStream.readLine()) != null) {
+                    errorResponse.append(inputLine);
+                }
+                errorStream.close();
+                throw new RuntimeException("Request failed with HTTP code " + responseCode + ": " + errorResponse);
             }
+
         } catch (IOException e) {
-            throw new RuntimeException("Error interacting with the ChatGPT API: " + e.getMessage(), e);
+            throw new RuntimeException("Connection error: " + e.getMessage(), e);
         }
     }
 
-    private static String getLLMResponse(String response) {
-        int firstChar = response.indexOf("content") + 11;
-        int lastChar = response.indexOf("\"", firstChar);
-        return response.substring(firstChar, lastChar);
+    public static String extractContentFromResponse(String response) {
+        int startMarker = response.indexOf("content") + 11;
+        int endMarker = response.indexOf("\"", startMarker);
+        return response.substring(startMarker, endMarker);
     }
 
-    public static void main(String[] args) {
-        String userPrompt = "Hi robot, this is my first API call! I'm so excited! Tell me a joke!";
-        String chatGPTResponse = generateChatGPTResponse(userPrompt);
-        System.out.println(chatGPTResponse);
+    public static String geumata(int x) {
+        if (x == 1) {
+            return "θέλω ενα πρωινο γευμα και το υλικα που χρειζομαστε για αυτο το γευμα ";
+        } else if (x == 2) {
+            return  "θέλω ονομαστικά MONO τα υλικά , εκτός απο τα μπαχαρικα ," +
+                    "για κάθε προϊόν, επιλέγοντας τον πιο γνωστό ή συνηθισμένο τύπο του(π.χ. φέτα, γάλα πλήρες, ψωμι ζεας...)," +
+                    "μορφη απαντησης :αυγο, τυρι φιλαδελφια, ψωμι ζεας, ....," +
+                    "Για το γεύμα ";
+        } else if (x == 3) {
+            return "πες μου ΜΟΝΟ ΤΟ ΟΝΟΜΑ του γεύματος";
+        }
+        return "";
     }
+
 }
