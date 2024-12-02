@@ -180,29 +180,29 @@ public class AI {
 
     public static Macros[] macro_numbers(List<String> food, List<Float> calories, List<Float> protein ,List<Float> carbs , List<Float> fat , String name_meal) throws URISyntaxException {
         //γεμησμα λιστων με τα μακρος τους
-            for (int i = 0; i < food.size(); i++) {
-                calories.add(Float.valueOf(chatGPT(geumata(4) + "του ΥΛΙΚΟΥ " + food.get(i) + "ΑΠΑΝΤΑ ΜΕ ΕΝΑΝ ΑΡΙΘΜΟ")));
-                protein.add(Float.valueOf(chatGPT(geumata(5) + "του υλικου " + food.get(i) + "ΑΠΑΝΤΑ ΜΕ ΕΝΑΝ ΑΡΙΘΜΟ")));
-                carbs.add(Float.valueOf(chatGPT(geumata(6) + "του υλικου " + food.get(i) + "ΑΠΑΝΤΑ ΜΕ ΕΝΑΝ ΑΡΙΘΜΟ")));
-                fat.add(Float.valueOf(chatGPT(geumata(7) + "του υλικου " + food.get(i) + "ΑΠΑΝΤΑ ΜΟΝΟ ΜΕ ΕΝΑΝ ΑΡΙΘΜΟ")));
-            }
+        for (int i = 0; i < food.size(); i++) {
+            calories.add(Float.valueOf(chatGPT(geumata(4) + "του ΥΛΙΚΟΥ " + food.get(i) + "ΑΠΑΝΤΑ ΜΕ ΕΝΑΝ ΑΡΙΘΜΟ")));
+            protein.add(Float.valueOf(chatGPT(geumata(5) + "του υλικου " + food.get(i) + "ΑΠΑΝΤΑ ΜΕ ΕΝΑΝ ΑΡΙΘΜΟ")));
+            carbs.add(Float.valueOf(chatGPT(geumata(6) + "του υλικου " + food.get(i) + "ΑΠΑΝΤΑ ΜΕ ΕΝΑΝ ΑΡΙΘΜΟ")));
+            fat.add(Float.valueOf(chatGPT(geumata(7) + "του υλικου " + food.get(i) + "ΑΠΑΝΤΑ ΜΟΝΟ ΜΕ ΕΝΑΝ ΑΡΙΘΜΟ")));
+        }
 
-            Macros[] meal_list = new Macros[food.size() + 1]; //μακροσ λιστα
-            meal_list[0] = new Macros(name_meal); // αρχικοποιηση πρωτησ θεσησ με το ονομα του γευματος
+        Macros[] meal_list = new Macros[food.size() + 1]; //μακροσ λιστα
+        meal_list[0] = new Macros(name_meal); // αρχικοποιηση πρωτησ θεσησ με το ονομα του γευματος
 
 
         //καταχορουμε στο πινακα τα μακροσ ανα σειρα και υλικο με μακρος
-            for (int i = 1; i < meal_list.length; i++) {
-                meal_list[i] = new Macros(food.get(i - 1), calories.get(i - 1), protein.get(i - 1), carbs.get(i - 1), fat.get(i - 1));
-            }
+        for (int i = 1; i < meal_list.length; i++) {
+            meal_list[i] = new Macros(food.get(i - 1), calories.get(i - 1), protein.get(i - 1), carbs.get(i - 1), fat.get(i - 1));
+        }
 
-            // εκτυπωση για να ειμαστε σιγουροι οτι εγινε η δουλεια
-            System.out.println(meal_list[0].name);
-            for (int i = 1; i < meal_list.length; i++) {
-                System.out.println(meal_list[i].name + ", " + meal_list[i].calories + ", " + meal_list[i].protein + ", " + meal_list[i].fat);
-            }
+        // εκτυπωση για να ειμαστε σιγουροι οτι εγινε η δουλεια
+        System.out.println(meal_list[0].name);
+        for (int i = 1; i < meal_list.length; i++) {
+            System.out.println(meal_list[i].name + ", " + meal_list[i].calories + ", " + meal_list[i].protein + ", " + meal_list[i].fat);
+        }
 
-            return meal_list;
+        return meal_list;
     }
 }
 
