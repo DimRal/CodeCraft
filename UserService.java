@@ -16,7 +16,7 @@ public class UserService {
             while ((line = reader.readLine()) != null) {
                 String[] data = line.split(",");
                 if (data.length == 3) {
-                    User user = new User(data[1], data[0], data[2]); // username, email, password
+                    User user = new User(data[0], data[1], data[2]); // username, email, password
                     users.add(user);
                 }
             }
@@ -34,11 +34,21 @@ public class UserService {
     private void saveUsersToFile() {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_NAME))) {
             for (User user : users) {
-                writer.write(user.getEmail() + "," + user.getUsername() + "," + user.getPassword());
+                writer.write(user.getUsername() + "," + user.getEmail() + "," + user.getPassword());
                 writer.newLine();
             }
         } catch (IOException e) {
             System.err.println("Error saving users: " + e.getMessage());
         }
     }
+
+    public User loginUser(String email, String password) {
+        for (User user : users) { // Υποθέτουμε ότι το `users` είναι η λίστα των χρηστών.
+            if ((user.getEmail().equals(email) || user.getUsername().equals(email)) && user.getPassword().equals(password)) {
+                return user; // Επιστροφή του χρήστη αν τα στοιχεία είναι σωστά.
+            }
+        }
+        return null; // Επιστροφή null αν δεν βρέθηκε χρήστης.
+    }
+    
 }
