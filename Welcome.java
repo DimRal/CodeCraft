@@ -1,5 +1,8 @@
+import javax.swing.JOptionPane;
+
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.VBox;
@@ -12,11 +15,18 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ToggleGroup;
 
 public class Welcome extends Application {
+    private UserService userService; // Αναφορά στο UserService
+    
     public static void main (String []args) {
         Application.launch(args);
     }
     @Override
     public void start(Stage window) {
+
+        userService = new UserService();
+        userService.loadUsersFromFile();
+
+
         //Ρύθμιση διαστάσεων και ονόματος εισαγωγικού παραθύρου
         window.setWidth(700);
         window.setHeight(500);
@@ -105,9 +115,28 @@ public class Welcome extends Application {
 
         Button signupButton = new Button("Sign up!");
         signupButton.setOnAction(e -> {
+            String username = usernameField.getText();
+            String email = emailField.getText();
+            String password = passwordField.getText();
+            String confirmPassword = confirmPasswordField.getText();
+
+            if (username.isEmpty() || email.isEmpty() || password.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "All fields are required!");
+    
+            }
+
             // Αποθήκευση λογικής
-            System.out.println("Saved: " + usernameField.getText());
-        });
+            if (passwordField.getText().equals(confirmPasswordField.getText())) {
+                userService.addUser(usernameField.getText(), emailField.getText(), passwordField.getText());
+                JOptionPane.showMessageDialog(null, "User registered successfully!");
+                
+            }else {
+                JOptionPane.showMessageDialog(null, "Passwords do not match!");
+            }
+
+    });
+    
+    
 
         layout.getChildren().addAll(
                 registerTitle,
@@ -132,15 +161,42 @@ public class Welcome extends Application {
     }
     private Scene login() {
         VBox layout = new VBox(10);
-        layout.setStyle("-fx-padding: 20; -fx-background-color: #f7f7f7;");
+        layout.setStyle("-fx-padding: 25; -fx-background-color: #6ec475");
 
         TextField usernameLogin = new TextField();
         usernameLogin.setPromptText("Username or Email");
 
         TextField passwordLogin = new TextField();
         passwordLogin.setPromptText("Password");
-        return new Scene(layout, 700, 500);
+        
 
+        //κουμπί σύνδεσης
+        Button loginButton = new Button("Login");
+        loginButton.setOnAction(e ->{
+            String email = usernameLogin.getText();
+            String Password = passwordLogin.getText();
+            //Λογική σύνδεσης
+            User loggesInUser = userService.loginUser(email, Password); 
+            if (loggesInUser != null) {
+                Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
+                successAlert.setTitle("Login Successful");
+                successAlert.setHeaderText(null);
+                successAlert.setContentText("Welcome, " + loggesInUser.getUsername() + "!");
+                successAlert.showAndWait();
+            } else {
+                Alert failureAlert = new Alert(Alert.AlertType.ERROR);
+                failureAlert.setTitle("Login Failed");
+                failureAlert.setHeaderText(null);
+                failureAlert.setContentText("Incorrect email or password. Please try again.");
+                failureAlert.showAndWait();
+            }
+    
+        });
+        layout.getChildren().addAll(
+        new Label("Login to MealPlanner"),
+        usernameLogin,passwordLogin, loginButton
+        );
 
+         return new Scene(layout, 700, 500); // Επιστρέφει τη σκηνή στο τέλος
     }
 }
