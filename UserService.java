@@ -3,38 +3,34 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserService {
-    private List<User> users = new ArrayList<>();
-    private static final String FILE_NAME = "users.txt";
+    private static final String FILE_NAME = "users.txt"; // Όνομα αρχείου
+    private final List<User> users = new ArrayList<>();
 
-    // Εγγραφή χρήστη
-    public boolean registerUser(String username, String email, String password) {
-        for (User user : users) {
-            if (user.getEmail().equals(email)) {
-                System.out.println("Το email χρησιμοποιείται ήδη.");
-                return false;
-            }
-        }
-
-        User newUser = new User(username, email, password);
-        users.add(newUser);
-        saveUsersToFile();  // Αποθήκευση των χρηστών στο αρχείο
-        System.out.println("Η εγγραφή ήταν επιτυχής!");
-        return true;
+    public List<User> getUsers() {
+        return users;
     }
 
-    // Σύνδεση χρήστη
-    public User loginUser(String email, String password) {
-        for (User user : users) {
-            if (user.getEmail().equals(email) && user.getPassword().equals(password)) {
-                System.out.println("Η σύνδεση ήταν επιτυχής!");
-                return user;
+    public void loadUsersFromFile() {
+        try (BufferedReader reader = new BufferedReader(new FileReader(FILE_NAME))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] data = line.split(",");
+                if (data.length == 3) {
+                    User user = new User(data[1], data[0], data[2]); // username, email, password
+                    users.add(user);
+                }
             }
+        } catch (IOException e) {
+            System.err.println("Error loading users: " + e.getMessage());
         }
-        System.out.println("Λάθος email ή κωδικός.");
-        return null;
     }
 
-    // Αποθήκευση χρηστών σε αρχείο
+    public void addUser(String username, String email, String password) {
+        User user = new User(username, email, password);
+        users.add(user);
+        saveUsersToFile();
+    }
+
     private void saveUsersToFile() {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_NAME))) {
             for (User user : users) {
@@ -42,24 +38,7 @@ public class UserService {
                 writer.newLine();
             }
         } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    // Φόρτωση χρηστών από αρχείο
-    public void loadUsersFromFile() {
-        try (BufferedReader reader = new BufferedReader(new FileReader(FILE_NAME))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                String[] data = line.split(",");
-                if (data.length == 3) {
-                    User user = new User(data[1], data[0], data[2]);
-                    users.add(user);
-                }
-            }
-        } catch (IOException e) {
-            System.out.println("Δεν βρέθηκε αρχείο χρηστών.");
+            System.err.println("Error saving users: " + e.getMessage());
         }
     }
 }
-
