@@ -15,18 +15,29 @@ public class UserService {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] data = line.split(",");
-                if (data.length == 3) {
-                    User user = new User(data[0], data[1], data[2]); // username, email, password
+                if (data.length == 6) {
+                    try {
+                        String username = data[0];
+                        String email = data[1];
+                        String password = data[2];
+                        int age = Integer.parseInt(data[3]);
+                        double height = Double.parseDouble(data[4]);
+                        double weight = Double.parseDouble(data[5]);
+
+                        User user = new User(username, email, password, age, height, weight); // username,email,password,age,height,weight
                     users.add(user);
+                } catch (NumberFormatException e) {
+                    System.err.println("Invalid number format in line: " + line);
                 }
             }
-        } catch (IOException e) {
+        }
+     }catch (IOException e) {
             System.err.println("Error loading users: " + e.getMessage());
         }
     }
 
-    public void addUser(String username, String email, String password) {
-        User user = new User(username, email, password);
+    public void addUser(String username, String email, String password , int  age, double height, double weight) {
+        User user = new User(username, email, password, age, height, weight);
         users.add(user);
         saveUsersToFile();
     }
@@ -34,7 +45,7 @@ public class UserService {
     private void saveUsersToFile() {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_NAME))) {
             for (User user : users) {
-                writer.write(user.getUsername() + "," + user.getEmail() + "," + user.getPassword());
+                writer.write(user.getUsername() + "," + user.getEmail() + "," + user.getPassword() + "," + user.getAge() + "," + user.getHeight() + "," + user.getWeight());
                 writer.newLine();
             }
         } catch (IOException e) {
@@ -50,5 +61,5 @@ public class UserService {
         }
         return null; // Επιστροφή null αν δεν βρέθηκε χρήστης.
     }
-    
+
 }

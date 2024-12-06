@@ -9,10 +9,13 @@ public class User {
     private String goal; // lose weight, gain muscle, maintain weight
 
     // Constructor
-    public User(String username, String email, String password) {
+    public User(String username, String email, String password, int age, double height, double weight) {
         this.username = username;
         this.email = email;
         this.password = password;
+        this.age = age;
+        this.height = height;
+        this.weight = weight;
     }
 
     // Getters and Setters
