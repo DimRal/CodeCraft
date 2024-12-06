@@ -14,7 +14,7 @@ import javafx.scene.control.ToggleGroup;
 
 public class Welcome extends Application {
     private UserService userService; // Αναφορά στο UserService
-    
+
     public static void main (String []args) {
         Application.launch(args);
     }
@@ -117,32 +117,47 @@ public class Welcome extends Application {
             String email = emailField.getText();
             String password = passwordField.getText();
             String confirmPassword = confirmPasswordField.getText();
+            String age = ageField.getText();
+            String height = heightField.getText();
+            String weight = weightField.getText();
+
 
             if (username.isEmpty() || email.isEmpty() || password.isEmpty()) {
-            Alert alert = new Alert(Alert.AlertType.ERROR); // Τύπος alert: Σφάλμα   
+            Alert alert = new Alert(Alert.AlertType.ERROR); // Τύπος alert: Σφάλμα
             alert.setTitle("Error");
             alert.setHeaderText(null);
             alert.setContentText("All fields are required!"); // Μήνυμα
             alert.showAndWait();
-            } else if (passwordField.getText().equals(confirmPasswordField.getText())) {
-                userService.addUser(usernameField.getText(), emailField.getText(), passwordField.getText());
-                Alert alert = new Alert(Alert.AlertType.INFORMATION); // Τύπος alert: Ενημέρωση
-                alert.setTitle("Success");
-                alert.setHeaderText(null);
-                alert.setContentText("User registered succesfully!"); // Μήνυμα
-                alert.showAndWait();       
+            } else if (password.equals(confirmPassword)) {
+                try {
+                    int age1 = Integer.parseInt(ageField.getText());
+                    double height1 = Double.parseDouble(heightField.getText());
+                    double weight1 = Double.parseDouble(weightField.getText());
+                 userService.addUser(username,email,password,age1,height1,weight1);
+                 Alert alert = new Alert(Alert.AlertType.INFORMATION); // Τύπος alert: Ενημέρωση
+                 alert.setTitle("Success");
+                 alert.setHeaderText(null);
+                 alert.setContentText("User registered succesfully!"); // Μήνυμα
+                 alert.showAndWait();
+                } catch (NumberFormatException ex) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR); // Τύπος alert: Σφάλμα
+                    alert.setTitle("Error");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Age, height, and weight must be numeric values!"); // Μήνυμα
+                    alert.showAndWait();
             }
-            if  (!passwordField.getText().equals(confirmPasswordField.getText())) {
+            if  (!passwordField.equals(confirmPassword)) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION); // Τύπος alert: Ενημέρωση
                 alert.setTitle("Error");
                 alert.setHeaderText(null);
                 alert.setContentText("Passwords do not match!"); // Μήνυμα
-                alert.showAndWait();    
+                alert.showAndWait();
             }
 
-    });
-    
-    
+
+        }    });
+
+
 
         layout.getChildren().addAll(
                 registerTitle,
@@ -174,7 +189,7 @@ public class Welcome extends Application {
 
         TextField passwordLogin = new TextField();
         passwordLogin.setPromptText("Password");
-        
+
 
         //κουμπί σύνδεσης
         Button loginButton = new Button("Login");
@@ -182,7 +197,7 @@ public class Welcome extends Application {
             String email = usernameLogin.getText();
             String Password = passwordLogin.getText();
             //Λογική σύνδεσης
-            User loggesInUser = userService.loginUser(email, Password); 
+            User loggesInUser = userService.loginUser(email, Password);
             if (loggesInUser != null) {
                 Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
                 successAlert.setTitle("Login Successful");
@@ -196,7 +211,7 @@ public class Welcome extends Application {
                 failureAlert.setContentText("Incorrect email or password. Please try again.");
                 failureAlert.showAndWait();
             }
-    
+
         });
         layout.getChildren().addAll(
         new Label("Login to MealPlanner"),
