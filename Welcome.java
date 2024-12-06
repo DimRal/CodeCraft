@@ -1,4 +1,3 @@
-import javax.swing.JOptionPane;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -121,17 +120,25 @@ public class Welcome extends Application {
             String confirmPassword = confirmPasswordField.getText();
 
             if (username.isEmpty() || email.isEmpty() || password.isEmpty()) {
-                JOptionPane.showMessageDialog(null, "All fields are required!");
-    
-            }
-
-            // Αποθήκευση λογικής
-            if (passwordField.getText().equals(confirmPasswordField.getText())) {
+            Alert alert = new Alert(Alert.AlertType.ERROR); // Τύπος alert: Σφάλμα   
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("All fields are required!"); // Μήνυμα
+            alert.showAndWait();
+            } else if (passwordField.getText().equals(confirmPasswordField.getText())) {
                 userService.addUser(usernameField.getText(), emailField.getText(), passwordField.getText());
-                JOptionPane.showMessageDialog(null, "User registered successfully!");
-                
-            }else {
-                JOptionPane.showMessageDialog(null, "Passwords do not match!");
+                Alert alert = new Alert(Alert.AlertType.INFORMATION); // Τύπος alert: Ενημέρωση
+                alert.setTitle("Success");
+                alert.setHeaderText(null);
+                alert.setContentText("User registered succesfully!"); // Μήνυμα
+                alert.showAndWait();       
+            }
+            if  (!passwordField.getText().equals(confirmPasswordField.getText())) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION); // Τύπος alert: Ενημέρωση
+                alert.setTitle("Error");
+                alert.setHeaderText(null);
+                alert.setContentText("Passwords do not match!"); // Μήνυμα
+                alert.showAndWait();    
             }
 
     });
