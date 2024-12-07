@@ -121,7 +121,6 @@ public class Welcome extends Application {
             String height = heightField.getText();
             String weight = weightField.getText();
 
-
             if (username.isEmpty() || email.isEmpty() || password.isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR); // Τύπος alert: Σφάλμα
             alert.setTitle("Error");
@@ -146,19 +145,15 @@ public class Welcome extends Application {
                     alert.setContentText("Age, height, and weight must be numeric values!"); // Μήνυμα
                     alert.showAndWait();
             }
-            if  (!passwordField.equals(confirmPassword)) {
+            if  (!password.equals(confirmPassword)) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION); // Τύπος alert: Ενημέρωση
                 alert.setTitle("Error");
                 alert.setHeaderText(null);
                 alert.setContentText("Passwords do not match!"); // Μήνυμα
                 alert.showAndWait();
             }
-
-
-        }    });
-
-
-
+        }
+    });
         layout.getChildren().addAll(
                 registerTitle,
                 new Label("Username:"), usernameField,
