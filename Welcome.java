@@ -111,6 +111,32 @@ public class Welcome extends Application {
         goalComboBox.getItems().addAll("Lose weight", "Gain muscle", "Maintain weight");
         goalComboBox.setPromptText("Select your goal");
 
+        ComboBox<String> sportComboBox = new ComboBox<>();
+        sportComboBox.getItems().addAll("Μπάσκετ", "Ποδόσφαιρο", "Box");
+        sportComboBox.setPromptText("Select your sport");
+        
+       TextField trainingField = new TextField();
+       trainingField.setPromptText("How many trainings per week (1-7)?");
+       trainingField.setVisible(false); // Αρχικά το πεδίο είναι κρυφό
+
+       // Όταν επιλέγεται άθλημα, εμφανίζεται το πεδίο για τον αριθμό προπονήσεων
+       sportComboBox.setOnAction(e -> {
+         String selectedSport = sportComboBox.getValue();
+         if (selectedSport != null) {
+            trainingField.setVisible(true);
+            trainingField.setText("");  // Καθαρίζει το πεδίο κάθε φορά που αλλάζει το άθλημα
+         }
+       });
+
+
+
+    
+        
+
+
+
+
+
         Button signupButton = new Button("Sign up!");
         signupButton.setOnAction(e -> {
             String username = usernameField.getText();
@@ -120,6 +146,9 @@ public class Welcome extends Application {
             String age = ageField.getText();
             String height = heightField.getText();
             String weight = weightField.getText();
+            
+
+    
 
             if (username.isEmpty() || email.isEmpty() || password.isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR); // Τύπος alert: Σφάλμα
@@ -166,6 +195,7 @@ public class Welcome extends Application {
                 new Label("Height"),heightField,
                 new Label("Weight"),weightField,
                 new Label("Goal:"), goalComboBox,
+                new Label("Sport and Weekly Practices"), sportComboBox,trainingField,
                 signupButton
         );
 
