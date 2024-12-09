@@ -127,6 +127,12 @@ public class Welcome extends Application {
             alert.setHeaderText(null);
             alert.setContentText("All fields are required!"); // Μήνυμα
             alert.showAndWait();
+            }  if  (!password.equals(confirmPassword)) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION); // Τύπος alert: Ενημέρωση
+                alert.setTitle("Error");
+                alert.setHeaderText(null);
+                alert.setContentText("Passwords do not match!"); // Μήνυμα
+                alert.showAndWait();
             } else if (password.equals(confirmPassword)) {
                 try {
                     int age1 = Integer.parseInt(ageField.getText());
@@ -144,15 +150,10 @@ public class Welcome extends Application {
                     alert.setHeaderText(null);
                     alert.setContentText("Age, height, and weight must be numeric values!"); // Μήνυμα
                     alert.showAndWait();
+                }
+
             }
-            if  (!password.equals(confirmPassword)) {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION); // Τύπος alert: Ενημέρωση
-                alert.setTitle("Error");
-                alert.setHeaderText(null);
-                alert.setContentText("Passwords do not match!"); // Μήνυμα
-                alert.showAndWait();
-            }
-        }
+             
     });
         layout.getChildren().addAll(
                 registerTitle,
