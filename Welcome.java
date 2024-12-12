@@ -63,7 +63,7 @@ public class Welcome extends Application {
 
 
         VBox layout = new VBox(10);
-        layout.setStyle("-fx-alignment: center; -fx-font-family: 'Times New Roman'; -fx-padding: 20;-fx-background-image: url('background.png');-fx-background-image: fill;-fx-background-size: cover; -fx-background-repeat: no-repeat;");
+        layout.setStyle("-fx-alignment: center; -fx-font-family: 'Times New Roman'; -fx-padding: 20;-fx-background-image: url('background2.jpg');-fx-background-image: fill;-fx-background-size: cover; -fx-background-repeat: no-repeat;");
 
         //Τίτλος register στο παράθυρο register
         Label registerTitle = new Label("Register");
@@ -101,10 +101,8 @@ public class Welcome extends Application {
 
         ToggleGroup gender = new ToggleGroup();
         RadioButton option1 = new RadioButton("Male");
-        option1.setStyle("-fx-font-size: 18px;-fx-font-weight: bold;-fx-text-fill: white;-fx-effect: dropshadow(gaussian, black, 5, 0.5, 1, 1);");
         option1.setToggleGroup(gender);
         RadioButton option2 = new RadioButton("Female");
-        option2.setStyle("-fx-font-size: 18px;-fx-font-weight: bold;-fx-text-fill: white;-fx-effect: dropshadow(gaussian, black, 5, 0.5, 1, 1);");
         option2.setToggleGroup(gender);
 
         TextField heightField = new TextField();
@@ -141,7 +139,7 @@ public class Welcome extends Application {
 
        ComboBox<String> addsportComboBox = new ComboBox<>();
        addsportComboBox.getItems().addAll("Μπάσκετ", "Ποδόσφαιρο", "Box");
-       addsportComboBox.setPromptText("Add sport");
+       addsportComboBox.setPromptText("Add your sport");
 
       TextField practiceField = new TextField();
       practiceField.setPromptText("How many trainings per week (1-7)?");
@@ -223,7 +221,7 @@ public class Welcome extends Application {
     }
     private Scene login() {
         VBox layout = new VBox(10);
-        layout.setStyle("-fx-alignment: center; -fx-font-family: 'Times New Roman'; -fx-padding: 20;-fx-background-image: url('background.png');-fx-background-size: cover; -fx-background-repeat: no-repeat;");
+        layout.setStyle("-fx-alignment: center; -fx-font-family: 'Times New Roman'; -fx-padding: 20;-fx-background-image: url('background2.jpg');-fx-background-size: cover; -fx-background-repeat: no-repeat;");
 
         TextField usernameLogin = new TextField();
         usernameLogin.setPromptText("Username or Email");
