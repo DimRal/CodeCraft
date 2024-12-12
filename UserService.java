@@ -1,4 +1,5 @@
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -20,24 +21,22 @@ public class UserService {
             System.out.println("Το αρχείο δεν βρέθηκε. Δημιουργείται ένα νέο αρχείο.");
             return;
         }
-
+    
         try (BufferedReader reader = new BufferedReader(new FileReader(FILE_NAME))) {
-            String line;
-            users.clear(); // Καθαρίζουμε την υπάρχουσα λίστα πριν φορτώσουμε νέα δεδομένα
-            while ((line = reader.readLine()) != null) {
-                try {
-                    // Μετατρέπουμε κάθε γραμμή JSON σε αντικείμενο User
-                    User user = gson.fromJson(line, User.class);
+            // Διαβάζουμε το JSON array και το μετατρέπουμε σε λίστα χρηστών
+            User[] loadedUsers = gson.fromJson(reader, User[].class);
+            if (loadedUsers != null) {
+                users.clear();
+                for (User user : loadedUsers) {
                     users.add(user);
-                } catch (Exception e) {
-                    System.err.println("Σφάλμα στην ανάγνωση χρήστη από τη γραμμή: " + line);
-                    e.printStackTrace();
                 }
             }
         } catch (IOException e) {
             System.err.println("Σφάλμα κατά την φόρτωση χρηστών: " + e.getMessage());
         }
     }
+    
+    
 
      // Προσθήκη χρήστη στη λίστα και αποθήκευση στο αρχείο JSON
     public void addUser(String username, String email, String password , int  age, double height, double weight) {
@@ -49,22 +48,14 @@ public class UserService {
     // Αποθήκευση χρηστών στο αρχείο JSON
     private void saveUsersToFile() {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_NAME))) {
-            writer.write("["); // Ξεκινάμε την λίστα JSON
-            for (int i = 0; i < users.size(); i++) {
-                User user = users.get(i);
-                // Γράφουμε τον χρήστη σε μορφή JSON
-                writer.write(gson.toJson(user));
-                if (i < users.size() - 1) {
-                    writer.write(",\n"); // Αν δεν είναι ο τελευταίος χρήστης, προσθέτουμε κόμμα και νέα γραμμή
-                }
-            }
-            writer.write("]"); // Κλείνουμε την λίστα JSON
+            Gson prettyGson = new GsonBuilder().setPrettyPrinting().create(); // Δημιουργία Gson με μορφοποίηση
+            String json = prettyGson.toJson(users); // Μετατροπή της λίστας χρηστών σε μορφοποιημένο JSON
+         writer.write(json); // Γράψιμο στο αρχείο
         } catch (IOException e) {
             System.err.println("Σφάλμα κατά την αποθήκευση χρηστών: " + e.getMessage());
         }
     }
-    
-    
+
 
     // Σύνδεση χρήστη με βάση το email ή το username και τον κωδικό
     public User loginUser(String email, String password) {
