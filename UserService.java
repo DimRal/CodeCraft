@@ -21,7 +21,7 @@ public class UserService {
             System.out.println("Το αρχείο δεν βρέθηκε. Δημιουργείται ένα νέο αρχείο.");
             return;
         }
-    
+
         try (BufferedReader reader = new BufferedReader(new FileReader(FILE_NAME))) {
             // Διαβάζουμε το JSON array και το μετατρέπουμε σε λίστα χρηστών
             User[] loadedUsers = gson.fromJson(reader, User[].class);
@@ -35,12 +35,12 @@ public class UserService {
             System.err.println("Σφάλμα κατά την φόρτωση χρηστών: " + e.getMessage());
         }
     }
-    
-    
+
+
 
      // Προσθήκη χρήστη στη λίστα και αποθήκευση στο αρχείο JSON
-    public void addUser(String username, String email, String password , int  age, double height, double weight) {
-        User user = new User(username, email, password, age, height, weight);
+    public void addUser(String username, String email, String password , int  age, double height, double weight,String pref) {
+        User user = new User(username, email, password, age, height, weight,pref);
         users.add(user);
         saveUsersToFile(); // Αποθήκευση χρηστών στο αρχείο JSON
     }
