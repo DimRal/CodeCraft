@@ -7,17 +7,17 @@ public class User {
     private double height; // in cm
     private double weight; // in kg
     private String goal; // lose weight, gain muscle, maintain weight
-    private String pref;// food preferences
+    
 
     // Constructor
-    public User(String username, String email, String password, int age, double height, double weight,String pref) {
+    public User(String username, String email, String password, int age, double height, double weight) {
         this.username = username;
         this.email = email;
         this.password = password;
         this.age = age;
         this.height = height;
         this.weight = weight;
-        this.pref = pref;
+        
     }
 
     // Getters and Setters
@@ -85,11 +85,4 @@ public class User {
         this.goal = goal;
     }
 
-    public String getPref() {
-        return pref;
-    }
-
-    public void setPref(String pref) {
-        this.pref = pref;
-    }
 }
