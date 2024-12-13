@@ -1,0 +1,51 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "AI",
+            "request": "launch",
+            "mainClass": "AI",
+            "projectName": "CodeCraft_f8da77ef"
+        },
+        {
+            "type": "java",
+            "name": "MealPlanner",
+            "request": "launch",
+            "mainClass": "MealPlanner",
+            "projectName": "CodeCraft_f8da77ef"
+        },
+        {
+            "type": "java",
+            "name": "MealPlanner1",
+            "request": "launch",
+            "mainClass": "MealPlanner1",
+            "projectName": "CodeCraft_f8da77ef"
+        },
+        {
+            "type": "java",
+            "name": "MealPlannerGUI",
+            "request": "launch",
+            "mainClass": "MealPlannerGUI",
+            "projectName": "CodeCraft_f8da77ef"
+        },
+        {
+            "type": "java",
+            "name": "Welcome",
+            "request": "launch",
+            "mainClass": "Welcome",
+            "projectName": "CodeCraft_f8da77ef",
+            "vmArgs": "--module-path C:/Users/bstam/OneDrive/Υπολογιστής/javafx-sdk-23.0.1/lib --add-modules javafx.controls"
+        },
+
+    ]
+}
