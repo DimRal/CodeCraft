@@ -120,7 +120,7 @@ public class Welcome extends Application {
         goalComboBox.setPromptText("Select your goal");
 
         ComboBox<String> sportComboBox = new ComboBox<>();
-        sportComboBox.getItems().addAll("Μπάσκετ", "Ποδόσφαιρο", "Box");
+        sportComboBox.getItems().addAll("Περπάτημα","Τρέξιμο","Ποδήλατο","Κολύμβηση","Σχοινάκι","Βάρη","Γιόγκα","Πιλάτες","Χορός","CrossFit/HIIT","Αναρρίχηση","Ποδόσφαιρο","Μπάσκετ","Τένις","Βόλει(αγωνιστικό)","Πυγμαχία","Πολεμικές τέχνες","Καράτε","Τάε Κβο Ντο","Σκι","Κγιάκ","Κωπηλασία","Περπάτημα με βάρη","Πεζοπορία");
         sportComboBox.setPromptText("Select your sport");
 
        TextField trainingField = new TextField();
@@ -138,7 +138,7 @@ public class Welcome extends Application {
 
 
        ComboBox<String> addsportComboBox = new ComboBox<>();
-       addsportComboBox.getItems().addAll("Μπάσκετ", "Ποδόσφαιρο", "Box");
+       addsportComboBox.getItems().addAll("Περπάτημα","Τρέξιμο","Ποδήλατο","Κολύμβηση","Σχοινάκι","Βάρη","Γιόγκα","Πιλάτες","Χορός","CrossFit/HIIT","Αναρρίχηση","Ποδόσφαιρο","Μπάσκετ","Τένις","Βόλει(αγωνιστικό)","Πυγμαχία","Πολεμικές τέχνες","Καράτε","Τάε Κβο Ντο","Σκι","Κγιάκ","Κωπηλασία","Περπάτημα με βάρη","Πεζοπορία");
        addsportComboBox.setPromptText("Add your sport");
 
       TextField practiceField = new TextField();
@@ -221,7 +221,7 @@ public class Welcome extends Application {
     }
     private Scene login() {
         VBox layout = new VBox(10);
-        layout.setStyle("-fx-alignment: center; -fx-font-family: 'Times New Roman'; -fx-padding: 20;-fx-background-image: url('background2.jpg');-fx-background-size: cover; -fx-background-repeat: no-repeat;");
+        layout.setStyle("-fx-alignment: center; -fx-font-family: 'Times New Roman'; -fx-padding: 20;-fx-background-image: url('background2.jpggi');-fx-background-size: cover; -fx-background-repeat: no-repeat;");
 
         TextField usernameLogin = new TextField();
         usernameLogin.setPromptText("Username or Email");
