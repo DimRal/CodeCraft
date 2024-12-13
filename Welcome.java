@@ -148,6 +148,22 @@ public class Welcome extends Application {
          }
        });
 
+       //Επιλογή και για δεύτερο άθλημα
+       ComboBox<String> addsportComboBox = new ComboBox<>();
+       addsportComboBox.getItems().addAll("Μπάσκετ", "Ποδόσφαιρο", "Box");
+       addsportComboBox.setPromptText("Add your sport");
+       TextField practiceField = new TextField();
+       practiceField.setPromptText("How many trainings per week (1-7)?");
+       practiceField.setVisible(false); // Αρχικά το πεδίο είναι κρυφό
+       // Όταν επιλέγεται άθλημα, εμφανίζεται το πεδίο για τον αριθμό προπονήσεων
+       addsportComboBox.setOnAction(e -> {
+        String selectedSport = addsportComboBox.getValue();
+        if (selectedSport != null) {
+           practiceField.setVisible(true);
+           practiceField.setText("");  // Καθαρίζει το πεδίο κάθε φορά που αλλάζει το άθλημα
+        }
+      });
+
         Button signupButton = new Button("Sign up!");
         signupButton.setOnAction(e -> {
             String username = usernameField.getText();
@@ -204,6 +220,7 @@ public class Welcome extends Application {
                 new Label("Food Preferences:"),preferencesField,
                 new Label("Goal:"), goalComboBox,
                 new Label("Sport and Weekly Practices:"), sportComboBox,trainingField,
+                new Label("Second Sport and Weekly Practices:"),addsportComboBox,practiceField,
                 signupButton
         );
 
