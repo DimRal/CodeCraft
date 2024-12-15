@@ -8,12 +8,15 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 
 
 public class AI {
 
     public static void main(String[] args) throws URISyntaxException {
-       //λιστα με ολα τα γευματα
+        //λιστα με ολα τα γευματα
         ArrayList<Macros[]> diet = new ArrayList<>();
 
         //μεταβλητη που καταχωρουντε τα γευματα ετσι ωστε να το διβαζει το ΑΙ και να μην τα ξανα χρησιμοποιει
@@ -78,10 +81,10 @@ public class AI {
         System.out.println("\n");
 
         //ημερησια μακροθρεπτικα
-        Macros macros=(retryMakeFood(112.0, 175,20,"Α",500,"Kick box",1));
+        Macros macros=(DAYS_MACROS(112.0, 175,20,"Α",500/7,"Βάρη",1));
     }
 
-//ΕΛΕΓΧΟΣ ΓΙΑ ΝΑ ΕΠΑΝΑΛΜΒΑΝΕΤΕ ΜΙΑ ΔΙΑΔΙΚΑΣΙΑ ΟΤΑΝ ΥΠΑΡΧΕΙ ΣΦΑΛΜΑ,ΚΑΙ ΣΥΓΚΕΚΡΗΜΕΝΑ ΓΙΑ ΤΙΣ ΛΑΘΟΣ ΑΠΟΑΝΤΗΣΕΙΣ ΤΟΥ ΑΙ
+    //ΕΛΕΓΧΟΣ ΓΙΑ ΝΑ ΕΠΑΝΑΛΜΒΑΝΕΤΕ ΜΙΑ ΔΙΑΔΙΚΑΣΙΑ ΟΤΑΝ ΥΠΑΡΧΕΙ ΣΦΑΛΜΑ,ΚΑΙ ΣΥΓΚΕΚΡΗΜΕΝΑ ΓΙΑ ΤΙΣ ΛΑΘΟΣ ΑΠΟΑΝΤΗΣΕΙΣ ΤΟΥ ΑΙ
     public static void retryMakeFood(ArrayList<Macros[]> diet, int mealType, String requirements) {
         boolean success = false;
         while (!success) {
@@ -95,65 +98,36 @@ public class AI {
         }
     }
     //ΕΛΕΓΧΟΣ ΓΙΑ ΝΑ ΕΠΑΝΑΛΜΒΑΝΕΤΕ ΜΙΑ ΔΙΑΔΙΚΑΣΙΑ ΟΤΑΝ ΥΠΑΡΧΕΙ ΣΦΑΛΜΑ,ΚΑΙ ΣΥΓΚΕΚΡΗΜΕΝΑ ΓΙΑ ΤΙΣ ΛΑΘΟΣ ΑΠΟΑΝΤΗΣΕΙΣ ΤΟΥ ΑΙ
-    public static Macros retryMakeFood(double weightKg, double heightCm, int age, String gender, double durationMin, String sport,int target) {
-        boolean success = false;// ΕΛΕΓΧΟΣ ΓΙΑ ΤΟ ΚΑΛΕΣΜΑ ΤΟΥ DAYS_MACROS
-        boolean success2 = false;//ΕΛΕΓΧΟΣ ΓΙΑ ΟΛΟ ΤΟ ΠΡΟΓΡΑΜΜΑ
-        //ΛΙΣΤΑ ΠΟΥ ΑΠΟΘΗΚΕΥΟΝΤΑΙ ΤΑ ΚΑΛΕΣΜΑΤΑ ΤΟΥ DAYS_MACROS ΓΙΑ ΝΑ ΣΥΓΚΡΗΝΟΥΜΕ ΚΑΙ ΝΑ ΒΡΟΥΜΕ ΑΠΟ ΟΛΑ ΑΥΤΑ ΤΟ ΣΩΣΤΟ ΜΕΣΟ ΤΟ ΜΕΤ
-        ArrayList<Macros> x = new ArrayList<>();
-        //ΑΡΧΟΚΟΠΟΙΗΣΗ ΜΕΤΑΒΛΗΤΗΣ ΜΕ ΤΑ ΗΜΕΡΗΣΙΑ ΜΑΚΡΟΣ ΚΑΙ ΤΗΝ ΤΕΛΙΚΗ ΕΚΔΟΧΗ
-        Macros final_version_DM = null;
-
-        // Επανάληψη μέχρι να ολοκληρωθεί σωστά καθως οι απαντησεισ του ΑΙ δεν ειναι παντα ορθες
-        while (!success2) {
-            try {
-                // Συμπλήρωση της λίστας με BMR
-                for (int i = 0; i < 7; i++) {// Επανάληψη μέχρι να ολοκληρωθεί σωστά καθως οι απαντησεισ του ΑΙ δεν ειναι παντα ορθες
-                    while (!success) {
-                        try {
-                            final_version_DM = DAYS_MACROS(weightKg, heightCm, age, gender, durationMin, sport,target);
-                            success = true;  // Επιτυχής υπολογισμός
-                        } catch (Exception e) {
-                            System.err.println("Προέκυψε σφάλμα: " + e.getMessage());
-                            System.out.println("Επανάληψη προσπάθειας...");
-                        }
-                    }
-                    x.add(final_version_DM);  // Προσθήκη στη λίστα
-                    success = false;  // Επαναφορά για την επόμενη επανάληψη
-                }
-
-                // Εύρεση της πιο συχνής τιμής BMR
-                Macros max = null;
-                for (int i = 0; i < 7; i++) {
-                    int count = 0;
-                    for (int h = 0; h < 7; h++) {
-                        if (Double.compare(x.get(i).bmr, x.get(h).bmr) == 0) {
-                            count++;
-                        }
-                    }
-                    if (max == null || count > max.fores) {
-                        max = new Macros(i, count);  // Εκχώρηση νέας μέγιστης τιμής
-                    }
-                }
-
-                if (max != null) {
-                    final_version_DM = x.get(max.thesi);
-                    success2 = true;  // Ενημέρωση επιτυχίας
-                }
-
-            } catch (Exception t) {
-                System.err.println("Προέκυψε σφάλμα: " + t.getMessage());
-                System.out.println("Επανάληψη προσπάθειας...");
-            }
+    public static double getMetValue(String activity) {
+        switch (activity) {
+            case "Περπάτημα": return 4.25; // Μέσος όρος περπατήματος
+            case "Τρέξιμο": return 11.1; // Μέσος όρος τρεξίματος
+            case "Ποδήλατο": return 8.625; // Μέσος όρος ποδηλασίας
+            case "Κολύμβηση": return 9.0;
+            case "Σχοινάκι": return 10.0;
+            case "Βάρη": return 7.0;
+            case "Γιόγκα": return 3.0;
+            case "Πιλάτες": return 3.5;
+            case "Χορός": return 6.0;
+            case "CrossFit/HIIT": return 9.0;
+            case "Αναρρίχηση": return 4.0;
+            case "Ποδόσφαιρο": return 10.0;
+            case "Μπάσκετ": return 8.0;
+            case "Τένις": return 8.0;
+            case "Βόλει(αγωνιστικό)": return 6.0;
+            case "Πυγμαχία": return 12.0;
+            case "Πολεμικές τέχνες": return 10.0;
+            case "Καράτε": return 10.0;
+            case "Τάε Κβο Ντο": return 11.0;
+            case "Σκι": return 10.0;
+            case "Κγιάκ": return 5.0;
+            case "Κωπηλασία": return 10.0;
+            case "Περπάτημα με βάρη": return 6.0;
+            case "Πεζοπορία": return 9.0;
+            default: throw new IllegalArgumentException("Άγνωστη δραστηριότητα: " + activity);
         }
-        //ΕΚΤΥΠΩΣΗ ΓΙΑ ΕΠΙΒΕΒΑΙΩΣΗ
-        System.out.println("Ηλικία: " + age + " ετών");
-        System.out.println("Θερμίδες Καύσης: " + Math.round(final_version_DM.calories2) + " kcal");
-        System.out.println("Πρωτεΐνες: " + Math.round(final_version_DM.protein2) + " γρ");
-        System.out.println("Υδατάνθρακες: " + Math.round(final_version_DM.carbs2) + " γρ");
-        System.out.println("Λίπη: " + Math.round(final_version_DM.fat2) + " γρ");
-        //ΕΠΙΣΤΡΟΦΗ ΜΑΚΡΟΘΡΕΠΤΙΚΩΝ
-        return final_version_DM;
     }
+
 
     public static String chatGPT(String message) throws URISyntaxException {
         String url = "https://api.openai.com/v1/chat/completions";
@@ -276,42 +250,6 @@ public class AI {
                     "- Κόκκινο κρέας: Μοσχαρίσια μπριζόλα με ρύζι." +
                     "- Λευκό κρέας: Ψητό στήθος κοτόπουλου με κινόα." +
                     "Τώρα θέλω ένα γεύμα από μία από αυτές τις κατηγορίες που να είναι μεσημεριανό και να πληροί τις παραπάνω οδηγίες.";
-        }else if (x == 9){
-            return "η απαντηση πρεπει να ειναι ενας αριθμος π.χ. 7.0" +
-                    "σου εχω γραψει πριν το αθλημα" +
-                    "Άσκηση και τα MET τους" +
-                    "Περπάτημα (4 km/h) 3.5" +
-                    "Περπάτημα (6 km/h) 5.0" +
-                    "Τρέξιμο (8 km/h) 8.0" +
-                    "Τρέξιμο (10 km/h) 10.0" +
-                    "Τρέξιμο (12 km/h) 11.5" +
-                    "Τρέξιμο (15 km/h) 13.0" +
-                    "Τρέξιμο (18 km/h) 15.0" +
-                    "Ποδήλατο (10-12 km/h) 4.0" +
-                    "Ποδήλατο (16-19 km/h) 8.5" +
-                    "Ποδήλατο (22-25 km/h) 10.0" +
-                    "Ποδήλατο (30+ km/h) 12.0" +
-                    "Κολύμβηση 9.0" +
-                    "Σχοινάκι  10.0" +
-                    "Βάρη  7.0" +
-                    "Γιόγκα 3.0" +
-                    "Πιλάτες 3.5" +
-                    "Χορός  6.0" +
-                    "CrossFit / HIIT 9.0" +
-                    "Αναρρίχηση 4.0" +
-                    "Ποδόσφαιρο 10.0" +
-                    "Μπάσκετn 8.0" +
-                    "Τένις 8.0" +
-                    "Βόλεϊ (αγωνιστικό) 6.0" +
-                    "Πυγμαχία 12.0" +
-                    "Πολεμικές τέχνες 10.0" +
-                    "Καράτε1 0.0" +
-                    "Τάε Κβο Ντο 11.0" +
-                    "Σκι 10.0 " +
-                    "Καγιάκ 5.0 " +
-                    "Κωπηλασία   10.0 " +
-                    "Περπάτημα με βάρη 6.0 " +
-                    "Πεζοπορία  9.0";
         }
         return "";
     }
@@ -380,14 +318,34 @@ public class AI {
         }
         return meal_panel;
     }
+    private static float extractNumber(String response, Pattern pattern) {
+        Matcher matcher = pattern.matcher(response);
+        if (matcher.find()) {
+            return Float.parseFloat(matcher.group());
+        } else {
+            throw new IllegalArgumentException("Δεν βρέθηκε αριθμός στην απάντηση: " + response);
+        }
+    }
 
     public static Macros[] macro_numbers(List<String> food, List<Float> calories, List<Float> protein ,List<Float> carbs , List<Float> fat , String name_meal) throws URISyntaxException {
         //γεμησμα λιστων με τα μακρος τους
         for (int i = 0; i < food.size(); i++) {
-            calories.add(Float.valueOf(chatGPT(geumata(4) + "του ΥΛΙΚΟΥ " + food.get(i) + "ΑΠΑΝΤΑ ΜΕ ΕΝΑΝ ΑΡΙΘΜΟ")));
-            protein.add(Float.valueOf(chatGPT(geumata(5) + "του υλικου " + food.get(i) + "ΑΠΑΝΤΑ ΜΕ ΕΝΑΝ ΑΡΙΘΜΟ")));
-            carbs.add(Float.valueOf(chatGPT(geumata(6) + "του υλικου " + food.get(i) + "ΑΠΑΝΤΑ ΜΕ ΕΝΑΝ ΑΡΙΘΜΟ")));
-            fat.add(Float.valueOf(chatGPT(geumata(7) + "του υλικου " + food.get(i) + "ΑΠΑΝΤΑ ΜΟΝΟ ΜΕ ΕΝΑΝ ΑΡΙΘΜΟ")));
+            String calorieResponse = chatGPT(geumata(4) + " του υλικού " + food.get(i) + " ΑΠΑΝΤΑ ΜΕ ΕΝΑΝ ΑΡΙΘΜΟ");
+            String proteinResponse = chatGPT(geumata(5) + " του υλικού " + food.get(i) + " ΑΠΑΝΤΑ ΜΕ ΕΝΑΝ ΑΡΙΘΜΟ");
+            String carbResponse = chatGPT(geumata(6) + " του υλικού " + food.get(i) + " ΑΠΑΝΤΑ ΜΕ ΕΝΑΝ ΑΡΙΘΜΟ");
+            String fatResponse = chatGPT(geumata(7) + " του υλικού " + food.get(i) + " ΑΠΑΝΤΑ ΜΟΝΟ ΜΕ ΕΝΑΝ ΑΡΙΘΜΟ");
+
+            Pattern pattern = Pattern.compile("\\d+(\\.\\d+)?");
+
+            float cal = extractNumber(calorieResponse, pattern);
+            float prot = extractNumber(proteinResponse, pattern);
+            float carb = extractNumber(carbResponse, pattern);
+            float ft = extractNumber(fatResponse, pattern);
+
+            calories.add(cal);
+            protein.add(prot);
+            carbs.add(carb);
+            fat.add(ft);
         }
 
         Macros[] meal_list = new Macros[food.size() + 1]; //μακροσ λιστα
@@ -402,54 +360,41 @@ public class AI {
     }
 
     public static Macros DAYS_MACROS(double weightKg, double heightCm, int age, String gender, double durationMin, String sport, int target) throws URISyntaxException {
-        //ΑΡΧΙΚΟΠΟΙΗΣΗ ΒΜR ΚΑΙ ΥΠΟΛΟΓΙΣΜΟΣ ΤΟΥ
-        double BMR = 0;
-        if (gender.equalsIgnoreCase("Α")) {
-            BMR= 10 * weightKg + 6.25 * heightCm - 5 * age + 5;
-        } else if (gender.equalsIgnoreCase("Γ")) {
-            BMR= 10 * weightKg + 6.25 * heightCm - 5 * age - 161;
-        }
-        //ΑΡΧΟΚΟΠΟΙΗΣΗ ΜΕΤ
-        Double ΜΕΤ= Double.valueOf(chatGPT("μορφη απαντησησ π.χ. 10.0 θελω το MET του αθληματος" + sport + "σου δινω επισησ και αυτα τα δεδδομενα"+ geumata(9)));
+        // Υπολογισμός BMR
+        double BMR = gender.equalsIgnoreCase("Α")
+                ? 10 * weightKg + 6.25 * heightCm - 5 * age + 5
+                : 10 * weightKg + 6.25 * heightCm - 5 * age - 161;
+
 
         // Υπολογισμός θερμίδων καύσης
-        double caloriesBurned= ΜΕΤ * 0.0175 * weightKg * durationMin;
+        double caloriesBurned = getMetValue(sport) * 0.0175 * weightKg * durationMin;
 
+        // Συνολικές Θερμίδες
+        double totalCalories = BMR + caloriesBurned;
 
-        // Υπολογισμός μακροθρεπτικών ισοροπιας
-            double proteinCalories = caloriesBurned * 0.25;  // 0,25% πρωτεΐνες
-            double carbCalories = caloriesBurned * 0.50;   // 50% υδατάνθρακες
-            double fatCalories = caloriesBurned * 0.25;   // 25% λίπη
-
-            double proteinGrams = proteinCalories / 4;
-            double carbGrams = carbCalories / 4;
-            double fatGrams = fatCalories / 9;
-            //NA ΜΕΙΩΣΕΙ ΚΙΛΑ
-        if (target==1) {
-            double caloriesBurned1 = (BMR-BMR*15/100) + caloriesBurned / 7;
-            double proteinCalories1 = proteinCalories +proteinCalories * 0.25;  // 0,25% πρωτεΐνες
-            double carbCalories1 = carbCalories -carbCalories * 0.15;   // 50% υδατάνθρακες
-            double fatCalories1 = fatCalories -fatCalories * 0.10;   // 25% λίπη
-
-            double proteinGrams1 = proteinCalories / 4;
-            double carbGrams1 = carbCalories / 4;
-            double fatGrams1 = fatCalories / 9;
-            return new Macros(String.valueOf(age),caloriesBurned1,proteinCalories1,carbCalories1,fatCalories1,ΜΕΤ);
-            //ΝΑ ΑΥΞΗΣΗ ΚΙΛΑ
-        }else if (target==2){
-            double caloriesBurned2 = (BMR+BMR*15/100) + caloriesBurned / 7;
-            double proteinCalories2 = proteinCalories +proteinCalories * 0.20;  // 0,25% πρωτεΐνες
-            double carbCalories2 = carbCalories +carbCalories * 20;   // 50% υδατάνθρακες
-            double fatCalories2 = fatCalories +fatCalories * 0.5;   // 25% λίπη
-
-            double proteinGrams2 = proteinCalories / 4;
-            double carbGrams2 = carbCalories / 4;
-            double fatGrams2 = fatCalories / 9;
-            return new Macros(String.valueOf(age),caloriesBurned2,proteinCalories2,carbCalories2,fatCalories2,ΜΕΤ);
-
+        if (target == 1) {  // Απώλεια Βάρους
+            totalCalories = (BMR * 0.85) + caloriesBurned;
+        } else if (target == 2) {  // Αύξηση Βάρους
+            totalCalories = (BMR * 1.15) + caloriesBurned;
         }
-        caloriesBurned = BMR + caloriesBurned / 7;
-        return new Macros(String.valueOf(age),caloriesBurned,proteinCalories,carbCalories,fatCalories,ΜΕΤ);
+
+        // Υπολογισμός Μακροθρεπτικών Συστατικών
+        double proteinCalories = totalCalories * 0.25;  // 25% Πρωτεΐνες
+        double carbCalories = totalCalories * 0.50;    // 50% Υδατάνθρακες
+        double fatCalories = totalCalories * 0.25;    // 25% Λίπη
+
+        long proteinGrams = Math.round(proteinCalories / 4);   // kcal/γρ
+        long carbGrams = Math.round(carbCalories / 4);        // kcal/γρ
+        long fatGrams = Math.round(fatCalories / 9);          // kcal/γρ
+        long roundedCalories = Math.round(totalCalories/1);
+
+        System.out.println("Ηλικία: " + age + " ετών");
+        System.out.println("Θερμίδες Καύσης: " + totalCalories + " kcal");
+        System.out.println("Πρωτεΐνες: " + proteinGrams + " γρ");
+        System.out.println("Υδατάνθρακες: " + carbGrams + " γρ");
+        System.out.println("Λίπη: " + fatGrams + " γρ");
+
+        // Επιστροφή Αντικειμένου Macros
+        return new Macros(String.valueOf(age), roundedCalories, proteinGrams, carbGrams, fatGrams, 0.0);
     }
 }
-
