@@ -242,7 +242,7 @@ public class Welcome extends Application {
 
 
         VBox layout = new VBox(10);
-        layout.setStyle("-fx-alignment: center; -fx-font-family: 'Times New Roman'; -fx-padding: 20;-fx-background-image: url('background2.jpggi');-fx-background-size: cover; -fx-background-repeat: no-repeat;");
+        layout.setStyle("-fx-alignment: center; -fx-font-family: 'Times New Roman'; -fx-padding: 20;-fx-background-image:url('background2.jpg');-fx-background-size: cover; -fx-background-repeat: no-repeat;");
 
         double widthField = 350;
 
