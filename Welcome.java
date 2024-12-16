@@ -1,9 +1,10 @@
 import javafx.application.Application;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.scene.control.Label;
@@ -12,6 +13,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.text.TextFlow;
 
 public class Welcome extends Application {
     private UserService userService; // Αναφορά στο UserService
@@ -25,13 +27,15 @@ public class Welcome extends Application {
         userService = new UserService();
         userService.loadUsersFromFile();
 
-
         //Ρύθμιση διαστάσεων και ονόματος εισαγωγικού παραθύρου
         window.setWidth(700);
         window.setHeight(500);
         window.setTitle("MealPlanner");
+        //Ρύθμιση αρχικών τίτλων
         Label titleLabel = new Label("Welcome to MealPlanner!");
-        titleLabel.setStyle("-fx-font-size: 23px; -fx-font-weight: bold; -fx-text-fill: white;-fx-effect: dropshadow(gaussian, black, 5, 0.5, 1, 1);");
+        titleLabel.setStyle("-fx-font-size: 35px; -fx-font-weight: bold; -fx-text-fill: white;-fx-effect: dropshadow(gaussian, black, 5, 0.5, 1, 1);");
+        Label secondTitle = new Label("Easy meals, better living.");
+        secondTitle.setStyle("-fx-font-size: 25px;-fx-text-fill: white; ");
 
         //Δημιουργία κουμπιών
         Button button;
@@ -40,27 +44,35 @@ public class Welcome extends Application {
         button2=new Button();
         button.setText("Let's get started!");
         button2.setText("I already have an account");
-        button.setStyle("-fx-font-size:18px;");
-        button2.setStyle("-fx-font-size:18px;");
+        button.setStyle("-fx-font-size: 20px; -fx-background-color: #5F6C51; -fx-text-fill: white; -fx-background-radius: 10;");
+        button2.setStyle("-fx-font-size: 20px; -fx-background-color: #5F6C51; -fx-text-fill: white; -fx-background-radius: 10;");
         button.setOnAction(e -> window.setScene(createInput()));
         button2.setOnAction(e -> window.setScene(login()));
 
-        VBox layout = new VBox(10); // Απόσταση 10 pixel ανάμεσα στα στοιχεία και κουμπιά
-        layout.getChildren().addAll(titleLabel,button,button2);
-        Scene mainScene=new Scene(layout);
+        // Δημιουργία VBox για τον τίτλο με padding
+        VBox topLayout = new VBox();
+        topLayout.getChildren().add(titleLabel);
+        topLayout.getChildren().add(secondTitle);
+        topLayout.setAlignment(Pos.CENTER); // Ευθυγράμμιση οριζόντια στο κέντρο
+        topLayout.setPadding(new Insets(30, 0, 0, 0)); // 30 pixels από πάνω
 
-        layout.setStyle("-fx-alignment: center; -fx-font-family: 'Times New Roman'; -fx-padding: 20;-fx-background-image: url('background.png');-fx-background-size: cover; -fx-background-repeat: no-repeat;");
+        // Δημιουργία VBox για τα κουμπιά
+        VBox buttonLayout = new VBox(10); // Απόσταση 10 pixel ανάμεσα στα κουμπιά
+        buttonLayout.getChildren().addAll(button, button2);
+        buttonLayout.setAlignment(Pos.CENTER); // Κουμπιά στο κέντρο
+
+        // Δημιουργία κύριου VBox
+        VBox layout = new VBox(220); // Απόσταση ανάμεσα στον τίτλο και τα κουμπιά
+        layout.getChildren().addAll(topLayout, buttonLayout);
+        layout.setStyle("-fx-font-family: 'Times New Roman'; -fx-padding: 20; -fx-background-image: url('background.png'); -fx-background-size: cover; -fx-background-repeat: no-repeat;");
+        layout.setAlignment(Pos.TOP_CENTER); // Όλα τα περιεχόμενα στην κορυφή, κεντραρισμένα
+
+        Scene mainScene = new Scene(layout);
         window.setScene(mainScene);
         window.show();
     }
-    private Label createStyledLabel(String text) {
-        Label label = new Label(text);
-        label.setStyle("-fx-font-size: 16px;-fx-font-weight: bold;-fx-text-fill: white;-fx-effect: dropshadow(gaussian, black, 5, 0.5, 1, 1);");
-        return label;
-    }
-    private Scene createInput() {
-         AnchorPane root = new AnchorPane(); // Για τοποθέτηση στοιχείων με ακρίβεια
 
+    private Scene createInput() {
 
         VBox layout = new VBox(10);
         layout.setStyle("-fx-alignment: center; -fx-font-family: 'Times New Roman'; -fx-padding: 20;-fx-background-image: url('background2.jpg');-fx-background-image: fill;-fx-background-size: cover; -fx-background-repeat: no-repeat;");
@@ -70,7 +82,7 @@ public class Welcome extends Application {
         registerTitle.setStyle( "-fx-font-size: 23px;-fx-font-weight: bold;-fx-text-fill: white;-fx-effect: dropshadow(gaussian, black, 5, 0.5, 1, 1);");
 
         //Ρύθμιση καθορισμένου πλάτους για τα ορθογώνια συμπλήρωσης
-        double fieldWidth = 450;
+        double fieldWidth = 350;
 
         // Προσθήκη πεδίων εισαγωγής στοιχείων
         TextField usernameField = new TextField();
@@ -114,6 +126,11 @@ public class Welcome extends Application {
         weightField.setPromptText("Enter your weight in kgs");
         weightField.setPrefWidth(fieldWidth);
         weightField.setMaxWidth(fieldWidth);
+
+        TextField preferencesField = new TextField();
+        preferencesField.setPromptText("Enter your food preferences");
+        preferencesField.setPrefWidth(fieldWidth);
+        preferencesField.setMaxWidth(fieldWidth);
 
         ComboBox<String> goalComboBox = new ComboBox<>();
         goalComboBox.getItems().addAll("Lose weight", "Gain muscle", "Maintain weight");
@@ -163,6 +180,7 @@ public class Welcome extends Application {
             String age = ageField.getText();
             String height = heightField.getText();
             String weight = weightField.getText();
+            String pref = preferencesField.getText();
 
             if (username.isEmpty() || email.isEmpty() || password.isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR); // Τύπος alert: Σφάλμα
@@ -181,7 +199,7 @@ public class Welcome extends Application {
                     int age1 = Integer.parseInt(ageField.getText());
                     double height1 = Double.parseDouble(heightField.getText());
                     double weight1 = Double.parseDouble(weightField.getText());
-                    userService.addUser(username,email,password,age1,height1,weight1);
+                    userService.addUser(username,email,password,age1,height1,weight1,pref);
                     Alert alert = new Alert(Alert.AlertType.INFORMATION); // Τύπος alert: Ενημέρωση
                     alert.setTitle("Success");
                     alert.setHeaderText(null);
@@ -202,10 +220,11 @@ public class Welcome extends Application {
                 new Label("Email:"), emailField,
                 new Label("Password:"), passwordField,
                 new Label("Confirm Password"),confirmPasswordField,
-                new Label("Age"),ageField,
-                new Label("Gender"),option1,option2,
-                new Label("Height"),heightField,
-                new Label("Weight"),weightField,
+                new Label("Age:"),ageField,
+                new Label("Gender:"),option1,option2,
+                new Label("Height:"),heightField,
+                new Label("Weight:"),weightField,
+                new Label("Food Preferences:"),preferencesField,
                 new Label("Goal:"), goalComboBox,
                 new Label("Sport and Weekly Practices"), sportComboBox,trainingField,
                 new Label("Add sport and Weekly Practices"),addsportComboBox,practiceField,
@@ -220,15 +239,22 @@ public class Welcome extends Application {
         return new Scene(scrollPane, 700, 500);
     }
     private Scene login() {
+
+
         VBox layout = new VBox(10);
         layout.setStyle("-fx-alignment: center; -fx-font-family: 'Times New Roman'; -fx-padding: 20;-fx-background-image: url('background2.jpggi');-fx-background-size: cover; -fx-background-repeat: no-repeat;");
 
+        double widthField = 350;
+
         TextField usernameLogin = new TextField();
         usernameLogin.setPromptText("Username or Email");
+        usernameLogin.setPrefWidth(widthField);
+        usernameLogin.setMaxWidth(widthField);
 
         TextField passwordLogin = new TextField();
         passwordLogin.setPromptText("Password");
-
+        passwordLogin.setPrefWidth(widthField);
+        passwordLogin.setMaxWidth(widthField);
 
         //κουμπί σύνδεσης
         Button loginButton = new Button("Login");

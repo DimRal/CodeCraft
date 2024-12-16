@@ -16,7 +16,7 @@
             "name": "AI",
             "request": "launch",
             "mainClass": "AI",
-            "projectName": "CodeCraft_846023fc"
+
         },
         {
             "type": "java",
@@ -24,14 +24,30 @@
             "request": "launch",
             "mainClass": "MealPlanner",
             "projectName": "CodeCraft_846023fc"
+
+        },
+        {
+            "type": "java",
+            "name": "MealPlanner1",
+            "request": "launch",
+            "mainClass": "MealPlanner1",
+            "projectName": "CodeCraft_f8da77ef"
+        },
+        {
+            "type": "java",
+            "name": "MealPlannerGUI",
+            "request": "launch",
+            "mainClass": "MealPlannerGUI",
+            "projectName": "CodeCraft_f8da77ef"
         },
         {
             "type": "java",
             "name": "Welcome",
             "request": "launch",
             "mainClass": "Welcome",
+
             "projectName": "CodeCraft_846023fc",
             "vmArgs": "--module-path C:/Users/User/Dropbox/PC/Downloads/programms/openjfx-23.0.1_windows-x64_bin-sdk/javafx-sdk-23.0.1/lib --add-modules javafx.controls,javafx.fxml"
         }
-    ]    
+    ]   
 }

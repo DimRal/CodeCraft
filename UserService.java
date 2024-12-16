@@ -39,8 +39,8 @@ public class UserService {
 
 
      // Προσθήκη χρήστη στη λίστα και αποθήκευση στο αρχείο JSON
-    public void addUser(String username, String email, String password , int  age, double height, double weight) {
-        User user = new User(username, email, password, age, height, weight);
+    public void addUser(String username, String email, String password , int  age, double height, double weight,String pref) {
+        User user = new User(username, email, password, age, height, weight,pref);
         users.add(user);
         saveUsersToFile(); // Αποθήκευση χρηστών στο αρχείο JSON
     }
