@@ -46,7 +46,7 @@ public class Welcome extends Application {
         button2.setText("I already have an account");
         button.setStyle("-fx-font-size: 20px; -fx-background-color: #5F6C51; -fx-text-fill: white; -fx-background-radius: 10;");
         button2.setStyle("-fx-font-size: 20px; -fx-background-color: #5F6C51; -fx-text-fill: white; -fx-background-radius: 10;");
-        button.setOnAction(e -> window.setScene(createInput()));
+        button.setOnAction(e -> window.setScene(createInput(window)));
         button2.setOnAction(e -> window.setScene(login()));
 
         // Δημιουργία VBox για τον τίτλο με padding
@@ -72,7 +72,7 @@ public class Welcome extends Application {
         window.show();
     }
 
-    private Scene createInput() {
+    private Scene createInput(Stage window) {
 
         VBox layout = new VBox(10);
         layout.setStyle("-fx-alignment: center; -fx-font-family: 'Times New Roman'; -fx-padding: 20;-fx-background-image: url('background2.jpg');-fx-background-image: fill;-fx-background-size: cover; -fx-background-repeat: no-repeat;");
@@ -205,6 +205,8 @@ public class Welcome extends Application {
                     alert.setHeaderText(null);
                     alert.setContentText("User registered succesfully!"); // Μήνυμα
                     alert.showAndWait();
+
+                    window.setScene(login()); // Αλλαγή σκηνής στο login
                 } catch (NumberFormatException ex) {
                     Alert alert = new Alert(Alert.AlertType.ERROR); // Τύπος alert: Σφάλμα
                     alert.setTitle("Error");
