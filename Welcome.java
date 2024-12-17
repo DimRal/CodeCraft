@@ -49,6 +49,7 @@ public class Welcome extends Application {
         button.setOnAction(e -> window.setScene(createInput(window)));
         button2.setOnAction(e -> window.setScene(login()));
 
+        
         // Δημιουργία VBox για τον τίτλο με padding
         VBox topLayout = new VBox();
         topLayout.getChildren().add(titleLabel);
