@@ -8,6 +8,13 @@
             "type": "java",
             "name": "Welcome",
             "request": "launch",
+            "mainClass": "src.main.java.Welcome",
+            "projectName": "CodeCraft_846023fc"
+        },
+        {
+            "type": "java",
+            "name": "Welcome",
+            "request": "launch",
             "mainClass": "Welcome",
             "projectName": "mealplanner"
         },
