@@ -1,5 +1,6 @@
 package gr.uni.mealplanner;
 import javafx.application.Application;
+import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -11,6 +12,8 @@ import javafx.stage.Stage;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextInputControl;
+import javafx.scene.control.Toggle;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ToggleGroup;
@@ -18,171 +21,179 @@ import javafx.scene.text.TextFlow;
 
 public class Welcome extends Application {
     private UserService userService; // Αναφορά στο UserService
+        private RadioButton newToggle;
 
-    public static void main (String []args) {
-        Application.launch(args);
-    }
-    @Override
-    public void start(Stage window) {
-
-        userService = new UserService();
-        userService.loadUsersFromFile();
-
-        //Ρύθμιση διαστάσεων και ονόματος εισαγωγικού παραθύρου
-        window.setWidth(700);
-        window.setHeight(500);
-        window.setTitle("MealPlanner");
-        //Ρύθμιση αρχικών τίτλων
-        Label titleLabel = new Label("Welcome to MealPlanner!");
-        titleLabel.setStyle("-fx-font-size: 35px; -fx-font-weight: bold; -fx-text-fill: white;-fx-effect: dropshadow(gaussian, black, 5, 0.5, 1, 1);");
-        Label secondTitle = new Label("Easy meals, better living.");
-        secondTitle.setStyle("-fx-font-size: 25px;-fx-text-fill: white; ");
-
-        //Δημιουργία κουμπιών
-        Button button;
-        Button button2;
-        button=new Button();
-        button2=new Button();
-        button.setText("Let's get started!");
-        button2.setText("I already have an account");
-        button.setStyle("-fx-font-size: 20px; -fx-background-color: #5F6C51; -fx-text-fill: white; -fx-background-radius: 10;");
-        button2.setStyle("-fx-font-size: 20px; -fx-background-color: #5F6C51; -fx-text-fill: white; -fx-background-radius: 10;");
-        button.setOnAction(e -> window.setScene(createInput(window)));
-        button2.setOnAction(e -> window.setScene(login(window)));
-
-
-        // Δημιουργία VBox για τον τίτλο με padding
-        VBox topLayout = new VBox();
-        topLayout.getChildren().add(titleLabel);
-        topLayout.getChildren().add(secondTitle);
-        topLayout.setAlignment(Pos.CENTER); // Ευθυγράμμιση οριζόντια στο κέντρο
-        topLayout.setPadding(new Insets(30, 0, 0, 0)); // 30 pixels από πάνω
-
-        // Δημιουργία VBox για τα κουμπιά
-        VBox buttonLayout = new VBox(10); // Απόσταση 10 pixel ανάμεσα στα κουμπιά
-        buttonLayout.getChildren().addAll(button, button2);
-        buttonLayout.setAlignment(Pos.CENTER); // Κουμπιά στο κέντρο
-
-        // Δημιουργία κύριου VBox
-        VBox layout = new VBox(220); // Απόσταση ανάμεσα στον τίτλο και τα κουμπιά
-        layout.getChildren().addAll(topLayout, buttonLayout);
-        layout.setStyle("-fx-font-family: 'Times New Roman'; -fx-padding: 20; -fx-background-image: url('background.png'); -fx-background-size: cover; -fx-background-repeat: no-repeat;");
-        layout.setAlignment(Pos.TOP_CENTER); // Όλα τα περιεχόμενα στην κορυφή, κεντραρισμένα
-
-        Scene mainScene = new Scene(layout);
-        window.setScene(mainScene);
-        window.show();
-    }
-
-    private Scene createInput(Stage window) {
-
-        VBox layout = new VBox(10);
-        layout.setStyle("-fx-alignment: center; -fx-font-family: 'Times New Roman'; -fx-padding: 20;-fx-background-image: url('background2.jpg');-fx-background-image: fill;-fx-background-size: cover; -fx-background-repeat: no-repeat;");
-
-        //Τίτλος register στο παράθυρο register
-        Label registerTitle = new Label("Register");
-        registerTitle.setStyle( "-fx-font-size: 23px;-fx-font-weight: bold;-fx-text-fill: white;-fx-effect: dropshadow(gaussian, black, 5, 0.5, 1, 1);");
-
-        //Ρύθμιση καθορισμένου πλάτους για τα ορθογώνια συμπλήρωσης
-        double fieldWidth = 350;
-
-        // Προσθήκη πεδίων εισαγωγής στοιχείων
-        TextField usernameField = new TextField();
-        usernameField.setPromptText("Enter your username");
-        usernameField.setPrefWidth(fieldWidth);
-        usernameField.setMaxWidth(fieldWidth);
-
-        TextField emailField = new TextField();
-        emailField.setPromptText("Enter your email");
-        emailField.setPrefWidth(fieldWidth);
-        emailField.setMaxWidth(fieldWidth);
-
-
-        PasswordField passwordField = new PasswordField();
-        passwordField.setPromptText("Enter your password");
-        passwordField.setPrefWidth(fieldWidth);
-        passwordField.setMaxWidth(fieldWidth);
-
-        PasswordField confirmPasswordField = new PasswordField();
-        confirmPasswordField.setPromptText("Confirm your password");
-        confirmPasswordField.setPrefWidth(fieldWidth);
-        confirmPasswordField.setMaxWidth(fieldWidth);
-
-        TextField ageField = new TextField();
-        ageField.setPromptText("Enter your age");
-        ageField.setPrefWidth(fieldWidth);
-        ageField.setMaxWidth(fieldWidth);
-
-        ToggleGroup gender = new ToggleGroup();
-        RadioButton option1 = new RadioButton("Male");
-        option1.setToggleGroup(gender);
-        RadioButton option2 = new RadioButton("Female");
-        option2.setToggleGroup(gender);
-
-        TextField heightField = new TextField();
-        heightField.setPromptText("Enter your height in cm");
-        usernameField.setPrefWidth(fieldWidth);
-        heightField.setMaxWidth(fieldWidth);
-
-        TextField weightField = new TextField();
-        weightField.setPromptText("Enter your weight in kgs");
-        weightField.setPrefWidth(fieldWidth);
-        weightField.setMaxWidth(fieldWidth);
-
-        TextField preferencesField = new TextField();
-        preferencesField.setPromptText("Enter your food preferences");
-        preferencesField.setPrefWidth(fieldWidth);
-        preferencesField.setMaxWidth(fieldWidth);
-
-        ComboBox<String> goalComboBox = new ComboBox<>();
-        goalComboBox.getItems().addAll("Lose weight", "Gain muscle", "Maintain weight");
-        goalComboBox.setPromptText("Select your goal");
-
-        ComboBox<String> sportComboBox = new ComboBox<>();
-        sportComboBox.getItems().addAll("Περπάτημα","Τρέξιμο","Ποδήλατο","Κολύμβηση","Σχοινάκι","Βάρη","Γιόγκα","Πιλάτες","Χορός","CrossFit/HIIT","Αναρρίχηση","Ποδόσφαιρο","Μπάσκετ","Τένις","Βόλει(αγωνιστικό)","Πυγμαχία","Πολεμικές τέχνες","Καράτε","Τάε Κβο Ντο","Σκι","Κγιάκ","Κωπηλασία","Περπάτημα με βάρη","Πεζοπορία");
-        sportComboBox.setPromptText("Select your sport");
-
-       TextField trainingField = new TextField();
-       trainingField.setPromptText("How many trainings per week (1-7)?");
-       trainingField.setVisible(false); // Αρχικά το πεδίο είναι κρυφό
-
-       // Όταν επιλέγεται άθλημα, εμφανίζεται το πεδίο για τον αριθμό προπονήσεων
-       sportComboBox.setOnAction(e -> {
-         String selectedSport = sportComboBox.getValue();
-         if (selectedSport != null) {
-            trainingField.setVisible(true);
-            trainingField.setText("");  // Καθαρίζει το πεδίο κάθε φορά που αλλάζει το άθλημα
-         }
-       });
-
-
-       ComboBox<String> addsportComboBox = new ComboBox<>();
-       addsportComboBox.getItems().addAll("Περπάτημα","Τρέξιμο","Ποδήλατο","Κολύμβηση","Σχοινάκι","Βάρη","Γιόγκα","Πιλάτες","Χορός","CrossFit/HIIT","Αναρρίχηση","Ποδόσφαιρο","Μπάσκετ","Τένις","Βόλει(αγωνιστικό)","Πυγμαχία","Πολεμικές τέχνες","Καράτε","Τάε Κβο Ντο","Σκι","Κγιάκ","Κωπηλασία","Περπάτημα με βάρη","Πεζοπορία");
-       addsportComboBox.setPromptText("Add your sport");
-
-      TextField practiceField = new TextField();
-      practiceField.setPromptText("How many trainings per week (1-7)?");
-      practiceField.setVisible(false); // Αρχικά το πεδίο είναι κρυφό
-
-      // Όταν επιλέγεται άθλημα, εμφανίζεται το πεδίο για τον αριθμό προπονήσεων
-      addsportComboBox.setOnAction(e -> {
-        String selectedSport = addsportComboBox.getValue();
-        if (selectedSport != null) {
-           practiceField.setVisible(true);
-           practiceField.setText("");  // Καθαρίζει το πεδίο κάθε φορά που αλλάζει το άθλημα
+        public static void main (String []args) {
+            Application.launch(args);
         }
-      });
+        @Override
+        public void start(Stage window) {
 
-        Button signupButton = new Button("Sign up!");
-        signupButton.setOnAction(e -> {
+            userService = new UserService();
+            userService.loadUsersFromFile();
+
+            //Ρύθμιση διαστάσεων και ονόματος εισαγωγικού παραθύρου
+            window.setWidth(700);
+            window.setHeight(500);
+            window.setTitle("MealPlanner");
+            //Ρύθμιση αρχικών τίτλων
+            Label titleLabel = new Label("Welcome to MealPlanner!");
+            titleLabel.setStyle("-fx-font-size: 35px; -fx-font-weight: bold; -fx-text-fill: white;-fx-effect: dropshadow(gaussian, black, 5, 0.5, 1, 1);");
+            Label secondTitle = new Label("Easy meals, better living.");
+            secondTitle.setStyle("-fx-font-size: 25px;-fx-text-fill: white; ");
+
+            //Δημιουργία κουμπιών
+            Button button;
+            Button button2;
+            button=new Button();
+            button2=new Button();
+            button.setText("Let's get started!");
+            button2.setText("I already have an account");
+            button.setStyle("-fx-font-size: 20px; -fx-background-color: #5F6C51; -fx-text-fill: white; -fx-background-radius: 10;");
+            button2.setStyle("-fx-font-size: 20px; -fx-background-color: #5F6C51; -fx-text-fill: white; -fx-background-radius: 10;");
+            button.setOnAction(e -> window.setScene(createInput(window)));
+            button2.setOnAction(e -> window.setScene(login(window)));
+
+
+            // Δημιουργία VBox για τον τίτλο με padding
+            VBox topLayout = new VBox();
+            topLayout.getChildren().add(titleLabel);
+            topLayout.getChildren().add(secondTitle);
+            topLayout.setAlignment(Pos.CENTER); // Ευθυγράμμιση οριζόντια στο κέντρο
+            topLayout.setPadding(new Insets(30, 0, 0, 0)); // 30 pixels από πάνω
+
+            // Δημιουργία VBox για τα κουμπιά
+            VBox buttonLayout = new VBox(10); // Απόσταση 10 pixel ανάμεσα στα κουμπιά
+            buttonLayout.getChildren().addAll(button, button2);
+            buttonLayout.setAlignment(Pos.CENTER); // Κουμπιά στο κέντρο
+
+            // Δημιουργία κύριου VBox
+            VBox layout = new VBox(220); // Απόσταση ανάμεσα στον τίτλο και τα κουμπιά
+            layout.getChildren().addAll(topLayout, buttonLayout);
+            layout.setStyle("-fx-font-family: 'Times New Roman'; -fx-padding: 20; -fx-background-image: url('background.png'); -fx-background-size: cover; -fx-background-repeat: no-repeat;");
+            layout.setAlignment(Pos.TOP_CENTER); // Όλα τα περιεχόμενα στην κορυφή, κεντραρισμένα
+
+            Scene mainScene = new Scene(layout);
+            window.setScene(mainScene);
+            window.show();
+        }
+
+        private Scene createInput(Stage window) {
+
+            VBox layout = new VBox(10);
+            layout.setStyle("-fx-alignment: center; -fx-font-family: 'Times New Roman'; -fx-padding: 20;-fx-background-image: url('background2.jpg');-fx-background-image: fill;-fx-background-size: cover; -fx-background-repeat: no-repeat;");
+
+            //Τίτλος register στο παράθυρο register
+            Label registerTitle = new Label("Register");
+            registerTitle.setStyle( "-fx-font-size: 23px;-fx-font-weight: bold;-fx-text-fill: white;-fx-effect: dropshadow(gaussian, black, 5, 0.5, 1, 1);");
+
+            //Ρύθμιση καθορισμένου πλάτους για τα ορθογώνια συμπλήρωσης
+            double fieldWidth = 350;
+
+            // Προσθήκη πεδίων εισαγωγής στοιχείων
+            TextField usernameField = new TextField();
+            usernameField.setPromptText("Enter your username");
+            usernameField.setPrefWidth(fieldWidth);
+            usernameField.setMaxWidth(fieldWidth);
+
+            TextField emailField = new TextField();
+            emailField.setPromptText("Enter your email");
+            emailField.setPrefWidth(fieldWidth);
+            emailField.setMaxWidth(fieldWidth);
+
+
+            PasswordField passwordField = new PasswordField();
+            passwordField.setPromptText("Enter your password");
+            passwordField.setPrefWidth(fieldWidth);
+            passwordField.setMaxWidth(fieldWidth);
+
+            PasswordField confirmPasswordField = new PasswordField();
+            confirmPasswordField.setPromptText("Confirm your password");
+            confirmPasswordField.setPrefWidth(fieldWidth);
+            confirmPasswordField.setMaxWidth(fieldWidth);
+
+            TextField ageField = new TextField();
+            ageField.setPromptText("Enter your age");
+            ageField.setPrefWidth(fieldWidth);
+            ageField.setMaxWidth(fieldWidth);
+
+            ToggleGroup gender = new ToggleGroup();
+            RadioButton option1 = new RadioButton("Male");
+            option1.setToggleGroup(gender);
+            RadioButton option2 = new RadioButton("Female");
+            option2.setToggleGroup(gender);
+
+            TextField heightField = new TextField();
+            heightField.setPromptText("Enter your height in cm");
+            usernameField.setPrefWidth(fieldWidth);
+            heightField.setMaxWidth(fieldWidth);
+
+            TextField weightField = new TextField();
+            weightField.setPromptText("Enter your weight in kgs");
+            weightField.setPrefWidth(fieldWidth);
+            weightField.setMaxWidth(fieldWidth);
+
+            TextField preferencesField = new TextField();
+            preferencesField.setPromptText("Enter your food preferences");
+            preferencesField.setPrefWidth(fieldWidth);
+            preferencesField.setMaxWidth(fieldWidth);
+
+            ComboBox<String> goalComboBox = new ComboBox<>();
+            goalComboBox.getItems().addAll("Lose weight", "Gain muscle", "Maintain weight");
+            goalComboBox.setPromptText("Select your goal");
+
+            ComboBox<String> sportComboBox = new ComboBox<>();
+            sportComboBox.getItems().addAll("Περπάτημα","Τρέξιμο","Ποδήλατο","Κολύμβηση","Σχοινάκι","Βάρη","Γιόγκα","Πιλάτες","Χορός","CrossFit/HIIT","Αναρρίχηση","Ποδόσφαιρο","Μπάσκετ","Τένις","Βόλει(αγωνιστικό)","Πυγμαχία","Πολεμικές τέχνες","Καράτε","Τάε Κβο Ντο","Σκι","Κγιάκ","Κωπηλασία","Περπάτημα με βάρη","Πεζοπορία");
+            sportComboBox.setPromptText("Select your sport");
+
+           TextField trainingField = new TextField();
+           trainingField.setPromptText("How many trainings per week (1-7)?");
+           trainingField.setVisible(false); // Αρχικά το πεδίο είναι κρυφό
+
+           // Όταν επιλέγεται άθλημα, εμφανίζεται το πεδίο για τον αριθμό προπονήσεων
+           sportComboBox.setOnAction(e -> {
+             String selectedSport = sportComboBox.getValue();
+             if (selectedSport != null) {
+                trainingField.setVisible(true);
+                trainingField.setText("");  // Καθαρίζει το πεδίο κάθε φορά που αλλάζει το άθλημα
+             }
+           });
+
+
+           ComboBox<String> addsportComboBox = new ComboBox<>();
+           addsportComboBox.getItems().addAll("Περπάτημα","Τρέξιμο","Ποδήλατο","Κολύμβηση","Σχοινάκι","Βάρη","Γιόγκα","Πιλάτες","Χορός","CrossFit/HIIT","Αναρρίχηση","Ποδόσφαιρο","Μπάσκετ","Τένις","Βόλει(αγωνιστικό)","Πυγμαχία","Πολεμικές τέχνες","Καράτε","Τάε Κβο Ντο","Σκι","Κγιάκ","Κωπηλασία","Περπάτημα με βάρη","Πεζοπορία");
+           addsportComboBox.setPromptText("Add your sport");
+
+          TextField practiceField = new TextField();
+          practiceField.setPromptText("How many trainings per week (1-7)?");
+          practiceField.setVisible(false); // Αρχικά το πεδίο είναι κρυφό
+
+          // Όταν επιλέγεται άθλημα, εμφανίζεται το πεδίο για τον αριθμό προπονήσεων
+          addsportComboBox.setOnAction(e -> {
+            String selectedSport = addsportComboBox.getValue();
+            if (selectedSport != null) {
+               practiceField.setVisible(true);
+               practiceField.setText("");  // Καθαρίζει το πεδίο κάθε φορά που αλλάζει το άθλημα
+            }
+          });
+
+            Button signupButton = new Button("Sign up!");
+            signupButton.setOnAction(e -> {
             String username = usernameField.getText();
             String email = emailField.getText();
             String password = passwordField.getText();
             String confirmPassword = confirmPasswordField.getText();
             String age = ageField.getText();
+            RadioButton selectedRadioButton = (RadioButton) newToggle;
+            String gender1 = (selectedRadioButton != null) ? selectedRadioButton.getText() : "Not selected";
             String height = heightField.getText();
             String weight = weightField.getText();
+            String goal = goalComboBox.getValue();
             String pref = preferencesField.getText();
+            String sports1 = sportComboBox.getValue();
+            String sports2 = addsportComboBox.getValue();
+            String training = trainingField.getText();
+            String practice = practiceField.getText();
 
             if (username.isEmpty() || email.isEmpty() || password.isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR); // Τύπος alert: Σφάλμα
@@ -201,7 +212,7 @@ public class Welcome extends Application {
                     int age1 = Integer.parseInt(ageField.getText());
                     double height1 = Double.parseDouble(heightField.getText());
                     double weight1 = Double.parseDouble(weightField.getText());
-                    userService.addUser(username,email,password,age1,height1,weight1,pref);
+                    userService.addUser(username,email,password,age1,gender1,height1,weight1,goal,pref,sports1,training,sports2,practice);
                     Alert alert = new Alert(Alert.AlertType.INFORMATION); // Τύπος alert: Ενημέρωση
                     alert.setTitle("Success");
                     alert.setHeaderText(null);
@@ -304,18 +315,13 @@ public class Welcome extends Application {
         Label Title = new Label("Your programm");
         Title.setStyle("-fx-font-size: 23px;-fx-font-weight: bold;-fx-text-fill: white;-fx-effect: dropshadow(gaussian, black, 5, 0.5, 1, 1);");
         VBox.setMargin(welcomeLabel, new Insets(-300, 0, 10, 0));
+        VBox.setMargin(Title, new Insets(0, 0, 10, 0));
         VBox layout1 = new VBox(220);
         layout1.getChildren().addAll(welcomeLabel,Title);
-        VBox.setMargin(Title, new Insets(0, 0, 10, 0));
         layout.getChildren().addAll(welcomeLabel, Title );
         layout.setAlignment(Pos.TOP_CENTER);
-<<<<<<< Updated upstream
-       
-        
-=======
 
 
->>>>>>> Stashed changes
         return new Scene(layout, 700, 500); // Επιστρέφει τη σκηνή στο τέλος
 }
 }

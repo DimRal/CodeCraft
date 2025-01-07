@@ -1,7 +1,6 @@
 package gr.uni.mealplanner;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -40,8 +39,8 @@ public class UserService {
 
 
      // Προσθήκη χρήστη στη λίστα και αποθήκευση στο αρχείο JSON
-    public void addUser(String username, String email, String password , int  age, double height, double weight,String pref) {
-        User user = new User(username, email, password, age, height, weight,pref);
+    public void addUser(String username, String email, String password , int  age , String gender,double height, double weight,String goal, String pref,String sports1, String training,String sports2,String practice) {
+        User user = new User(username, email, password, age, gender, height, weight,goal, pref, sports1,training, sports2,practice);
         users.add(user);
         saveUsersToFile(); // Αποθήκευση χρηστών στο αρχείο JSON
     }
