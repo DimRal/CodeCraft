@@ -316,7 +316,7 @@ public class Welcome extends Application {
 
         layout.getChildren().addAll(welcomeLabel, Title );
         layout.setAlignment(Pos.TOP_CENTER);
-        
+       
         
         return new Scene(layout, 700, 500); // Επιστρέφει τη σκηνή στο τέλος
     }
