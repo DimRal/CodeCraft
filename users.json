@@ -11,5 +11,35 @@
     "pref": "κοτόπουλο",
     "sports1": "Τρέξιμο",
     "sports2": "Ποδήλατο"
+  },
+  {
+    "username": "maria",
+    "email": "maraki@gmail.com",
+    "password": "1111",
+    "gender": "Not selected",
+    "age": 19,
+    "height": 1.9,
+    "weight": 78.0,
+    "goal": "Lose weight",
+    "pref": "αβοκάντο",
+    "sports1": "Τρέξιμο",
+    "training": "5",
+    "sports2": "Κολύμβηση",
+    "practice": "3"
+  },
+  {
+    "username": "eleni",
+    "email": "eleni@gmail.com",
+    "password": "1111",
+    "gender": "Female",
+    "age": 19,
+    "height": 1.69,
+    "weight": 70.0,
+    "goal": "Lose weight",
+    "pref": "αβοκάντο",
+    "sports1": "Γιόγκα",
+    "training": "3",
+    "sports2": "Σχοινάκι",
+    "practice": "1"
   }
 ]

@@ -5,7 +5,6 @@ public class User {
     private String password;
     private String gender; // male or female
     private int age;
-    private String sex;
     private double height; // in cm
     private double weight; // in kg
     private String goal; // lose weight, gain muscle, maintain weight

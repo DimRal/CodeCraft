@@ -184,8 +184,14 @@ public class Welcome extends Application {
             String password = passwordField.getText();
             String confirmPassword = confirmPasswordField.getText();
             String age = ageField.getText();
-            RadioButton selectedRadioButton = (RadioButton) newToggle;
-            String gender1 = (selectedRadioButton != null) ? selectedRadioButton.getText() : "Not selected";
+            RadioButton selectedRadioButton = (RadioButton) gender.getSelectedToggle();
+            String gender1;
+
+            if (selectedRadioButton != null) {
+                gender1 = selectedRadioButton.getText();
+            } else {
+                gender1 = "Not selected";
+            }
             String height = heightField.getText();
             String weight = weightField.getText();
             String goal = goalComboBox.getValue();
