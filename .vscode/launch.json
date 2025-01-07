@@ -8,10 +8,9 @@
             "type": "java",
             "name": "Welcome",
             "request": "launch",
-            "mainClass": "Welcome",
+            "mainClass": "gr.uni.mealplanner.Welcome",
             "projectName": "mealplanner",
-            "vmArgs": "--module-path C:/Users/bstam/OneDrive/Υπολογιστής/javafx-sdk-23.0.1/lib --add-modules javafx.controls,javafx.fxml"
-
+            "vmArgs": "--module-path C:/Users/User/Dropbox/PC/Downloads/programms/openjfx-23.0.1_windows-x64_bin-sdk/javafx-sdk-23.0.1/lib --add-modules javafx.controls,javafx.fxml"
         },
         {
             "type": "java",
@@ -23,28 +22,7 @@
             "type": "java",
             "name": "AI",
             "request": "launch",
-            "mainClass": "AI"
-        },
-        {
-            "type": "java",
-            "name": "MealPlanner",
-            "request": "launch",
-            "mainClass": "MealPlanner",
-            "projectName": "CodeCraft_846023fc"
-        },
-        {
-            "type": "java",
-            "name": "MealPlanner1",
-            "request": "launch",
-            "mainClass": "MealPlanner1",
-            "projectName": "CodeCraft_f8da77ef"
-        },
-        {
-            "type": "java",
-            "name": "MealPlannerGUI",
-            "request": "launch",
-            "mainClass": "MealPlannerGUI",
-            "projectName": "CodeCraft_f8da77ef"
-        },
+            "mainClass": "src.main.java.AI",
+        }
     ]
 }

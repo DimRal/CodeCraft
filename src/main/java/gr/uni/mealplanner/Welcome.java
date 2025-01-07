@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.scene.control.Label;
@@ -48,7 +49,7 @@ public class Welcome extends Application {
         button.setStyle("-fx-font-size: 20px; -fx-background-color: #5F6C51; -fx-text-fill: white; -fx-background-radius: 10;");
         button2.setStyle("-fx-font-size: 20px; -fx-background-color: #5F6C51; -fx-text-fill: white; -fx-background-radius: 10;");
         button.setOnAction(e -> window.setScene(createInput(window)));
-        button2.setOnAction(e -> window.setScene(login()));
+        button2.setOnAction(e -> window.setScene(login(window)));
 
 
         // Δημιουργία VBox για τον τίτλο με padding
@@ -66,7 +67,7 @@ public class Welcome extends Application {
         // Δημιουργία κύριου VBox
         VBox layout = new VBox(220); // Απόσταση ανάμεσα στον τίτλο και τα κουμπιά
         layout.getChildren().addAll(topLayout, buttonLayout);
-        layout.setStyle("-fx-font-family: 'Times New Roman'; -fx-padding: 20; -fx-background-image: url('background.png'); -fx-background-size: cover; -fx-background-repeat: no-repeat;");
+        layout.setStyle("-fx-font-family: 'Times New Roman'; -fx-padding: 20; -fx-background-image: url('/background.png'); -fx-background-size: cover; -fx-background-repeat: no-repeat;");
         layout.setAlignment(Pos.TOP_CENTER); // Όλα τα περιεχόμενα στην κορυφή, κεντραρισμένα
 
         Scene mainScene = new Scene(layout);
@@ -77,7 +78,7 @@ public class Welcome extends Application {
     private Scene createInput(Stage window) {
 
         VBox layout = new VBox(10);
-        layout.setStyle("-fx-alignment: center; -fx-font-family: 'Times New Roman'; -fx-padding: 20;-fx-background-image: url('background2.jpg');-fx-background-image: fill;-fx-background-size: cover; -fx-background-repeat: no-repeat;");
+        layout.setStyle("-fx-alignment: center; -fx-font-family: 'Times New Roman'; -fx-padding: 20;-fx-background-image: url('/background2.jpg');-fx-background-image: fill;-fx-background-size: cover; -fx-background-repeat: no-repeat;");
 
         //Τίτλος register στο παράθυρο register
         Label registerTitle = new Label("Register");
@@ -208,7 +209,7 @@ public class Welcome extends Application {
                     alert.setContentText("User registered succesfully!"); // Μήνυμα
                     alert.showAndWait();
 
-                    window.setScene(login()); // Αλλαγή σκηνής στο login
+                    window.setScene(login(window)); // Αλλαγή σκηνής στο login
                 } catch (NumberFormatException ex) {
                     Alert alert = new Alert(Alert.AlertType.ERROR); // Τύπος alert: Σφάλμα
                     alert.setTitle("Error");
@@ -242,8 +243,11 @@ public class Welcome extends Application {
         scrollPane.setPannable(true);  // Επιτρέπει κύλιση με drag
         return new Scene(scrollPane, 700, 500);
     }
-    private Scene login() {
-
+    private Scene loginScene;
+    private Scene login(Stage window) {
+        if (loginScene != null) {
+            return loginScene; // Επιστροφή της ήδη δημιουργημένης σκηνής
+        }
 
         VBox layout = new VBox(10);
         layout.setStyle("-fx-alignment: center; -fx-font-family: 'Times New Roman'; -fx-padding: 20;-fx-background-image:url('background2.jpg');-fx-background-size: cover; -fx-background-repeat: no-repeat;");
@@ -273,6 +277,8 @@ public class Welcome extends Application {
                 successAlert.setHeaderText(null);
                 successAlert.setContentText("Welcome, " + loggesInUser.getUsername() + "!");
                 successAlert.showAndWait();
+
+                window.setScene(Programm());
             } else {
                 Alert failureAlert = new Alert(Alert.AlertType.ERROR);
                 failureAlert.setTitle("Login Failed");
@@ -290,6 +296,28 @@ public class Welcome extends Application {
         loginTitle,usernameLogin,passwordLogin, loginButton
         );
 
-         return new Scene(layout, 700, 500); // Επιστρέφει τη σκηνή στο τέλος
+
+        loginScene = new Scene(layout, 700, 500); // Δημιουργία της σκηνής
+        return loginScene;
+        
+    }
+
+    private Scene Programm() {
+
+        VBox layout = new VBox();
+        layout.setStyle("-fx-alignment: center; -fx-font-family: 'Times New Roman'; -fx-padding: 20;-fx-background-image:url('background2.jpg');-fx-background-size: cover; -fx-background-repeat: no-repeat;");
+    
+
+        Label welcomeLabel = new Label("Welcome to MealPlanner!");
+        welcomeLabel.setStyle("-fx-font-size: 30px;-fx-font-weight: bold;-fx-text-fill: white;-fx-effect: dropshadow(gaussian, black, 5, 0.5, 1, 1);"); 
+
+        Label Title = new Label("Your programm");
+        Title.setStyle("-fx-font-size: 23px;-fx-font-weight: bold;-fx-text-fill: white;-fx-effect: dropshadow(gaussian, black, 5, 0.5, 1, 1);");
+
+        layout.getChildren().addAll(welcomeLabel, Title );
+        layout.setAlignment(Pos.TOP_CENTER);
+        
+        
+        return new Scene(layout, 700, 500); // Επιστρέφει τη σκηνή στο τέλος
     }
 }

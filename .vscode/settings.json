@@ -2,16 +2,17 @@
     "java.project.referencedLibraries":  [
             "lib/**/*.jar",
             "libs/**/*.jar",
-            "C:/Users/bstam/OneDrive/Υπολογιστής/javafx-sdk-23.0.1/lib/javafx.base.jar",
-            "C:/Users/bstam/OneDrive/Υπολογιστής/javafx-sdk-23.0.1/lib/javafx.controls.jar",
-            "C:/Users/bstam/OneDrive/Υπολογιστής/javafx-sdk-23.0.1/lib/javafx.fxml.jar",
-            "C:/Users/bstam/OneDrive/Υπολογιστής/javafx-sdk-23.0.1/lib/javafx.graphics.jar",
-            "C:/Users/bstam/OneDrive/Υπολογιστής/javafx-sdk-23.0.1/lib/javafx.web.jar",
-            "C:/Users/bstam/OneDrive/Υπολογιστής/javafx-sdk-23.0.1/lib/javafx.media.jar",
-            "C:/Users/bstam/OneDrive/Υπολογιστής/javafx-sdk-23.0.1/lib/javafx.swing.jar",
-            "C:/Users/bstam/OneDrive/Υπολογιστής/javafx-sdk-23.0.1/lib/javafx-swt.jar"
-
-
+            "C:Users\\User/Dropbox\\PC/Downloads\\programms\\openjfx-23.0.1_windows-x64_bin-sdk\\javafx-sdk-23.0.1\\javafx.controls.jar",
+            "C:Users\\User/Dropbox\\PC/Downloads\\programms\\openjfx-23.0.1_windows-x64_bin-sdk\\javafx-sdk-23.0.1\\javafx.base.jar",
+            "C:Users\\User/Dropbox\\PC/Downloads\\programms\\openjfx-23.0.1_windows-x64_bin-sdk\\javafx-sdk-23.0.1\\javafx.fxml.jar",
+            "C:Users\\User/Dropbox\\PC/Downloads\\programms\\openjfx-23.0.1_windows-x64_bin-sdk\\javafx-sdk-23.0.1\\javafx.graphics.jar",
+            "C:Users\\User/Dropbox\\PC/Downloads\\programms\\openjfx-23.0.1_windows-x64_bin-sdk\\javafx-sdk-23.0.1\\javafx.web.jar",
+            "C:Users\\User/Dropbox\\PC/Downloads\\programms\\openjfx-23.0.1_windows-x64_bin-sdk\\javafx-sdk-23.0.1\\javafx.media.jar",
+            "C:Users\\User/Dropbox\\PC/Downloads\\programms\\openjfx-23.0.1_windows-x64_bin-sdk\\javafx-sdk-23.0.1\\javafx.swing.jar",
+            "C:Users\\User/Dropbox\\PC/Downloads\\programms\\openjfx-23.0.1_windows-x64_bin-sdk\\javafx-sdk-23.0.1\\javafx-swt.jar",
+            "C:Users\\User/Dropbox\\PC/Downloads\\programms\\openjfx-23.0.1_windows-x64_bin-sdk\\javafx-sdk-23.0.1\\lib/javafx.properties"
+        
         ],
-        "java.configuration.updateBuildConfiguration": "interactive"
-    }
+        "java.configuration.updateBuildConfiguration": "interactive",
+        "java.debug.settings.onBuildFailureProceed": true
+}

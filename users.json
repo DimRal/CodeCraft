@@ -16,5 +16,23 @@
     "height": 1.6,
     "weight": 50.0,
     "pref": "rtxi"
+  },
+  {
+    "username": "ioblum",
+    "email": "h@aue",
+    "password": "1111",
+    "age": 16,
+    "height": 1.6,
+    "weight": 50.0,
+    "pref": "αυγα"
+  },
+  {
+    "username": "stavros",
+    "email": "stavros@gmail.com",
+    "password": "1111",
+    "age": 20,
+    "height": 1.75,
+    "weight": 120.0,
+    "pref": "αυγά,αβοκάντο,χοιρινό"
   }
 ]
