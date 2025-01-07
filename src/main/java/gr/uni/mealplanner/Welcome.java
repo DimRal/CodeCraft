@@ -6,7 +6,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.scene.control.Label;
@@ -67,7 +66,7 @@ public class Welcome extends Application {
         // Δημιουργία κύριου VBox
         VBox layout = new VBox(220); // Απόσταση ανάμεσα στον τίτλο και τα κουμπιά
         layout.getChildren().addAll(topLayout, buttonLayout);
-        layout.setStyle("-fx-font-family: 'Times New Roman'; -fx-padding: 20; -fx-background-image: url('/background.png'); -fx-background-size: cover; -fx-background-repeat: no-repeat;");
+        layout.setStyle("-fx-font-family: 'Times New Roman'; -fx-padding: 20; -fx-background-image: url('background.png'); -fx-background-size: cover; -fx-background-repeat: no-repeat;");
         layout.setAlignment(Pos.TOP_CENTER); // Όλα τα περιεχόμενα στην κορυφή, κεντραρισμένα
 
         Scene mainScene = new Scene(layout);
@@ -78,7 +77,7 @@ public class Welcome extends Application {
     private Scene createInput(Stage window) {
 
         VBox layout = new VBox(10);
-        layout.setStyle("-fx-alignment: center; -fx-font-family: 'Times New Roman'; -fx-padding: 20;-fx-background-image: url('/background2.jpg');-fx-background-image: fill;-fx-background-size: cover; -fx-background-repeat: no-repeat;");
+        layout.setStyle("-fx-alignment: center; -fx-font-family: 'Times New Roman'; -fx-padding: 20;-fx-background-image: url('background2.jpg');-fx-background-image: fill;-fx-background-size: cover; -fx-background-repeat: no-repeat;");
 
         //Τίτλος register στο παράθυρο register
         Label registerTitle = new Label("Register");
@@ -248,7 +247,6 @@ public class Welcome extends Application {
         if (loginScene != null) {
             return loginScene; // Επιστροφή της ήδη δημιουργημένης σκηνής
         }
-
         VBox layout = new VBox(10);
         layout.setStyle("-fx-alignment: center; -fx-font-family: 'Times New Roman'; -fx-padding: 20;-fx-background-image:url('background2.jpg');-fx-background-size: cover; -fx-background-repeat: no-repeat;");
 
@@ -277,7 +275,6 @@ public class Welcome extends Application {
                 successAlert.setHeaderText(null);
                 successAlert.setContentText("Welcome, " + loggesInUser.getUsername() + "!");
                 successAlert.showAndWait();
-
                 window.setScene(Programm());
             } else {
                 Alert failureAlert = new Alert(Alert.AlertType.ERROR);
@@ -296,28 +293,29 @@ public class Welcome extends Application {
         loginTitle,usernameLogin,passwordLogin, loginButton
         );
 
-
-        loginScene = new Scene(layout, 700, 500); // Δημιουργία της σκηνής
-        return loginScene;
-        
+         return new Scene(layout, 700, 500); // Επιστρέφει τη σκηνή στο τέλος
     }
-
     private Scene Programm() {
-
         VBox layout = new VBox();
         layout.setStyle("-fx-alignment: center; -fx-font-family: 'Times New Roman'; -fx-padding: 20;-fx-background-image:url('background2.jpg');-fx-background-size: cover; -fx-background-repeat: no-repeat;");
-    
 
         Label welcomeLabel = new Label("Welcome to MealPlanner!");
-        welcomeLabel.setStyle("-fx-font-size: 30px;-fx-font-weight: bold;-fx-text-fill: white;-fx-effect: dropshadow(gaussian, black, 5, 0.5, 1, 1);"); 
-
+        welcomeLabel.setStyle("-fx-font-size: 30px;-fx-font-weight: bold;-fx-text-fill: white;-fx-effect: dropshadow(gaussian, black, 5, 0.5, 1, 1);");
         Label Title = new Label("Your programm");
         Title.setStyle("-fx-font-size: 23px;-fx-font-weight: bold;-fx-text-fill: white;-fx-effect: dropshadow(gaussian, black, 5, 0.5, 1, 1);");
-
+        VBox.setMargin(welcomeLabel, new Insets(-300, 0, 10, 0));
+        VBox layout1 = new VBox(220);
+        layout1.getChildren().addAll(welcomeLabel,Title);
+        VBox.setMargin(Title, new Insets(0, 0, 10, 0));
         layout.getChildren().addAll(welcomeLabel, Title );
         layout.setAlignment(Pos.TOP_CENTER);
+<<<<<<< Updated upstream
        
         
+=======
+
+
+>>>>>>> Stashed changes
         return new Scene(layout, 700, 500); // Επιστρέφει τη σκηνή στο τέλος
-    }
+}
 }
