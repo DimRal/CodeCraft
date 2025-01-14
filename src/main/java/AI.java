@@ -650,9 +650,3 @@ public class AI {
             return output.toString();
         }
     }
-        
-    
-        // Επιστροφή Αντικειμένου Macros
-        return new Macros(String.valueOf(age), roundedCalories, proteinGrams, carbGrams, fatGrams, 0.0);
-    }
-}
