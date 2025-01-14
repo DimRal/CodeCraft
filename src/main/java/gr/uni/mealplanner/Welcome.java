@@ -141,7 +141,7 @@ public class Welcome extends Application {
             allergiesField.setMaxWidth(fieldWidth);
 
             ComboBox<String> goalComboBox = new ComboBox<>();
-            goalComboBox.getItems().addAll("Lose weight", "Gain muscle", "Maintain weight");
+            goalComboBox.getItems().addAll("Lose weight", "Gain muscle");
             goalComboBox.setPromptText("Select your goal");
 
             ComboBox<String> sportComboBox = new ComboBox<>();

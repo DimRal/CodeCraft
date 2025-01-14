@@ -15,7 +15,7 @@ public class User {
 
 
     // Constructor
-    public User(String username, String email, String password, int age,String gender, double height, double weight,String goal,String food,String sports1,String training) {
+    public User(String username, String email, String password, int age,String gender, double height, double weight,String goal,String food,String sports1,String training,String allergies) {
         this.username = username;
         this.email = email;
         this.password = password;

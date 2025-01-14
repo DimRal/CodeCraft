@@ -10,7 +10,7 @@
             "request": "launch",
             "mainClass": "gr.uni.mealplanner.Welcome",
             "projectName": "mealplanner",
-            "vmArgs": "--module-path C:/Users/User/Dropbox/PC/Downloads/programms/openjfx-23.0.1_windows-x64_bin-sdk/javafx-sdk-23.0.1/lib --add-modules javafx.controls,javafx.fxml,javafx.graphics"
+            "vmArgs": "--module-path C:/Users/bstam/OneDrive/Υπολογιστής/javafx-sdk-23.0.1/lib --add-modules javafx.controls,javafx.fxml,javafx.graphics"
         },
         {
             "type": "java",
