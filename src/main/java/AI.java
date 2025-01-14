@@ -1,5 +1,3 @@
-package code.craft;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -16,7 +14,7 @@ import java.util.regex.Pattern;
 
 
 public class AI {
-   
+
     public static ArrayList<String> AI(double weightKg, double heightCm, int age, String gender, double durationMin, String sport, int target,String no_foods) throws URISyntaxException {
         //λιστα με ολα τα γευματα
         ArrayList<Macros[]> diet = new ArrayList<>();
@@ -79,19 +77,19 @@ public class AI {
         retryMakeFood(diet, 3, "ΑΥΤΟ ΘΕΛΩ ΝΑ ΕΙΝΑΙ  ΚΑΤΗΓΟΡΙΑ ΜΕ ΛΕΥΚΟ ΚΡΕΑΣ ΓΕΥΜΑ"+ai_messege_input3);
         ai_messege_input1=ai_messege_input1+diet.get(8)[0].name +", ";
         System.out.println("\n");
-        retryMakeFood(diet, 3, "ΑΥΤΟ ΘΕΛΩ ΝΑ ΕΙΝΑΙ  ΚΑΤΗΓΟΡΙΑ ΜΕ ΛΕΥΚΟ ΚΡΕΑΣ ΓΕΥΜΑ"+ai_messege_input3); 
+        retryMakeFood(diet, 3, "ΑΥΤΟ ΘΕΛΩ ΝΑ ΕΙΝΑΙ  ΚΑΤΗΓΟΡΙΑ ΜΕ ΛΕΥΚΟ ΚΡΕΑΣ ΓΕΥΜΑ"+ai_messege_input3);
         ai_messege_input1=ai_messege_input1+diet.get(9)[0].name +", ";
         System.out.println("\n");
-        retryMakeFood(diet, 3, "ΑΥΤΟ ΘΕΛΩ ΝΑ ΕΙΝΑΙ  ΚΑΤΗΓΟΡΙΑ ΜΕ ΚΟΚΚΙΝΟ ΚΡΕΑΣ ΓΕΥΜΑ"+ai_messege_input3); 
+        retryMakeFood(diet, 3, "ΑΥΤΟ ΘΕΛΩ ΝΑ ΕΙΝΑΙ  ΚΑΤΗΓΟΡΙΑ ΜΕ ΚΟΚΚΙΝΟ ΚΡΕΑΣ ΓΕΥΜΑ"+ai_messege_input3);
         ai_messege_input1=ai_messege_input1+diet.get(10)[0].name +", ";
         System.out.println("\n");
-        retryMakeFood(diet, 3, "ΑΥΤΟ ΘΕΛΩ ΝΑ ΕΙΝΑΙ  ΚΑΤΗΓΟΡΙΑ ΛΑΔΕΡΟ ΓΕΥΜΑ"+ai_messege_input3);         
+        retryMakeFood(diet, 3, "ΑΥΤΟ ΘΕΛΩ ΝΑ ΕΙΝΑΙ  ΚΑΤΗΓΟΡΙΑ ΛΑΔΕΡΟ ΓΕΥΜΑ"+ai_messege_input3);
         ai_messege_input1=ai_messege_input1+diet.get(11)[0].name +", ";
         System.out.println("\n");
-        retryMakeFood(diet, 3, "ΑΥΤΟ ΘΕΛΩ ΝΑ ΕΙΝΑΙ  ΚΑΤΗΓΟΡΙΑ ΟΣΠΡΙΑ ΓΕΥΜΑ"+ai_messege_input3);        
+        retryMakeFood(diet, 3, "ΑΥΤΟ ΘΕΛΩ ΝΑ ΕΙΝΑΙ  ΚΑΤΗΓΟΡΙΑ ΟΣΠΡΙΑ ΓΕΥΜΑ"+ai_messege_input3);
         ai_messege_input1=ai_messege_input1+diet.get(12)[0].name +", ";
         System.out.println("\n");
-        retryMakeFood(diet, 3, "ΑΥΤΟ ΘΕΛΩ ΝΑ ΕΙΝΑΙ  ΚΑΤΗΓΟΡΙΑ ΟΣΠΡΙΑ ΓΕΥΜΑ"+ai_messege_input3);        
+        retryMakeFood(diet, 3, "ΑΥΤΟ ΘΕΛΩ ΝΑ ΕΙΝΑΙ  ΚΑΤΗΓΟΡΙΑ ΟΣΠΡΙΑ ΓΕΥΜΑ"+ai_messege_input3);
         ai_messege_input1=ai_messege_input1+diet.get(13)[0].name +", ";
         System.out.println("\n");
         retryMakeFood(diet, 3, "ΑΥΤΟ ΘΕΛΩ ΝΑ ΕΙΝΑΙ  ΚΑΤΗΓΟΡΙΑ ΨΑΡΙ ΓΕΥΜΑ"+ai_messege_input3);
@@ -115,8 +113,8 @@ public class AI {
             }else{
                 percentageOfGoal1=35.0;
             }
-          
-    
+
+
 
         grammarias.add(app.optimizeMealIngredients(diet.get(y), macros,percentageOfGoal1));
         //for(int i=0;i<grammarias.get(y).length;i++){
@@ -124,17 +122,17 @@ public class AI {
        //}
         }
 
-    
+
         return outPut(diet, grammarias);
     }
-        
-        
 
 
-    
-        
- 
-    
+
+
+
+
+
+
         //ΕΛΕΓΧΟΣ ΓΙΑ ΝΑ ΕΠΑΝΑΛΜΒΑΝΕΤΕ ΜΙΑ ΔΙΑΔΙΚΑΣΙΑ ΟΤΑΝ ΥΠΑΡΧΕΙ ΣΦΑΛΜΑ,ΚΑΙ ΣΥΓΚΕΚΡΗΜΕΝΑ ΓΙΑ ΤΙΣ ΛΑΘΟΣ ΑΠΟΑΝΤΗΣΕΙΣ ΤΟΥ ΑΙ
         public static void retryMakeFood(ArrayList<Macros[]> diet, int mealType, String requirements) {
             boolean success = false;
@@ -183,13 +181,13 @@ public class AI {
                 default: throw new IllegalArgumentException("Άγνωστη δραστηριότητα: " + activity);
             }
         }
-    
-    
+
+
         public static String chatGPT(String message) throws URISyntaxException {
             String url = "https://api.openai.com/v1/chat/completions";
-            String apiKey = "" ; 
+            String apiKey = "" ;
             String model = "gpt-4o";
-    
+
             try {
                 URI uri = new URI(url);
                 URL obj = uri.toURL();
@@ -197,17 +195,17 @@ public class AI {
                 con.setRequestMethod("POST");
                 con.setRequestProperty("Authorization", "Bearer " + apiKey);
                 con.setRequestProperty("Content-Type", "application/json");
-    
+
                 String body = "{\"model\": \"" + model + "\", \"messages\": [{\"role\": \"user\", \"content\": \"" + message + "\"}]}";
                 con.setDoOutput(true);
-    
+
                 try (OutputStreamWriter writer = new OutputStreamWriter(con.getOutputStream())) {
                     writer.write(body);
                     writer.flush();
                 }
-    
+
                 int responseCode = con.getResponseCode();
-    
+
                 if (responseCode == HttpURLConnection.HTTP_OK) { // HTTP 200
                     BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
                     String inputLine;
@@ -221,25 +219,25 @@ public class AI {
                     BufferedReader errorStream = new BufferedReader(new InputStreamReader(con.getErrorStream()));
                     String inputLine;
                     StringBuilder errorResponse = new StringBuilder();
-    
+
                     while ((inputLine = errorStream.readLine()) != null) {
                         errorResponse.append(inputLine);
                     }
                     errorStream.close();
                     throw new RuntimeException("Request failed with HTTP code " + responseCode + ": " + errorResponse);
                 }
-    
+
             } catch (IOException e) {
                 throw new RuntimeException("Connection error: " + e.getMessage(), e);
             }
         }
-    
+
         public static String extractContentFromResponse(String response) {
             int startMarker = response.indexOf("content") + 11;
             int endMarker = response.indexOf("\"", startMarker);
             return response.substring(startMarker, endMarker);
         }
-    
+
         public static String geumata(int x) {
             //μηνηματα που χρησιμοποιουμε στο ΑΙ για να μασ δωσει τησ απαντησεισ που θελουμε
             if (x == 1) {
@@ -308,16 +306,16 @@ public class AI {
             }
             return "";
         }
-    
+
         public static Macros[] make_food (int choose_meal,String requirements) throws URISyntaxException {
             ArrayList<String> foodlist = new ArrayList<>();//λιστα υλικων
             ArrayList<Double> calorieslist = new ArrayList<>();//λιστα θερμιδων
             ArrayList<Double> proteinlist = new ArrayList<>();//λιστα πρωτεινων
             ArrayList<Double> carbslist = new ArrayList<>();//λιστα υδατανθρακων
             ArrayList<Double> fatlist = new ArrayList<>();//λιστα λιπαρων
-    
+
             String meal=""; //αρχικοποιηση γευματος
-    
+
             switch (choose_meal){//επιλογη τυπου γευματος μεσο των αριθμων 1,2,3,4,5
                 case 1:
                     meal = chatGPT("θελω ενα ΠΡΩΙΝΟ "+geumata(1)+ requirements);
@@ -335,10 +333,10 @@ public class AI {
                     meal = chatGPT("θελω ενα ΒΡΑΔΙΝΟ " +geumata(1)+ requirements);
                     break;
             }
-    
+
             String ingredients = (chatGPT(geumata(2) + meal));//τοποθετηση υλικων σε μεταβλητη
             String name_meal = (chatGPT(geumata(3) + meal));// ονομα γευματος
-    
+
             //----τοποθετηση υλικων απο την μεταβλητη ingredients σε λιστα ξεχωριστα το ενα με το αλλο
             int x = 0;
             for (int i = 0; i < ingredients.length(); i++) {
@@ -352,11 +350,11 @@ public class AI {
                 }
             }
             //----τοποθετηση υλικων απο την μεταβλητη ingredients σε λιστα ξεχωριστα το ενα με το αλλο
-    
-    
+
+
             Macros[] meal_panel = new Macros[ingredients.length()+1]; //πινακας που θα μπει ολοκληρωμενα το γευμα με τα μακρος
             int i =0;//αρχικοποιηση
-    
+
             //να επαναλαμβανει μεχρι να σταμτησει να βγαζει eroor που γινεται λογο λαθος μορφης απαντησησ του AI
             //τρεχει η μεθοδος macro_numbers αρα το γευμα και τα υλικα ειναι ιδια γινεται η επαναληψη μονο στα μακρος
             do {
@@ -381,7 +379,7 @@ public class AI {
                 throw new IllegalArgumentException("Δεν βρέθηκε αριθμός στην απάντηση: " + response);
             }
         }
-    
+
         public static Macros[] macro_numbers(List<String> food, List<Double> calories, List<Double> protein ,List<Double> carbs , List<Double> fat , String name_meal) throws URISyntaxException {
             //γεμησμα λιστων με τα μακρος τους
             for (int i = 0; i < food.size(); i++) {
@@ -389,66 +387,66 @@ public class AI {
                 String proteinResponse = chatGPT(geumata(5) + " του υλικού " + food.get(i) + " ΑΠΑΝΤΑ ΜΕ ΕΝΑΝ ΑΡΙΘΜΟ");
                 String carbResponse = chatGPT(geumata(6) + " του υλικού " + food.get(i) + " ΑΠΑΝΤΑ ΜΕ ΕΝΑΝ ΑΡΙΘΜΟ");
                 String fatResponse = chatGPT(geumata(7) + " του υλικού " + food.get(i) + " ΑΠΑΝΤΑ ΜΟΝΟ ΜΕ ΕΝΑΝ ΑΡΙΘΜΟ");
-    
+
                 Pattern pattern = Pattern.compile("\\d+(\\.\\d+)?");
-    
+
                 double cal = extractNumber(calorieResponse, pattern);
                 double prot = extractNumber(proteinResponse, pattern);
                 double carb = extractNumber(carbResponse, pattern);
                 double ft = extractNumber(fatResponse, pattern);
-    
+
                 calories.add(cal);
                 protein.add(prot);
                 carbs.add(carb);
                 fat.add(ft);
             }
-    
+
             Macros[] meal_list = new Macros[food.size() + 1]; //μακροσ λιστα
             meal_list[0] = new Macros(name_meal); // αρχικοποιηση πρωτησ θεσησ με το ονομα του γευματος
-    
-    
+
+
             //καταχορουμε στο πινακα τα μακροσ ανα σειρα και υλικο με μακρος
             for (int i = 1; i < meal_list.length; i++) {
                 meal_list[i] = new Macros(food.get(i - 1), calories.get(i - 1), protein.get(i - 1), carbs.get(i - 1), fat.get(i - 1));
             }
             return meal_list;
         }
-    
+
         public static Macros DAYS_MACROS(double weightKg, double heightCm, int age, String gender, double durationMin, String sport, int target) throws URISyntaxException {
             // Υπολογισμός BMR
             double BMR = gender.equalsIgnoreCase("Α")
                     ? 10 * weightKg + 6.25 * heightCm - 5 * age + 5
                     : 10 * weightKg + 6.25 * heightCm - 5 * age - 161;
-    
-    
+
+
             // Υπολογισμός θερμίδων καύσης
             double caloriesBurned = getMetValue(sport) * 0.0175 * weightKg * durationMin;
-    
+
             // Συνολικές Θερμίδες
             double totalCalories = BMR + caloriesBurned;
-    
+
             if (target == 1) {  // Απώλεια Βάρους
                 totalCalories = (BMR * 0.85) + caloriesBurned;
             } else if (target == 2) {  // Αύξηση Βάρους
                 totalCalories = (BMR * 1.15) + caloriesBurned;
             }
-    
+
             // Υπολογισμός Μακροθρεπτικών Συστατικών
             double proteinCalories = totalCalories * 0.25;  // 25% Πρωτεΐνες
             double carbCalories = totalCalories * 0.50;    // 50% Υδατάνθρακες
             double fatCalories = totalCalories * 0.25;    // 25% Λίπη
-    
+
             long proteinGrams = Math.round(proteinCalories / 4);   // kcal/γρ
             long carbGrams = Math.round(carbCalories / 4);        // kcal/γρ
             long fatGrams = Math.round(fatCalories / 9);          // kcal/γρ
             long roundedCalories = Math.round(totalCalories/1);
-    
+
             System.out.println("Ηλικία: " + age + " ετών");
             System.out.println("Θερμίδες Καύσης: " + totalCalories + " kcal");
             System.out.println("Πρωτεΐνες: " + proteinGrams + " γρ");
             System.out.println("Υδατάνθρακες: " + carbGrams + " γρ");
             System.out.println("Λίπη: " + fatGrams + " γρ");
-    
+
             // Επιστροφή Αντικειμένου Macros
             return new Macros(String.valueOf(age), roundedCalories, proteinGrams, carbGrams, fatGrams, 0.0);
         }
@@ -456,9 +454,9 @@ public class AI {
             StringBuilder output = new StringBuilder();
             ArrayList<String> program = new ArrayList<>();
             String[] days = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
-            
+
             output.append("\n   Weekly Meal Plan\n\n   =================\n");
-            
+
             for (int i = 0; i < days.length; i++) {
                 output.setLength(0);
                 output.append("  -----" + days[i] + "-----  \n\n");
@@ -471,10 +469,10 @@ public class AI {
             }
             return program;
         }
-    
+
         public static String outPut_Help(ArrayList<Macros[]> diet, ArrayList<double[]> grammarias, int x, int i) {
             StringBuilder output = new StringBuilder();
-            
+
             switch (x) {
                 case 1: {
                     if (i == 0 || i == 2 || i == 4 || i == 6) {
@@ -649,10 +647,6 @@ public class AI {
             }
             return output.toString();
         }
+
     }
-        
-    
-        // Επιστροφή Αντικειμένου Macros
-        return new Macros(String.valueOf(age), roundedCalories, proteinGrams, carbGrams, fatGrams, 0.0);
-    }
-}
+

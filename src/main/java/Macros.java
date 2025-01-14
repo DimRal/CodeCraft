@@ -1,4 +1,3 @@
-package code.craft;
 
 public class Macros {
     String name;
