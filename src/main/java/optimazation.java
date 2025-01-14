@@ -1,4 +1,3 @@
-package gr.unit.mealplanner;
 
 import org.apache.commons.math3.optim.linear.LinearConstraint;
 import org.apache.commons.math3.optim.linear.LinearConstraintSet;
@@ -77,7 +76,7 @@ public class optimazation {
 
       // The value arg determines the least amount of each ingredient
       // 1 means that all ingredients will be present)
-      constraints.add(new LinearConstraint(nonNegative, Relationship.GEQ, 1));  
+      constraints.add(new LinearConstraint(nonNegative, Relationship.GEQ, 1));
     }
 
     LinearConstraintSet constraintSet = new LinearConstraintSet(constraints);
