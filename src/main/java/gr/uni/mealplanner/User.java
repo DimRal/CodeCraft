@@ -8,15 +8,14 @@ public class User {
     private double height; // in cm
     private double weight; // in kg
     private String goal; // lose weight, gain muscle, maintain weight
-    private String pref; //food preferences
+    private String food; //food you don't eat
     private String sports1;
     private String training;
-    private String sports2;
-    private String practice;
+    private String allergies;
 
 
     // Constructor
-    public User(String username, String email, String password, int age,String gender, double height, double weight,String goal,String pref,String sports1,String training,String sports2,String practice) {
+    public User(String username, String email, String password, int age,String gender, double height, double weight,String goal,String food,String sports1,String training,String allergies) {
         this.username = username;
         this.email = email;
         this.password = password;
@@ -25,11 +24,10 @@ public class User {
         this.height = height;
         this.weight = weight;
         this.goal = goal;
-        this.pref = pref;
+        this.food = food;
         this.sports1 = sports1;
         this.training = training;
-        this.sports2 = sports2;
-        this.practice = practice;
+        this.allergies = allergies;
     }
 
     // Getters and Setters
@@ -97,12 +95,12 @@ public class User {
         this.goal = goal;
     }
 
-    public String getPref() {
-        return pref;
+    public String getFood() {
+        return food;
     }
 
-    public void setPref(String pref) {
-        this.pref = pref;
+    public void setFood(String food) {
+        this.food = food;
     }
 
     public void setSports1(String sports1) {
@@ -111,23 +109,17 @@ public class User {
     public String getSports1() {
         return sports1;
     }
-    public void setSports2(String sports2) {
-        this.sports2 = sports2;
+    public void setAllergies(String allergies) {
+        this.allergies = allergies;
     }
 
-    public String getSports2() {
-        return sports2;
+    public String getAllergies() {
+        return allergies;
     }
     public void setTraining(String training) {
         this.training = training;
     }
     public String getTraString() {
         return training;
-    }
-    public void setPractice(String practice) {
-        this.practice = practice;
-    }
-    public String getPractice(){
-        return practice;
     }
 }

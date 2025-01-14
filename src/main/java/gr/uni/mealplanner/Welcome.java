@@ -1,6 +1,5 @@
 package gr.uni.mealplanner;
 import javafx.application.Application;
-import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -12,12 +11,10 @@ import javafx.stage.Stage;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.control.TextInputControl;
-import javafx.scene.control.Toggle;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.text.TextFlow;
+
 
 public class Welcome extends Application {
     private UserService userService; // Αναφορά στο UserService
@@ -133,10 +130,15 @@ public class Welcome extends Application {
             weightField.setPrefWidth(fieldWidth);
             weightField.setMaxWidth(fieldWidth);
 
-            TextField preferencesField = new TextField();
-            preferencesField.setPromptText("Enter your food preferences");
-            preferencesField.setPrefWidth(fieldWidth);
-            preferencesField.setMaxWidth(fieldWidth);
+            TextField foodsField = new TextField();
+            foodsField.setPromptText("Enter the foods you don't eat");
+            foodsField.setPrefWidth(fieldWidth);
+            foodsField.setMaxWidth(fieldWidth);
+
+            TextField allergiesField = new TextField ();
+            allergiesField.setPromptText("Enter your allergies");
+            allergiesField.setPrefWidth(fieldWidth);
+            allergiesField.setMaxWidth(fieldWidth);
 
             ComboBox<String> goalComboBox = new ComboBox<>();
             goalComboBox.getItems().addAll("Lose weight", "Gain muscle", "Maintain weight");
@@ -147,7 +149,7 @@ public class Welcome extends Application {
             sportComboBox.setPromptText("Select your sport");
 
            TextField trainingField = new TextField();
-           trainingField.setPromptText("How many trainings per week (1-7)?");
+           trainingField.setPromptText("How many hours per week?");
            trainingField.setVisible(false); // Αρχικά το πεδίο είναι κρυφό
 
            // Όταν επιλέγεται άθλημα, εμφανίζεται το πεδίο για τον αριθμό προπονήσεων
@@ -158,24 +160,6 @@ public class Welcome extends Application {
                 trainingField.setText("");  // Καθαρίζει το πεδίο κάθε φορά που αλλάζει το άθλημα
              }
            });
-
-
-           ComboBox<String> addsportComboBox = new ComboBox<>();
-           addsportComboBox.getItems().addAll("Περπάτημα","Τρέξιμο","Ποδήλατο","Κολύμβηση","Σχοινάκι","Βάρη","Γιόγκα","Πιλάτες","Χορός","CrossFit/HIIT","Αναρρίχηση","Ποδόσφαιρο","Μπάσκετ","Τένις","Βόλει(αγωνιστικό)","Πυγμαχία","Πολεμικές τέχνες","Καράτε","Τάε Κβο Ντο","Σκι","Κγιάκ","Κωπηλασία","Περπάτημα με βάρη","Πεζοπορία");
-           addsportComboBox.setPromptText("Add your sport");
-
-          TextField practiceField = new TextField();
-          practiceField.setPromptText("How many trainings per week (1-7)?");
-          practiceField.setVisible(false); // Αρχικά το πεδίο είναι κρυφό
-
-          // Όταν επιλέγεται άθλημα, εμφανίζεται το πεδίο για τον αριθμό προπονήσεων
-          addsportComboBox.setOnAction(e -> {
-            String selectedSport = addsportComboBox.getValue();
-            if (selectedSport != null) {
-               practiceField.setVisible(true);
-               practiceField.setText("");  // Καθαρίζει το πεδίο κάθε φορά που αλλάζει το άθλημα
-            }
-          });
 
             Button signupButton = new Button("Sign up!");
             signupButton.setOnAction(e -> {
@@ -195,11 +179,11 @@ public class Welcome extends Application {
             String height = heightField.getText();
             String weight = weightField.getText();
             String goal = goalComboBox.getValue();
-            String pref = preferencesField.getText();
+            String foods = foodsField.getText();
             String sports1 = sportComboBox.getValue();
-            String sports2 = addsportComboBox.getValue();
             String training = trainingField.getText();
-            String practice = practiceField.getText();
+            String allergies = allergiesField.getText();
+
 
             if (username.isEmpty() || email.isEmpty() || password.isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR); // Τύπος alert: Σφάλμα
@@ -218,7 +202,7 @@ public class Welcome extends Application {
                     int age1 = Integer.parseInt(ageField.getText());
                     double height1 = Double.parseDouble(heightField.getText());
                     double weight1 = Double.parseDouble(weightField.getText());
-                    userService.addUser(username,email,password,age1,gender1,height1,weight1,goal,pref,sports1,training,sports2,practice);
+                    userService.addUser(username,email,password,age1,gender1,height1,weight1,goal,foods,sports1,training,allergies);
                     Alert alert = new Alert(Alert.AlertType.INFORMATION); // Τύπος alert: Ενημέρωση
                     alert.setTitle("Success");
                     alert.setHeaderText(null);
@@ -245,10 +229,10 @@ public class Welcome extends Application {
                 new Label("Gender:"),option1,option2,
                 new Label("Height:"),heightField,
                 new Label("Weight:"),weightField,
-                new Label("Food Preferences:"),preferencesField,
+                new Label("Food Preferences:"),foodsField,
+                new Label("Allergies:"),allergiesField,
                 new Label("Goal:"), goalComboBox,
                 new Label("Sport and Weekly Practices"), sportComboBox,trainingField,
-                new Label("Add sport and Weekly Practices"),addsportComboBox,practiceField,
                 signupButton
         );
 
