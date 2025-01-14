@@ -1,13 +1,11 @@
+package code.craft;
+
 public class Macros {
     String name;
-    float calories;
-    float protein;
-    float carbs;
-    float fat;
-    double calories2;
-    double protein2;
-    double carbs2;
-    double fat2;
+    double calories;
+    double protein;
+    double carbs;
+    double fat;
     Double bmr ;
     int thesi;
     int fores;
@@ -22,21 +20,27 @@ public class Macros {
     }
 
     //για τισ υπολοιπες
-    public Macros(String name, float calories, float protein, float carbs, float fat){
+
+    public Macros(String name, double calories, double protein, double carbs, double fat,double bmr){
+        this.name=name;
+        this.calories=calories;
+        this.carbs= carbs;
+        this.fat=fat;
+        this.protein=protein;
+        this.bmr=bmr;
+    }
+    public Macros(String name, double calories, double protein, double carbs, double fat){
         this.name=name;
         this.calories=calories;
         this.carbs= carbs;
         this.fat=fat;
         this.protein=protein;
     }
-
-    public Macros(String name, double calories, double protein, double carbs, double fat,double bmr){
-        this.name=name;
-        this.calories2=calories;
-        this.carbs2= carbs;
-        this.fat2=fat;
-        this.protein2=protein;
-        this.bmr=bmr;
+    public Macros(double calories, double protein, double carbs, double fat){
+        this.calories=calories;
+        this.carbs= carbs;
+        this.fat=fat;
+        this.protein=protein;
     }
 
 }
