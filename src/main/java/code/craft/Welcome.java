@@ -222,7 +222,6 @@ public class Welcome extends Application {
                     //window.setScene(waiting())
                     AI ai =new AI();
                     ArrayList<String> programm=ai.AI_meals(weight1, height1, age1, gender1, tr1*60,sports1,goal, pref);
-                    System.out.println(programm.get(0));
 
                     window.setScene(login(window,programm));
 
