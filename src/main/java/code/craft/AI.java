@@ -185,7 +185,7 @@ public class AI {
     
         public static String chatGPT(String message) throws URISyntaxException {
             String url = "https://api.openai.com/v1/chat/completions";
-            String apiKey = "YOUR_API_KEY_HERE" ; //put key here
+            String apiKey = "put your key here" ; //put key here
             
             String model = "gpt-4o";
     
