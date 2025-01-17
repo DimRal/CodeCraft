@@ -30,71 +30,46 @@ public class AI {
 
 
         //ΠΡΩΙΝΟ ΛΙΣΤΑ[0,1]
-        System.out.println("----1)ΠΡΩΙΝΟ----");
         retryMakeFood(diet, 1, ai_messege_input1); // Πρωινό
         ai_messege_input1=ai_messege_input1+diet.get(0)[0].name +", ";
-        System.out.println("\n");
-        System.out.println("----2)ΠΡΩΙΝΟ----");
         retryMakeFood(diet, 1, ai_messege_input2); // Πρωινό
         ai_messege_input2=ai_messege_input2+diet.get(1)[0].name +", ";
-        System.out.println("\n");
 
 
         //ΔΕΚΑΤΙΑΝΟ ΛΙΣΤΑ[2,3]
-        System.out.println("----1)ΔΕΚΑΤΙΑΝΟ----");
         retryMakeFood(diet, 2, ai_messege_input1); // Δεκατιανό
         ai_messege_input1=ai_messege_input1+diet.get(2)[0].name +", ";
-        System.out.println("\n");
-        System.out.println("----2)ΔΕΚΑΤΙΑΝΟ----");
         retryMakeFood(diet, 2, ai_messege_input2); // Δεκατιανό
         ai_messege_input2=ai_messege_input2+diet.get(3)[0].name +", ";
-        System.out.println("\n");
 
 
         //ΑΠΟΓΕΥΜΑΤΙΝΟ ΛΙΣΤΑ[4,5]
-        System.out.println("----1)ΑΠΟΓΕΥΜΑΤΙΝΟ----");
         retryMakeFood(diet, 4, ai_messege_input1); // Απογευματινό
         ai_messege_input1=ai_messege_input1+diet.get(4)[0].name +", ";
-        System.out.println("\n");
-        System.out.println("----2)ΑΠΟΓΕΥΜΑΤΙΝΟ----");
         retryMakeFood(diet, 4, ai_messege_input2); // Απογευματινό
         ai_messege_input2=ai_messege_input2+diet.get(5)[0].name +", ";
-        System.out.println("\n");
 
 
         //ΒΡΑΔΙΝΟ ΛΙΣΤΑ[6,7]
-        System.out.println("----1)ΒΡΑΔΙΝΟ----");
         retryMakeFood(diet, 5, ai_messege_input1); // Βραδινό
         ai_messege_input1=ai_messege_input1+diet.get(6)[0].name +", ";
-        System.out.println("\n");
-        System.out.println("----2)ΒΡΑΔΙΝΟ----");
         retryMakeFood(diet, 5, ai_messege_input2); // Βραδινό
         ai_messege_input2=ai_messege_input2+diet.get(7)[0].name +", ";
-        System.out.println("\n");
 
         //ΜΕΣΗΜΕΡΙΑΝΟ ΛΙΣΤΑ[8,9,10,11,12,13,14]
-        System.out.println("----ΜΕΣΗΜΕΡΙΑΝΑ----");
         retryMakeFood(diet, 3, "ΑΥΤΟ ΘΕΛΩ ΝΑ ΕΙΝΑΙ  ΚΑΤΗΓΟΡΙΑ ΜΕ ΛΕΥΚΟ ΚΡΕΑΣ ΓΕΥΜΑ"+ai_messege_input3);
         ai_messege_input1=ai_messege_input1+diet.get(8)[0].name +", ";
-        System.out.println("\n");
         retryMakeFood(diet, 3, "ΑΥΤΟ ΘΕΛΩ ΝΑ ΕΙΝΑΙ  ΚΑΤΗΓΟΡΙΑ ΜΕ ΛΕΥΚΟ ΚΡΕΑΣ ΓΕΥΜΑ"+ai_messege_input3); 
         ai_messege_input1=ai_messege_input1+diet.get(9)[0].name +", ";
-        System.out.println("\n");
         retryMakeFood(diet, 3, "ΑΥΤΟ ΘΕΛΩ ΝΑ ΕΙΝΑΙ  ΚΑΤΗΓΟΡΙΑ ΜΕ ΚΟΚΚΙΝΟ ΚΡΕΑΣ ΓΕΥΜΑ"+ai_messege_input3); 
         ai_messege_input1=ai_messege_input1+diet.get(10)[0].name +", ";
-        System.out.println("\n");
         retryMakeFood(diet, 3, "ΑΥΤΟ ΘΕΛΩ ΝΑ ΕΙΝΑΙ  ΚΑΤΗΓΟΡΙΑ ΛΑΔΕΡΟ ΓΕΥΜΑ"+ai_messege_input3);         
         ai_messege_input1=ai_messege_input1+diet.get(11)[0].name +", ";
-        System.out.println("\n");
         retryMakeFood(diet, 3, "ΑΥΤΟ ΘΕΛΩ ΝΑ ΕΙΝΑΙ  ΚΑΤΗΓΟΡΙΑ ΟΣΠΡΙΑ ΓΕΥΜΑ"+ai_messege_input3);        
         ai_messege_input1=ai_messege_input1+diet.get(12)[0].name +", ";
-        System.out.println("\n");
         retryMakeFood(diet, 3, "ΑΥΤΟ ΘΕΛΩ ΝΑ ΕΙΝΑΙ  ΚΑΤΗΓΟΡΙΑ ΟΣΠΡΙΑ ΓΕΥΜΑ"+ai_messege_input3);        
         ai_messege_input1=ai_messege_input1+diet.get(13)[0].name +", ";
-        System.out.println("\n");
         retryMakeFood(diet, 3, "ΑΥΤΟ ΘΕΛΩ ΝΑ ΕΙΝΑΙ  ΚΑΤΗΓΟΡΙΑ ΨΑΡΙ ΓΕΥΜΑ"+ai_messege_input3);
-        ai_messege_input1=ai_messege_input1+diet.get(14)[0].name +", ";
-        System.out.println("\n");
 
         //ημερησια μακροθρεπτικα
         Macros macros=DAYS_MACROS( weightKg,  heightCm,  age,  gender,  durationMin,  sport,  target);
