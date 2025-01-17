@@ -1,0 +1,722 @@
+// Source code is decompiled from a .class file using FernFlower decompiler.
+package code.craft;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class AI {
+   public AI() {
+   }
+
+   public ArrayList<String> AI_meals(double weightKg, double heightCm, int age, String gender, double durationMin, String sport, String target, String no_foods) throws URISyntaxException {
+      ArrayList<Macros[]> diet = new ArrayList();
+      ArrayList<double[]> grammarias = new ArrayList();
+      String ai_messege_input1 = "\u0394\u0395\u039d \u03a0\u03a1\u0395\u03a0\u0395\u0399 \u039c\u0395 \u03a4\u0399\u03a0\u039f\u03a4\u0391 ,\u039f\u03a0\u03a9\u03a3 \u039a\u0391\u0399 \u0394\u0397\u03a0\u039f\u03a4\u0395 \u039d\u0391 \u0395\u03a7\u0395\u0399 \u039a\u0391\u03a0\u039f\u0399\u0391 \u03a3\u03a5\u039d\u03a4\u0391\u0393\u0397 \u03a4\u0391 \u03a0\u0391\u03a1\u0391\u039a\u0391\u03a4\u03a9: " + no_foods + "\u03a4\u039f \u0393\u0395\u03a5\u039c\u0391 \u03a0\u039f\u03a5 \u0398\u0391 \u03a6\u03a4\u0399\u0391\u039e\u0395\u0399\u03a3 \u03a0\u03a1\u03a0\u0395\u0399 \u039d\u0391 \u039c\u0397\u039d \u039c\u039f\u0399\u0391\u0396\u0395\u0399 \u039f\u03a5\u03a4\u0395 \u039c\u0395 \u039b\u0399\u0393\u039f \u039c\u0395 \u03a4\u0391 \u03a0\u0391\u03a1\u0391\u039a\u0391\u03a4\u03a9:  ";
+      String ai_messege_input2 = "\u0394\u0395\u039d \u03a0\u03a1\u0395\u03a0\u0395\u0399 \u039c\u0395 \u03a4\u0399\u03a0\u039f\u03a4\u0391 ,\u039f\u03a0\u03a9\u03a3 \u039a\u0391\u0399 \u0394\u0397\u03a0\u039f\u03a4\u0395 \u039d\u0391 \u0395\u03a7\u0395\u0399 \u039a\u0391\u03a0\u039f\u0399\u0391 \u03a3\u03a5\u039d\u03a4\u0391\u0393\u0397 \u03a4\u0391 \u03a0\u0391\u03a1\u0391\u039a\u0391\u03a4\u03a9: " + no_foods + "\u03a4\u039f \u0393\u0395\u03a5\u039c\u0391 \u03a0\u039f\u03a5 \u0398\u0391 \u03a6\u03a4\u0399\u0391\u039e\u0395\u0399\u03a3 \u03a0\u03a1\u03a0\u0395\u0399 \u039d\u0391 \u039c\u0397\u039d \u039c\u039f\u0399\u0391\u0396\u0395\u0399 \u039f\u03a5\u03a4\u0395 \u039c\u0395 \u039b\u0399\u0393\u039f \u039c\u0395 \u03a4\u0391 \u03a0\u0391\u03a1\u0391\u039a\u0391\u03a4\u03a9:  ";
+      String ai_messege_input3 = "\u0394\u0395\u039d \u03a0\u03a1\u0395\u03a0\u0395\u0399 \u039c\u0395 \u03a4\u0399\u03a0\u039f\u03a4\u0391 ,\u039f\u03a0\u03a9\u03a3 \u039a\u0391\u0399 \u0394\u0397\u03a0\u039f\u03a4\u0395 \u039d\u0391 \u0395\u03a7\u0395\u0399 \u039a\u0391\u03a0\u039f\u0399\u0391 \u03a3\u03a5\u039d\u03a4\u0391\u0393\u0397 \u03a4\u0391 \u03a0\u0391\u03a1\u0391\u039a\u0391\u03a4\u03a9: " + no_foods + "\u03a4\u039f \u0393\u0395\u03a5\u039c\u0391 \u03a0\u039f\u03a5 \u0398\u0391 \u03a6\u03a4\u0399\u0391\u039e\u0395\u0399\u03a3 \u03a0\u03a1\u03a0\u0395\u0399 \u039d\u0391 \u039c\u0397\u039d \u039c\u039f\u0399\u0391\u0396\u0395\u0399 \u039f\u03a5\u03a4\u0395 \u039c\u0395 \u039b\u0399\u0393\u039f \u039c\u0395 \u03a4\u0391 \u03a0\u0391\u03a1\u0391\u039a\u0391\u03a4\u03a9:  ";
+      System.out.println("----1)\u03a0\u03a1\u03a9\u0399\u039d\u039f----");
+      retryMakeFood(diet, 1, ai_messege_input1);
+      ai_messege_input1 = ai_messege_input1 + ((Macros[])diet.get(0))[0].name + ", ";
+      System.out.println("\n");
+      System.out.println("----2)\u03a0\u03a1\u03a9\u0399\u039d\u039f----");
+      retryMakeFood(diet, 1, ai_messege_input2);
+      ai_messege_input2 = ai_messege_input2 + ((Macros[])diet.get(1))[0].name + ", ";
+      System.out.println("\n");
+      System.out.println("----1)\u0394\u0395\u039a\u0391\u03a4\u0399\u0391\u039d\u039f----");
+      retryMakeFood(diet, 2, ai_messege_input1);
+      ai_messege_input1 = ai_messege_input1 + ((Macros[])diet.get(2))[0].name + ", ";
+      System.out.println("\n");
+      System.out.println("----2)\u0394\u0395\u039a\u0391\u03a4\u0399\u0391\u039d\u039f----");
+      retryMakeFood(diet, 2, ai_messege_input2);
+      ai_messege_input2 = ai_messege_input2 + ((Macros[])diet.get(3))[0].name + ", ";
+      System.out.println("\n");
+      System.out.println("----1)\u0391\u03a0\u039f\u0393\u0395\u03a5\u039c\u0391\u03a4\u0399\u039d\u039f----");
+      retryMakeFood(diet, 4, ai_messege_input1);
+      ai_messege_input1 = ai_messege_input1 + ((Macros[])diet.get(4))[0].name + ", ";
+      System.out.println("\n");
+      System.out.println("----2)\u0391\u03a0\u039f\u0393\u0395\u03a5\u039c\u0391\u03a4\u0399\u039d\u039f----");
+      retryMakeFood(diet, 4, ai_messege_input2);
+      ai_messege_input2 = ai_messege_input2 + ((Macros[])diet.get(5))[0].name + ", ";
+      System.out.println("\n");
+      System.out.println("----1)\u0392\u03a1\u0391\u0394\u0399\u039d\u039f----");
+      retryMakeFood(diet, 5, ai_messege_input1);
+      ai_messege_input1 = ai_messege_input1 + ((Macros[])diet.get(6))[0].name + ", ";
+      System.out.println("\n");
+      System.out.println("----2)\u0392\u03a1\u0391\u0394\u0399\u039d\u039f----");
+      retryMakeFood(diet, 5, ai_messege_input2);
+      ai_messege_input2.makeConcatWithConstants<invokedynamic>(ai_messege_input2, ((Macros[])diet.get(7))[0].name);
+      System.out.println("\n");
+      System.out.println("----\u039c\u0395\u03a3\u0397\u039c\u0395\u03a1\u0399\u0391\u039d\u0391----");
+      retryMakeFood(diet, 3, "\u0391\u03a5\u03a4\u039f \u0398\u0395\u039b\u03a9 \u039d\u0391 \u0395\u0399\u039d\u0391\u0399  \u039a\u0391\u03a4\u0397\u0393\u039f\u03a1\u0399\u0391 \u039c\u0395 \u039b\u0395\u03a5\u039a\u039f \u039a\u03a1\u0395\u0391\u03a3 \u0393\u0395\u03a5\u039c\u0391" + ai_messege_input3);
+      ai_messege_input1 = ai_messege_input1 + ((Macros[])diet.get(8))[0].name + ", ";
+      System.out.println("\n");
+      retryMakeFood(diet, 3, "\u0391\u03a5\u03a4\u039f \u0398\u0395\u039b\u03a9 \u039d\u0391 \u0395\u0399\u039d\u0391\u0399  \u039a\u0391\u03a4\u0397\u0393\u039f\u03a1\u0399\u0391 \u039c\u0395 \u039b\u0395\u03a5\u039a\u039f \u039a\u03a1\u0395\u0391\u03a3 \u0393\u0395\u03a5\u039c\u0391" + ai_messege_input3);
+      ai_messege_input1 = ai_messege_input1 + ((Macros[])diet.get(9))[0].name + ", ";
+      System.out.println("\n");
+      retryMakeFood(diet, 3, "\u0391\u03a5\u03a4\u039f \u0398\u0395\u039b\u03a9 \u039d\u0391 \u0395\u0399\u039d\u0391\u0399  \u039a\u0391\u03a4\u0397\u0393\u039f\u03a1\u0399\u0391 \u039c\u0395 \u039a\u039f\u039a\u039a\u0399\u039d\u039f \u039a\u03a1\u0395\u0391\u03a3 \u0393\u0395\u03a5\u039c\u0391" + ai_messege_input3);
+      ai_messege_input1 = ai_messege_input1 + ((Macros[])diet.get(10))[0].name + ", ";
+      System.out.println("\n");
+      retryMakeFood(diet, 3, "\u0391\u03a5\u03a4\u039f \u0398\u0395\u039b\u03a9 \u039d\u0391 \u0395\u0399\u039d\u0391\u0399  \u039a\u0391\u03a4\u0397\u0393\u039f\u03a1\u0399\u0391 \u039b\u0391\u0394\u0395\u03a1\u039f \u0393\u0395\u03a5\u039c\u0391" + ai_messege_input3);
+      ai_messege_input1 = ai_messege_input1 + ((Macros[])diet.get(11))[0].name + ", ";
+      System.out.println("\n");
+      retryMakeFood(diet, 3, "\u0391\u03a5\u03a4\u039f \u0398\u0395\u039b\u03a9 \u039d\u0391 \u0395\u0399\u039d\u0391\u0399  \u039a\u0391\u03a4\u0397\u0393\u039f\u03a1\u0399\u0391 \u039f\u03a3\u03a0\u03a1\u0399\u0391 \u0393\u0395\u03a5\u039c\u0391" + ai_messege_input3);
+      ai_messege_input1 = ai_messege_input1 + ((Macros[])diet.get(12))[0].name + ", ";
+      System.out.println("\n");
+      retryMakeFood(diet, 3, "\u0391\u03a5\u03a4\u039f \u0398\u0395\u039b\u03a9 \u039d\u0391 \u0395\u0399\u039d\u0391\u0399  \u039a\u0391\u03a4\u0397\u0393\u039f\u03a1\u0399\u0391 \u039f\u03a3\u03a0\u03a1\u0399\u0391 \u0393\u0395\u03a5\u039c\u0391" + ai_messege_input3);
+      ai_messege_input1 = ai_messege_input1 + ((Macros[])diet.get(13))[0].name + ", ";
+      System.out.println("\n");
+      retryMakeFood(diet, 3, "\u0391\u03a5\u03a4\u039f \u0398\u0395\u039b\u03a9 \u039d\u0391 \u0395\u0399\u039d\u0391\u0399  \u039a\u0391\u03a4\u0397\u0393\u039f\u03a1\u0399\u0391 \u03a8\u0391\u03a1\u0399 \u0393\u0395\u03a5\u039c\u0391" + ai_messege_input3);
+      ai_messege_input1.makeConcatWithConstants<invokedynamic>(ai_messege_input1, ((Macros[])diet.get(14))[0].name);
+      System.out.println("\n");
+      Macros macros = DAYS_MACROS(weightKg, heightCm, age, gender, durationMin, sport, target);
+      new optimazation();
+
+      for(int y = 0; y < diet.size(); ++y) {
+         double percentageOfGoal1 = 0.0;
+         if (y != 0 && y != 1) {
+            if (y != 2 && y != 3) {
+               if (y != 4 && y != 5) {
+                  if (y != 6 && y != 7) {
+                     percentageOfGoal1 = 35.0;
+                  } else {
+                     percentageOfGoal1 = 20.0;
+                  }
+               } else {
+                  percentageOfGoal1 = 15.0;
+               }
+            } else {
+               percentageOfGoal1 = 10.0;
+            }
+         } else {
+            percentageOfGoal1 = 20.0;
+         }
+
+         grammarias.add(optimazation.optimizeMealIngredients((Macros[])diet.get(y), macros, percentageOfGoal1));
+      }
+
+      return outPut(diet, grammarias);
+   }
+
+   public static void retryMakeFood(ArrayList<Macros[]> diet, int mealType, String requirements) {
+      boolean success = false;
+
+      while(!success) {
+         try {
+            Macros[] x = make_food(mealType, requirements);
+            if (x[0].name == null) {
+               success = false;
+            } else {
+               diet.add(x);
+               success = true;
+            }
+         } catch (Exception var5) {
+            System.err.println("\u03a0\u03c1\u03bf\u03ad\u03ba\u03c5\u03c8\u03b5 \u03c3\u03c6\u03ac\u03bb\u03bc\u03b1: " + var5.getMessage());
+            System.out.println("\u0395\u03c0\u03b1\u03bd\u03ac\u03bb\u03b7\u03c8\u03b7 \u03c0\u03c1\u03bf\u03c3\u03c0\u03ac\u03b8\u03b5\u03b9\u03b1\u03c2...");
+         }
+      }
+
+   }
+
+   public static double getMetValue(String activity) {
+      switch (activity) {
+         case "\u039c\u03c0\u03ac\u03c3\u03ba\u03b5\u03c4":
+            return 8.0;
+         case "CrossFit/HIIT":
+            return 9.0;
+         case "\u03a4\u03ac\u03b5 \u039a\u03b2\u03bf \u039d\u03c4\u03bf":
+            return 11.0;
+         case "\u03a0\u03b5\u03c1\u03c0\u03ac\u03c4\u03b7\u03bc\u03b1":
+            return 4.25;
+         case "":
+            return 0.0;
+         case "\u03a3\u03ba\u03b9":
+            return 10.0;
+         case "\u0392\u03ac\u03c1\u03b7":
+            return 7.0;
+         case "\u03a0\u03bf\u03bb\u03b5\u03bc\u03b9\u03ba\u03ad\u03c2 \u03c4\u03ad\u03c7\u03bd\u03b5\u03c2":
+            return 10.0;
+         case "\u039a\u03c9\u03c0\u03b7\u03bb\u03b1\u03c3\u03af\u03b1":
+            return 10.0;
+         case "\u03a0\u03bf\u03b4\u03cc\u03c3\u03c6\u03b1\u03b9\u03c1\u03bf":
+            return 10.0;
+         case "\u0391\u03bd\u03b1\u03c1\u03c1\u03af\u03c7\u03b7\u03c3\u03b7":
+            return 4.0;
+         case "\u039a\u03bf\u03bb\u03cd\u03bc\u03b2\u03b7\u03c3\u03b7":
+            return 9.0;
+         case "\u03a4\u03c1\u03ad\u03be\u03b9\u03bc\u03bf":
+            return 11.1;
+         case "\u03a3\u03c7\u03bf\u03b9\u03bd\u03ac\u03ba\u03b9":
+            return 10.0;
+         case "\u039a\u03b3\u03b9\u03ac\u03ba":
+            return 5.0;
+         case "\u03a4\u03ad\u03bd\u03b9\u03c2":
+            return 8.0;
+         case "\u03a7\u03bf\u03c1\u03cc\u03c2":
+            return 6.0;
+         case "\u03a0\u03b5\u03c1\u03c0\u03ac\u03c4\u03b7\u03bc\u03b1 \u03bc\u03b5 \u03b2\u03ac\u03c1\u03b7":
+            return 6.0;
+         case "\u03a0\u03bf\u03b4\u03ae\u03bb\u03b1\u03c4\u03bf":
+            return 8.625;
+         case "\u0393\u03b9\u03cc\u03b3\u03ba\u03b1":
+            return 3.0;
+         case "\u03a0\u03b9\u03bb\u03ac\u03c4\u03b5\u03c2":
+            return 3.5;
+         case "\u039a\u03b1\u03c1\u03ac\u03c4\u03b5":
+            return 10.0;
+         case "\u0392\u03cc\u03bb\u03b5\u03b9(\u03b1\u03b3\u03c9\u03bd\u03b9\u03c3\u03c4\u03b9\u03ba\u03cc)":
+            return 6.0;
+         case "\u03a0\u03b5\u03b6\u03bf\u03c0\u03bf\u03c1\u03af\u03b1":
+            return 9.0;
+         case "\u03a0\u03c5\u03b3\u03bc\u03b1\u03c7\u03af\u03b1":
+            return 12.0;
+      }
+
+      throw new IllegalArgumentException("\u0386\u03b3\u03bd\u03c9\u03c3\u03c4\u03b7 \u03b4\u03c1\u03b1\u03c3\u03c4\u03b7\u03c1\u03b9\u03cc\u03c4\u03b7\u03c4\u03b1: " + activity);
+   }
+
+   public static String chatGPT(String message) throws URISyntaxException {
+      String url = "https://api.openai.com/v1/chat/completions";
+      //String apiKey = "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";
+      String model = "gpt-4o";
+
+      try {
+         URI uri = new URI(url);
+         URL obj = uri.toURL();
+         HttpURLConnection con = (HttpURLConnection)obj.openConnection();
+         con.setRequestMethod("POST");
+         con.setRequestProperty("Authorization", "Bearer " + apiKey);
+         con.setRequestProperty("Content-Type", "application/json");
+         String body = "{\"model\": \"" + model + "\", \"messages\": [{\"role\": \"user\", \"content\": \"" + message + "\"}]}";
+         con.setDoOutput(true);
+         Throwable var8 = null;
+         BufferedReader errorStream = null;
+
+         try {
+            OutputStreamWriter writer = new OutputStreamWriter(con.getOutputStream());
+
+            try {
+               writer.write(body);
+               writer.flush();
+            } finally {
+               if (writer != null) {
+                  writer.close();
+               }
+
+            }
+         } catch (Throwable var19) {
+            if (var8 == null) {
+               var8 = var19;
+            } else if (var8 != var19) {
+               var8.addSuppressed(var19);
+            }
+
+            throw var8;
+         }
+
+         int responseCode = con.getResponseCode();
+         StringBuilder errorResponse;
+         String inputLine;
+         if (responseCode == 200) {
+            errorStream = new BufferedReader(new InputStreamReader(con.getInputStream()));
+            errorResponse = new StringBuilder();
+
+            while((inputLine = errorStream.readLine()) != null) {
+               errorResponse.append(inputLine);
+            }
+
+            errorStream.close();
+            return extractContentFromResponse(errorResponse.toString());
+         } else {
+            errorStream = new BufferedReader(new InputStreamReader(con.getErrorStream()));
+            errorResponse = new StringBuilder();
+
+            while((inputLine = errorStream.readLine()) != null) {
+               errorResponse.append(inputLine);
+            }
+
+            errorStream.close();
+            throw new RuntimeException("Request failed with HTTP code " + responseCode + ": " + String.valueOf(errorResponse));
+         }
+      } catch (IOException var20) {
+         throw new RuntimeException("Connection error: " + var20.getMessage(), var20);
+      }
+   }
+
+   public static String extractContentFromResponse(String response) {
+      int startMarker = response.indexOf("content") + 11;
+      int endMarker = response.indexOf("\"", startMarker);
+      return response.substring(startMarker, endMarker);
+   }
+
+   public static String geumata(int x) {
+      if (x == 1) {
+         return "\u0393\u03b5\u03cd\u03bc\u03b1,\u03bc\u03b5 \u03bb\u03b9\u03b3\u03b1 \u03c5\u03bb\u03b9\u03ba\u03b1  \u03ba\u03b1\u03b9 \u03c4\u03b1 \u03c5\u03bb\u03b9\u03ba\u03ac \u03c0\u03bf\u03c5 \u03c7\u03c1\u03b5\u03b9\u03b1\u03b6\u03cc\u03bc\u03b1\u03c3\u03c4\u03b5 \u03b3\u03b9\u03b1 \u03b1\u03c5\u03c4\u03cc \u03c4\u03bf \u03b3\u03b5\u03cd\u03bc\u03b1.";
+      } else if (x == 2) {
+         return "\u0398\u03ad\u03bb\u03c9 \u03bd\u03b1 \u03bc\u03bf\u03c5 \u03b4\u03ce\u03c3\u03b5\u03b9\u03c2 \u03bc\u03cc\u03bd\u03bf \u03c4\u03b1 \u03c5\u03bb\u03b9\u03ba\u03ac \u03c4\u03bf\u03c5 \u03b3\u03b5\u03cd\u03bc\u03b1\u03c4\u03bf\u03c2 \u03b1\u03bb\u03bb\u03b1 \u03c0\u03c1\u03c9\u03c4\u03bf \u03bd\u03b1 \u03b2\u03b1\u03bb\u03b5\u03b9\u03c3 \u03c4\u03bf \u03ba\u03c5\u03c1\u03b9\u03bf \u03c3\u03c5\u03c3\u03c4\u03b1\u03c4\u03b9\u03ba\u03bf \u03c4\u03b7\u03c3 \u03c3\u03c5\u03bd\u03c4\u03b1\u03b3\u03b7\u03c2\u03c3\u03b5 \u03bc\u03bf\u03c1\u03c6\u03ae: \u03c5\u03bb\u03b9\u03ba\u03cc, \u03c5\u03bb\u03b9\u03ba\u03cc, \u03c5\u03bb\u03b9\u03ba\u03cc, ... \u03a0\u03c1\u03ad\u03c0\u03b5\u03b9 \u03bd\u03b1 \u03c0\u03b1\u03c1\u03b1\u03bb\u03b5\u03af\u03c8\u03b5\u03b9\u03c2 \u03c4\u03b1 \u03bc\u03c0\u03b1\u03c7\u03b1\u03c1\u03b9\u03ba\u03ac (\u03c0.\u03c7., \u03b1\u03bb\u03ac\u03c4\u03b9, \u03c0\u03b9\u03c0\u03ad\u03c1\u03b9, \u03c1\u03af\u03b3\u03b1\u03bd\u03b7). \u0391\u03bd \u03ad\u03bd\u03b1 \u03c5\u03bb\u03b9\u03ba\u03cc \u03ad\u03c7\u03b5\u03b9 \u03c0\u03bf\u03bb\u03bb\u03bf\u03cd\u03c2 \u03c4\u03cd\u03c0\u03bf\u03c5\u03c2 (\u03c0.\u03c7., \u03c4\u03c5\u03c1\u03af: \u03c6\u03ad\u03c4\u03b1, \u03ba\u03b1\u03c3\u03ad\u03c1\u03b9), \u03b4\u03b9\u03ac\u03bb\u03b5\u03be\u03b5 \u03c4\u03bf\u03bd \u03c0\u03b9\u03bf \u03ba\u03bf\u03b9\u03bd\u03cc \u03ae \u03c3\u03c5\u03bd\u03b7\u03b8\u03b9\u03c3\u03bc\u03ad\u03bd\u03bf \u03c4\u03cd\u03c0\u03bf. \u0397 \u03b1\u03c0\u03ac\u03bd\u03c4\u03b7\u03c3\u03b7 \u03c0\u03c1\u03ad\u03c0\u03b5\u03b9 \u03bd\u03b1 \u03b5\u03af\u03bd\u03b1\u03b9 \u03bc\u03cc\u03bd\u03bf \u03b7 \u03bb\u03af\u03c3\u03c4\u03b1 \u03c4\u03c9\u03bd \u03c5\u03bb\u03b9\u03ba\u03ce\u03bd \u03c7\u03c9\u03c1\u03b9\u03c3\u03bc\u03ad\u03bd\u03b7 \u03bc\u03b5 \u03ba\u03cc\u03bc\u03bc\u03b1\u03c4\u03b1, \u03c7\u03c9\u03c1\u03af\u03c2 \u03c4\u03b5\u03bb\u03b5\u03af\u03b5\u03c2 \u03ae \u03ac\u03bb\u03bb\u03b5\u03c2 \u03b5\u03c0\u03b5\u03be\u03b7\u03b3\u03ae\u03c3\u03b5\u03b9\u03c2.";
+      } else if (x == 3) {
+         return "\u03a0\u03b5\u03c2 \u03bc\u03bf\u03c5 \u039c\u039f\u039d\u039f \u03a4\u039f \u039f\u039d\u039f\u039c\u0391 \u03c4\u03bf\u03c5 \u03b3\u03b5\u03cd\u03bc\u03b1\u03c4\u03bf\u03c2.";
+      } else if (x == 4) {
+         return "\u0398\u03ad\u03bb\u03c9 \u03bd\u03b1 \u03bc\u03bf\u03c5 \u03b4\u03ce\u03c3\u03b5\u03b9\u03c2 \u03bc\u03cc\u03bd\u03bf \u03c4\u03bf\u03bd \u03b1\u03c1\u03b9\u03b8\u03bc\u03cc \u03c4\u03c9\u03bd \u03b8\u03b5\u03c1\u03bc\u03af\u03b4\u03c9\u03bd \u03b3\u03b9\u03b1 \u03c4\u03bf \u03c3\u03c5\u03b3\u03ba\u03b5\u03ba\u03c1\u03b9\u03bc\u03ad\u03bd\u03bf \u03c5\u03bb\u03b9\u03ba\u03cc. - \u0397 \u03b1\u03c0\u03ac\u03bd\u03c4\u03b7\u03c3\u03b7 \u03c0\u03c1\u03ad\u03c0\u03b5\u03b9 \u03bd\u03b1 \u03b5\u03af\u03bd\u03b1\u03b9 \u03ad\u03bd\u03b1\u03c2 \u03ba\u03b1\u03b9 \u03bc\u03cc\u03bd\u03bf \u03b1\u03c1\u03b9\u03b8\u03bc\u03cc\u03c2 (\u03c0.\u03c7., 155) \u03c0\u03bf\u03c5 \u03b5\u03af\u03bd\u03b1\u03b9 \u03c4\u03b1 \u03b3\u03c1\u03b1\u03bc\u03bc\u03ac\u03c1\u03b9\u03b1 \u03b3\u03b9\u03b1 \u03ad\u03bd\u03b1 \u03ae 100\u03b3\u03c1 \u03ae 100ml \u03c4\u03bf\u03c5 \u03c5\u03bb\u03b9\u03ba\u03bf\u03cd, \u03c7\u03c9\u03c1\u03af\u03c2 \u03b5\u03c0\u03b9\u03c0\u03bb\u03ad\u03bf\u03bd \u03ba\u03b5\u03af\u03bc\u03b5\u03bd\u03bf, \u03bc\u03bf\u03bd\u03ac\u03b4\u03b5\u03c2 \u03bc\u03ad\u03c4\u03c1\u03b7\u03c3\u03b7\u03c2 \u03ae \u03b5\u03be\u03b7\u03b3\u03ae\u03c3\u03b5\u03b9\u03c2. - \u0391\u03bd \u03b4\u03b5\u03bd \u03bc\u03c0\u03bf\u03c1\u03b5\u03af\u03c2 \u03bd\u03b1 \u03b2\u03c1\u03b5\u03b9\u03c2 \u03c4\u03b7\u03bd \u03c0\u03bb\u03b7\u03c1\u03bf\u03c6\u03bf\u03c1\u03af\u03b1, \u03b1\u03c0\u03ac\u03bd\u03c4\u03b7\u03c3\u03b5 \u03bc\u03cc\u03bd\u03bf \u03bc\u03b5 \u03c4\u03bf\u03bd \u03b1\u03c1\u03b9\u03b8\u03bc\u03cc 0. - \u039c\u03b7\u03bd \u03c0\u03b5\u03c1\u03b9\u03bb\u03b1\u03bc\u03b2\u03ac\u03bd\u03b5\u03b9\u03c2 \u03ba\u03b1\u03bc\u03af\u03b1 \u03ac\u03bb\u03bb\u03b7 \u03b5\u03be\u03ae\u03b3\u03b7\u03c3\u03b7, \u03c0\u03c1\u03cc\u03c4\u03b1\u03c3\u03b7, \u03c3\u03c7\u03cc\u03bb\u03b9\u03bf \u03ae \u03c0\u03bb\u03b7\u03c1\u03bf\u03c6\u03bf\u03c1\u03af\u03b1. \u03a0\u03b1\u03c1\u03b1\u03b4\u03b5\u03af\u03b3\u03bc\u03b1\u03c4\u03b1: 1. \u03a5\u03bb\u03b9\u03ba\u03cc: \u03b5\u03bd\u03b1 \u03b1\u03c5\u03b3\u03cc -> \u0391\u03c0\u03ac\u03bd\u03c4\u03b7\u03c3\u03b7: 70 2. \u03a5\u03bb\u03b9\u03ba\u03cc: 100 \u03b3\u03c1 \u03c6\u03ad\u03c4\u03b1 -> \u0391\u03c0\u03ac\u03bd\u03c4\u03b7\u03c3\u03b7: 250 3. \u03a5\u03bb\u03b9\u03ba\u03cc: 100 ml \u03b3\u03ac\u03bb\u03b1 \u03c0\u03bb\u03ae\u03c1\u03b5\u03c2 -> \u0391\u03c0\u03ac\u03bd\u03c4\u03b7\u03c3\u03b7: 64";
+      } else if (x == 5) {
+         return "\u0398\u03ad\u03bb\u03c9 \u03bd\u03b1 \u03bc\u03bf\u03c5 \u03b4\u03ce\u03c3\u03b5\u03b9\u03c2 \u03bc\u03cc\u03bd\u03bf \u03c4\u03bf\u03bd \u03b1\u03c1\u03b9\u03b8\u03bc\u03cc \u03c4\u03c9\u03bd \u03c0\u03c1\u03c9\u03c4\u03b5\u03ca\u03bd\u03ce\u03bd \u03b3\u03b9\u03b1 \u03c4\u03bf \u03c3\u03c5\u03b3\u03ba\u03b5\u03ba\u03c1\u03b9\u03bc\u03ad\u03bd\u03bf \u03c5\u03bb\u03b9\u03ba\u03cc. - \u0397 \u03b1\u03c0\u03ac\u03bd\u03c4\u03b7\u03c3\u03b7 \u03c0\u03c1\u03ad\u03c0\u03b5\u03b9 \u03bd\u03b1 \u03b5\u03af\u03bd\u03b1\u03b9 \u03ad\u03bd\u03b1\u03c2 \u03ba\u03b1\u03b9 \u03bc\u03cc\u03bd\u03bf \u03b1\u03c1\u03b9\u03b8\u03bc\u03cc\u03c2 (\u03c0.\u03c7., 12) \u03c0\u03bf\u03c5 \u03b5\u03af\u03bd\u03b1\u03b9 \u03c4\u03b1 \u03b3\u03c1\u03b1\u03bc\u03bc\u03ac\u03c1\u03b9\u03b1 \u03b3\u03b9\u03b1 \u03ad\u03bd\u03b1 \u03ae 100\u03b3\u03c1 \u03ae 100ml \u03c4\u03bf\u03c5 \u03c5\u03bb\u03b9\u03ba\u03bf\u03cd, \u03c7\u03c9\u03c1\u03af\u03c2 \u03b5\u03c0\u03b9\u03c0\u03bb\u03ad\u03bf\u03bd \u03ba\u03b5\u03af\u03bc\u03b5\u03bd\u03bf, \u03bc\u03bf\u03bd\u03ac\u03b4\u03b5\u03c2 \u03bc\u03ad\u03c4\u03c1\u03b7\u03c3\u03b7\u03c2 \u03ae \u03b5\u03be\u03b7\u03b3\u03ae\u03c3\u03b5\u03b9\u03c2. - \u0391\u03bd \u03b4\u03b5\u03bd \u03bc\u03c0\u03bf\u03c1\u03b5\u03af\u03c2 \u03bd\u03b1 \u03b2\u03c1\u03b5\u03b9\u03c2 \u03c4\u03b7\u03bd \u03c0\u03bb\u03b7\u03c1\u03bf\u03c6\u03bf\u03c1\u03af\u03b1, \u03b1\u03c0\u03ac\u03bd\u03c4\u03b7\u03c3\u03b5 \u03bc\u03cc\u03bd\u03bf \u03bc\u03b5 \u03c4\u03bf\u03bd \u03b1\u03c1\u03b9\u03b8\u03bc\u03cc 0. - \u039c\u03b7\u03bd \u03c0\u03b5\u03c1\u03b9\u03bb\u03b1\u03bc\u03b2\u03ac\u03bd\u03b5\u03b9\u03c2 \u03ba\u03b1\u03bc\u03af\u03b1 \u03ac\u03bb\u03bb\u03b7 \u03b5\u03be\u03ae\u03b3\u03b7\u03c3\u03b7, \u03c0\u03c1\u03cc\u03c4\u03b1\u03c3\u03b7, \u03c3\u03c7\u03cc\u03bb\u03b9\u03bf \u03ae \u03c0\u03bb\u03b7\u03c1\u03bf\u03c6\u03bf\u03c1\u03af\u03b1. \u03a0\u03b1\u03c1\u03b1\u03b4\u03b5\u03af\u03b3\u03bc\u03b1\u03c4\u03b1: 1. \u03a5\u03bb\u03b9\u03ba\u03cc: \u03b1\u03c5\u03b3\u03cc -> \u0391\u03c0\u03ac\u03bd\u03c4\u03b7\u03c3\u03b7: 12 2. \u03a5\u03bb\u03b9\u03ba\u03cc: \u03c6\u03ad\u03c4\u03b1 -> \u0391\u03c0\u03ac\u03bd\u03c4\u03b7\u03c3\u03b7: 14 3. \u03a5\u03bb\u03b9\u03ba\u03cc: \u03b3\u03ac\u03bb\u03b1 \u03c0\u03bb\u03ae\u03c1\u03b5\u03c2 -> \u0391\u03c0\u03ac\u03bd\u03c4\u03b7\u03c3\u03b7: 3.4";
+      } else if (x == 6) {
+         return "\u0398\u03ad\u03bb\u03c9 \u03bd\u03b1 \u03bc\u03bf\u03c5 \u03b4\u03ce\u03c3\u03b5\u03b9\u03c2 \u03bc\u03cc\u03bd\u03bf \u03c4\u03bf\u03bd \u03b1\u03c1\u03b9\u03b8\u03bc\u03cc \u03c4\u03c9\u03bd \u03c5\u03b4\u03b1\u03c4\u03b1\u03bd\u03b8\u03c1\u03ac\u03ba\u03c9\u03bd \u03b3\u03b9\u03b1 \u03c4\u03bf \u03c3\u03c5\u03b3\u03ba\u03b5\u03ba\u03c1\u03b9\u03bc\u03ad\u03bd\u03bf \u03c5\u03bb\u03b9\u03ba\u03cc. - \u0397 \u03b1\u03c0\u03ac\u03bd\u03c4\u03b7\u03c3\u03b7 \u03c0\u03c1\u03ad\u03c0\u03b5\u03b9 \u03bd\u03b1 \u03b5\u03af\u03bd\u03b1\u03b9 \u03ad\u03bd\u03b1\u03c2 \u03ba\u03b1\u03b9 \u03bc\u03cc\u03bd\u03bf \u03b1\u03c1\u03b9\u03b8\u03bc\u03cc\u03c2 (\u03c0.\u03c7., 5) \u03c0\u03bf\u03c5 \u03b5\u03af\u03bd\u03b1\u03b9 \u03c4\u03b1 \u03b3\u03c1\u03b1\u03bc\u03bc\u03ac\u03c1\u03b9\u03b1 \u03b3\u03b9\u03b1 \u03ad\u03bd\u03b1 \u03ae 100\u03b3\u03c1 \u03ae 100ml \u03c4\u03bf\u03c5 \u03c5\u03bb\u03b9\u03ba\u03bf\u03cd, \u03c7\u03c9\u03c1\u03af\u03c2 \u03b5\u03c0\u03b9\u03c0\u03bb\u03ad\u03bf\u03bd \u03ba\u03b5\u03af\u03bc\u03b5\u03bd\u03bf, \u03bc\u03bf\u03bd\u03ac\u03b4\u03b5\u03c2 \u03bc\u03ad\u03c4\u03c1\u03b7\u03c3\u03b7\u03c2 \u03ae \u03b5\u03be\u03b7\u03b3\u03ae\u03c3\u03b5\u03b9\u03c2. - \u0391\u03bd \u03b4\u03b5\u03bd \u03bc\u03c0\u03bf\u03c1\u03b5\u03af\u03c2 \u03bd\u03b1 \u03b2\u03c1\u03b5\u03b9\u03c2 \u03c4\u03b7\u03bd \u03c0\u03bb\u03b7\u03c1\u03bf\u03c6\u03bf\u03c1\u03af\u03b1, \u03b1\u03c0\u03ac\u03bd\u03c4\u03b7\u03c3\u03b5 \u03bc\u03cc\u03bd\u03bf \u03bc\u03b5 \u03c4\u03bf\u03bd \u03b1\u03c1\u03b9\u03b8\u03bc\u03cc 0. - \u039c\u03b7\u03bd \u03c0\u03b5\u03c1\u03b9\u03bb\u03b1\u03bc\u03b2\u03ac\u03bd\u03b5\u03b9\u03c2 \u03ba\u03b1\u03bc\u03af\u03b1 \u03ac\u03bb\u03bb\u03b7 \u03b5\u03be\u03ae\u03b3\u03b7\u03c3\u03b7, \u03c0\u03c1\u03cc\u03c4\u03b1\u03c3\u03b7, \u03c3\u03c7\u03cc\u03bb\u03b9\u03bf \u03ae \u03c0\u03bb\u03b7\u03c1\u03bf\u03c6\u03bf\u03c1\u03af\u03b1. \u03a0\u03b1\u03c1\u03b1\u03b4\u03b5\u03af\u03b3\u03bc\u03b1\u03c4\u03b1: 1. \u03a5\u03bb\u03b9\u03ba\u03cc: \u03b1\u03c5\u03b3\u03cc -> \u0391\u03c0\u03ac\u03bd\u03c4\u03b7\u03c3\u03b7: 1.1 2. \u03a5\u03bb\u03b9\u03ba\u03cc: \u03c6\u03ad\u03c4\u03b1 -> \u0391\u03c0\u03ac\u03bd\u03c4\u03b7\u03c3\u03b7: 2 3. \u03a5\u03bb\u03b9\u03ba\u03cc: \u03b3\u03ac\u03bb\u03b1 \u03c0\u03bb\u03ae\u03c1\u03b5\u03c2 -> \u0391\u03c0\u03ac\u03bd\u03c4\u03b7\u03c3\u03b7: 5";
+      } else if (x == 7) {
+         return "\u0398\u03ad\u03bb\u03c9 \u03bd\u03b1 \u03bc\u03bf\u03c5 \u03b4\u03ce\u03c3\u03b5\u03b9\u03c2 \u03bc\u03cc\u03bd\u03bf \u03c4\u03bf\u03bd \u03b1\u03c1\u03b9\u03b8\u03bc\u03cc \u03c4\u03c9\u03bd \u03bb\u03b9\u03c0\u03b1\u03c1\u03ce\u03bd \u03b3\u03b9\u03b1 \u03c4\u03bf \u03c3\u03c5\u03b3\u03ba\u03b5\u03ba\u03c1\u03b9\u03bc\u03ad\u03bd\u03bf \u03c5\u03bb\u03b9\u03ba\u03cc. - \u0397 \u03b1\u03c0\u03ac\u03bd\u03c4\u03b7\u03c3\u03b7 \u03c0\u03c1\u03ad\u03c0\u03b5\u03b9 \u03bd\u03b1 \u03b5\u03af\u03bd\u03b1\u03b9 \u03ad\u03bd\u03b1\u03c2 \u03ba\u03b1\u03b9 \u03bc\u03cc\u03bd\u03bf \u03b1\u03c1\u03b9\u03b8\u03bc\u03cc\u03c2 (\u03c0.\u03c7., 10) \u03c0\u03bf\u03c5 \u03b5\u03af\u03bd\u03b1\u03b9 \u03c4\u03b1 \u03b3\u03c1\u03b1\u03bc\u03bc\u03ac\u03c1\u03b9\u03b1 \u03b3\u03b9\u03b1 \u03ad\u03bd\u03b1 \u03ae 100\u03b3\u03c1 \u03ae 100ml \u03c4\u03bf\u03c5 \u03c5\u03bb\u03b9\u03ba\u03bf\u03cd, \u03c7\u03c9\u03c1\u03af\u03c2 \u03b5\u03c0\u03b9\u03c0\u03bb\u03ad\u03bf\u03bd \u03ba\u03b5\u03af\u03bc\u03b5\u03bd\u03bf, \u03bc\u03bf\u03bd\u03ac\u03b4\u03b5\u03c2 \u03bc\u03ad\u03c4\u03c1\u03b7\u03c3\u03b7\u03c2 \u03ae \u03b5\u03be\u03b7\u03b3\u03ae\u03c3\u03b5\u03b9\u03c2. - \u0391\u03bd \u03b4\u03b5\u03bd \u03bc\u03c0\u03bf\u03c1\u03b5\u03af\u03c2 \u03bd\u03b1 \u03b2\u03c1\u03b5\u03b9\u03c2 \u03c4\u03b7\u03bd \u03c0\u03bb\u03b7\u03c1\u03bf\u03c6\u03bf\u03c1\u03af\u03b1, \u03b1\u03c0\u03ac\u03bd\u03c4\u03b7\u03c3\u03b5 \u03bc\u03cc\u03bd\u03bf \u03bc\u03b5 \u03c4\u03bf\u03bd \u03b1\u03c1\u03b9\u03b8\u03bc\u03cc 0. - \u039c\u03b7\u03bd \u03c0\u03b5\u03c1\u03b9\u03bb\u03b1\u03bc\u03b2\u03ac\u03bd\u03b5\u03b9\u03c2 \u03ba\u03b1\u03bc\u03af\u03b1 \u03ac\u03bb\u03bb\u03b7 \u03b5\u03be\u03ae\u03b3\u03b7\u03c3\u03b7, \u03c0\u03c1\u03cc\u03c4\u03b1\u03c3\u03b7, \u03c3\u03c7\u03cc\u03bb\u03b9\u03bf \u03ae \u03c0\u03bb\u03b7\u03c1\u03bf\u03c6\u03bf\u03c1\u03af\u03b1. \u03a0\u03b1\u03c1\u03b1\u03b4\u03b5\u03af\u03b3\u03bc\u03b1\u03c4\u03b1: 1. \u03a5\u03bb\u03b9\u03ba\u03cc: \u03b1\u03c5\u03b3\u03cc -> \u0391\u03c0\u03ac\u03bd\u03c4\u03b7\u03c3\u03b7: 10 2. \u03a5\u03bb\u03b9\u03ba\u03cc: \u03c6\u03ad\u03c4\u03b1 -> \u0391\u03c0\u03ac\u03bd\u03c4\u03b7\u03c3\u03b7: 21 3. \u03a5\u03bb\u03b9\u03ba\u03cc: \u03b3\u03ac\u03bb\u03b1 \u03c0\u03bb\u03ae\u03c1\u03b5\u03c2 -> \u0391\u03c0\u03ac\u03bd\u03c4\u03b7\u03c3\u03b7: 3.6";
+      } else {
+         return x == 8 ? "\u0398\u03ad\u03bb\u03c9 \u03bd\u03b1 \u03bc\u03bf\u03c5 \u03b4\u03b7\u03bc\u03b9\u03bf\u03c5\u03c1\u03b3\u03ae\u03c3\u03b5\u03b9\u03c2 \u0395\u039d\u0391 \u039c\u039f\u039d\u039f \u03b1\u03c0\u03bb\u03cc, \u03b9\u03c3\u03bf\u03c1\u03c1\u03bf\u03c0\u03b7\u03bc\u03ad\u03bd\u03bf \u03bc\u03b5\u03c3\u03b7\u03bc\u03b5\u03c1\u03b9\u03b1\u03bd\u03cc \u03b3\u03b5\u03cd\u03bc\u03b1 \u03bc\u03b5 \u03bb\u03af\u03b3\u03b1 \u03c5\u03bb\u03b9\u03ba\u03ac. \u03a4\u03bf \u03b3\u03b5\u03cd\u03bc\u03b1 \u03c0\u03c1\u03ad\u03c0\u03b5\u03b9 \u03bd\u03b1 \u03c0\u03b5\u03c1\u03b9\u03bb\u03b1\u03bc\u03b2\u03ac\u03bd\u03b5\u03b9 \u03c0\u03c1\u03c9\u03c4\u03b5\u0390\u03bd\u03b5\u03c2, \u03c6\u03c5\u03c4\u03b9\u03ba\u03ad\u03c2 \u03af\u03bd\u03b5\u03c2, \u03ba\u03b1\u03bb\u03ac \u03bb\u03b9\u03c0\u03b1\u03c1\u03ac \u03ba\u03b1\u03b9 \u03b2\u03b9\u03c4\u03b1\u03bc\u03af\u03bd\u03b5\u03c2. \u039d\u03b1 \u03b1\u03c0\u03bf\u03c6\u03b5\u03cd\u03b3\u03b5\u03c4\u03b1\u03b9 \u03c4\u03bf \u03c4\u03b7\u03b3\u03b1\u03bd\u03b7\u03c4\u03cc \u03c6\u03b1\u03b3\u03b7\u03c4\u03cc \u03ba\u03b1\u03b9 \u03bd\u03b1 \u03c0\u03c1\u03bf\u03c4\u03b9\u03bc\u03ce\u03bd\u03c4\u03b1\u03b9 \u03c5\u03b3\u03b9\u03b5\u03b9\u03bd\u03ad\u03c2 \u03bc\u03ad\u03b8\u03bf\u03b4\u03bf\u03b9 \u03bc\u03b1\u03b3\u03b5\u03b9\u03c1\u03ad\u03bc\u03b1\u03c4\u03bf\u03c2 (\u03c0.\u03c7., \u03c8\u03b7\u03c4\u03cc, \u03b2\u03c1\u03b1\u03c3\u03c4\u03cc \u03ae \u03bc\u03b1\u03b3\u03b5\u03b9\u03c1\u03b5\u03c5\u03c4\u03cc). \u0393\u03b5\u03bd\u03b9\u03ba\u03ad\u03c2 \u039f\u03b4\u03b7\u03b3\u03af\u03b5\u03c2 \u03c0\u03bf\u03c5 \u03c0\u03c1\u03ad\u03c0\u03b5\u03b9 \u03bd\u03b1 \u03b3\u03bd\u03c9\u03c1\u03b9\u03b6\u03b5\u03b9\u03c3:1. 1 \u03c6\u03bf\u03c1\u03ac \u03c4\u03b7\u03bd \u03b5\u03b2\u03b4\u03bf\u03bc\u03ac\u03b4\u03b1 \u03c8\u03ac\u03c1\u03b9, \u03c0\u03bb\u03bf\u03cd\u03c3\u03b9\u03bf \u03c3\u03b5 \u03c9-3 (\u03c0.\u03c7., \u03c3\u03bf\u03bb\u03bf\u03bc\u03cc\u03c2, \u03c3\u03b1\u03c1\u03b4\u03ad\u03bb\u03b5\u03c2, \u03c3\u03ba\u03bf\u03c5\u03bc\u03c0\u03c1\u03af).2. 2 \u03c6\u03bf\u03c1\u03ad\u03c2 \u03c4\u03b7\u03bd \u03b5\u03b2\u03b4\u03bf\u03bc\u03ac\u03b4\u03b1 \u03bb\u03b1\u03b4\u03b5\u03c1\u03ac \u03c6\u03b1\u03b3\u03b7\u03c4\u03ac (\u03c0.\u03c7., \u03c6\u03b1\u03c3\u03bf\u03bb\u03ac\u03ba\u03b9\u03b1, \u03bc\u03c0\u03c1\u03b9\u03ac\u03bc, \u03bc\u03c0\u03ac\u03bc\u03b9\u03b5\u03c2, \u03c3\u03c0\u03b1\u03bd\u03b1\u03ba\u03cc\u03c1\u03c5\u03b6\u03bf).3. 1 \u03c6\u03bf\u03c1\u03ac \u03c4\u03b7\u03bd \u03b5\u03b2\u03b4\u03bf\u03bc\u03ac\u03b4\u03b1 \u03cc\u03c3\u03c0\u03c1\u03b9\u03b1 (\u03c0.\u03c7., \u03c6\u03b1\u03ba\u03ad\u03c2, \u03c1\u03b5\u03b2\u03af\u03b8\u03b9\u03b1, \u03c6\u03b1\u03c3\u03cc\u03bb\u03b9\u03b1).4. \u03a4\u03b9\u03c2 \u03c5\u03c0\u03cc\u03bb\u03bf\u03b9\u03c0\u03b5\u03c2 \u03b7\u03bc\u03ad\u03c1\u03b5\u03c2 \u03ba\u03c1\u03ad\u03b1\u03c2:   - \u039c\u03af\u03b1 \u03c6\u03bf\u03c1\u03ac \u03ba\u03cc\u03ba\u03ba\u03b9\u03bd\u03bf \u03ba\u03c1\u03ad\u03b1\u03c2 (\u03c0.\u03c7., \u03bc\u03bf\u03c3\u03c7\u03ac\u03c1\u03b9 \u03ae \u03c7\u03bf\u03b9\u03c1\u03b9\u03bd\u03cc).   - \u03a4\u03b9\u03c2 \u03ac\u03bb\u03bb\u03b5\u03c2 \u03b7\u03bc\u03ad\u03c1\u03b5\u03c2 \u03bb\u03b5\u03c5\u03ba\u03cc \u03ba\u03c1\u03ad\u03b1\u03c2 (\u03c0.\u03c7., \u03ba\u03bf\u03c4\u03cc\u03c0\u03bf\u03c5\u03bb\u03bf \u03ae \u03b3\u03b1\u03bb\u03bf\u03c0\u03bf\u03cd\u03bb\u03b1).\u03a0\u03b1\u03c1\u03b1\u03b4\u03b5\u03af\u03b3\u03bc\u03b1\u03c4\u03b1 \u03b3\u03b5\u03c5\u03bc\u03ac\u03c4\u03c9\u03bd:- \u03a8\u03ac\u03c1\u03b9: \u03a8\u03b7\u03c4\u03cc\u03c2 \u03c3\u03bf\u03bb\u03bf\u03bc\u03cc\u03c2 \u03bc\u03b5 \u03bc\u03c0\u03c1\u03cc\u03ba\u03bf\u03bb\u03bf \u03c3\u03c4\u03bf\u03bd \u03b1\u03c4\u03bc\u03cc, \u03c3\u03b1\u03c1\u03b4\u03ad\u03bb\u03b5\u03c2 \u03bc\u03b5 \u03c0\u03b1\u03c4\u03ac\u03c4\u03b5\u03c2 \u03c6\u03bf\u03cd\u03c1\u03bd\u03bf\u03c5.- \u039b\u03b1\u03b4\u03b5\u03c1\u03ac: \u03a6\u03b1\u03c3\u03bf\u03bb\u03ac\u03ba\u03b9\u03b1 \u03bc\u03b5 \u03b5\u03bb\u03b1\u03b9\u03cc\u03bb\u03b1\u03b4\u03bf, \u03bc\u03c0\u03c1\u03b9\u03ac\u03bc.- \u038c\u03c3\u03c0\u03c1\u03b9\u03b1: \u03a6\u03b1\u03ba\u03ad\u03c2 \u03c3\u03bf\u03cd\u03c0\u03b1, \u03c1\u03b5\u03b2\u03af\u03b8\u03b9\u03b1 \u03bb\u03b5\u03bc\u03bf\u03bd\u03ac\u03c4\u03b1.- \u039a\u03cc\u03ba\u03ba\u03b9\u03bd\u03bf \u03ba\u03c1\u03ad\u03b1\u03c2: \u039c\u03bf\u03c3\u03c7\u03b1\u03c1\u03af\u03c3\u03b9\u03b1 \u03bc\u03c0\u03c1\u03b9\u03b6\u03cc\u03bb\u03b1 \u03bc\u03b5 \u03c1\u03cd\u03b6\u03b9.- \u039b\u03b5\u03c5\u03ba\u03cc \u03ba\u03c1\u03ad\u03b1\u03c2: \u03a8\u03b7\u03c4\u03cc \u03c3\u03c4\u03ae\u03b8\u03bf\u03c2 \u03ba\u03bf\u03c4\u03cc\u03c0\u03bf\u03c5\u03bb\u03bf\u03c5 \u03bc\u03b5 \u03ba\u03b9\u03bd\u03cc\u03b1.\u03a4\u03ce\u03c1\u03b1 \u03b8\u03ad\u03bb\u03c9 \u03ad\u03bd\u03b1 \u03b3\u03b5\u03cd\u03bc\u03b1 \u03b1\u03c0\u03cc \u03bc\u03af\u03b1 \u03b1\u03c0\u03cc \u03b1\u03c5\u03c4\u03ad\u03c2 \u03c4\u03b9\u03c2 \u03ba\u03b1\u03c4\u03b7\u03b3\u03bf\u03c1\u03af\u03b5\u03c2 \u03c0\u03bf\u03c5 \u03bd\u03b1 \u03b5\u03af\u03bd\u03b1\u03b9 \u03bc\u03b5\u03c3\u03b7\u03bc\u03b5\u03c1\u03b9\u03b1\u03bd\u03cc \u03ba\u03b1\u03b9 \u03bd\u03b1 \u03c0\u03bb\u03b7\u03c1\u03bf\u03af \u03c4\u03b9\u03c2 \u03c0\u03b1\u03c1\u03b1\u03c0\u03ac\u03bd\u03c9 \u03bf\u03b4\u03b7\u03b3\u03af\u03b5\u03c2." : "";
+      }
+   }
+
+   public static Macros[] make_food(int choose_meal, String requirements) throws URISyntaxException {
+      ArrayList<String> foodlist = new ArrayList();
+      ArrayList<Double> calorieslist = new ArrayList();
+      ArrayList<Double> proteinlist = new ArrayList();
+      ArrayList<Double> carbslist = new ArrayList();
+      ArrayList<Double> fatlist = new ArrayList();
+      String meal = "";
+      String var10000;
+      switch (choose_meal) {
+         case 1:
+            var10000 = geumata(1);
+            meal = chatGPT("\u03b8\u03b5\u03bb\u03c9 \u03b5\u03bd\u03b1 \u03a0\u03a1\u03a9\u0399\u039d\u039f " + var10000 + requirements);
+            break;
+         case 2:
+            var10000 = geumata(1);
+            meal = chatGPT("\u03b8\u03b5\u03bb\u03c9 \u03b5\u03bd\u03b1 \u0394\u0395\u039a\u0391\u03a4\u0399\u0391\u039d\u039f " + var10000 + requirements);
+            break;
+         case 3:
+            var10000 = geumata(8);
+            meal = chatGPT("\u03b8\u03b5\u03bb\u03c9 \u03b5\u03bd\u03b1 \u039c\u0395\u03a3\u039c\u0395\u03a1\u0399\u0391\u039d\u039f" + var10000 + requirements);
+            break;
+         case 4:
+            var10000 = geumata(1);
+            meal = chatGPT("\u03b8\u03b5\u03bb\u03c9 \u03b5\u03bd\u03b1 \u0391\u03a0\u039f\u0393\u0395\u03a5\u039c\u0391\u03a4\u0399\u039d\u0391" + var10000 + requirements);
+            break;
+         case 5:
+            var10000 = geumata(1);
+            meal = chatGPT("\u03b8\u03b5\u03bb\u03c9 \u03b5\u03bd\u03b1 \u0392\u03a1\u0391\u0394\u0399\u039d\u039f " + var10000 + requirements);
+      }
+
+      var10000 = geumata(2);
+      String ingredients = chatGPT(var10000 + meal);
+      var10000 = geumata(3);
+      String name_meal = chatGPT(var10000 + meal);
+      int x = 0;
+
+      for(int i = 0; i < ingredients.length(); ++i) {
+         if (",".equals(String.valueOf(ingredients.charAt(i)))) {
+            foodlist.add(ingredients.substring(x, i));
+            x = i + 2;
+         } else if (".".equals(String.valueOf(ingredients.charAt(i)))) {
+            foodlist.add(ingredients.substring(x, i));
+            x = i + 2;
+         }
+      }
+
+      Macros[] meal_panel = new Macros[ingredients.length() + 1];
+      int i = false;
+
+      while(true) {
+         try {
+            meal_panel = macro_numbers(foodlist, calorieslist, proteinlist, carbslist, fatlist, name_meal);
+            break;
+         } catch (Exception var14) {
+            i = true;
+            if (i) {
+               break;
+            }
+         }
+      }
+
+      return meal_panel;
+   }
+
+   private static double extractNumber(String response, Pattern pattern) {
+      Matcher matcher = pattern.matcher(response);
+      if (matcher.find()) {
+         return Double.parseDouble(matcher.group());
+      } else {
+         throw new IllegalArgumentException("\u0394\u03b5\u03bd \u03b2\u03c1\u03ad\u03b8\u03b7\u03ba\u03b5 \u03b1\u03c1\u03b9\u03b8\u03bc\u03cc\u03c2 \u03c3\u03c4\u03b7\u03bd \u03b1\u03c0\u03ac\u03bd\u03c4\u03b7\u03c3\u03b7: " + response);
+      }
+   }
+
+   public static Macros[] macro_numbers(List<String> food, List<Double> calories, List<Double> protein, List<Double> carbs, List<Double> fat, String name_meal) throws URISyntaxException {
+      for(int i = 0; i < food.size(); ++i) {
+         String var10000 = geumata(4);
+         String calorieResponse = chatGPT(var10000 + " \u03c4\u03bf\u03c5 \u03c5\u03bb\u03b9\u03ba\u03bf\u03cd " + (String)food.get(i) + " \u0391\u03a0\u0391\u039d\u03a4\u0391 \u039c\u0395 \u0395\u039d\u0391\u039d \u0391\u03a1\u0399\u0398\u039c\u039f");
+         var10000 = geumata(5);
+         String proteinResponse = chatGPT(var10000 + " \u03c4\u03bf\u03c5 \u03c5\u03bb\u03b9\u03ba\u03bf\u03cd " + (String)food.get(i) + " \u0391\u03a0\u0391\u039d\u03a4\u0391 \u039c\u0395 \u0395\u039d\u0391\u039d \u0391\u03a1\u0399\u0398\u039c\u039f");
+         var10000 = geumata(6);
+         String carbResponse = chatGPT(var10000 + " \u03c4\u03bf\u03c5 \u03c5\u03bb\u03b9\u03ba\u03bf\u03cd " + (String)food.get(i) + " \u0391\u03a0\u0391\u039d\u03a4\u0391 \u039c\u0395 \u0395\u039d\u0391\u039d \u0391\u03a1\u0399\u0398\u039c\u039f");
+         var10000 = geumata(7);
+         String fatResponse = chatGPT(var10000 + " \u03c4\u03bf\u03c5 \u03c5\u03bb\u03b9\u03ba\u03bf\u03cd " + (String)food.get(i) + " \u0391\u03a0\u0391\u039d\u03a4\u0391 \u039c\u039f\u039d\u039f \u039c\u0395 \u0395\u039d\u0391\u039d \u0391\u03a1\u0399\u0398\u039c\u039f");
+         Pattern pattern = Pattern.compile("\\d+(\\.\\d+)?");
+         double cal = extractNumber(calorieResponse, pattern);
+         double prot = extractNumber(proteinResponse, pattern);
+         double carb = extractNumber(carbResponse, pattern);
+         double ft = extractNumber(fatResponse, pattern);
+         calories.add(cal);
+         protein.add(prot);
+         carbs.add(carb);
+         fat.add(ft);
+      }
+
+      Macros[] meal_list = new Macros[food.size() + 1];
+      meal_list[0] = new Macros(name_meal);
+
+      for(int i = 1; i < meal_list.length; ++i) {
+         meal_list[i] = new Macros((String)food.get(i - 1), (Double)calories.get(i - 1), (Double)protein.get(i - 1), (Double)carbs.get(i - 1), (Double)fat.get(i - 1));
+      }
+
+      return meal_list;
+   }
+
+   public static Macros DAYS_MACROS(double weightKg, double heightCm, int age, String gender, double durationMin, String sport, String target) throws URISyntaxException {
+      double BMR = gender.equalsIgnoreCase("Male") ? 10.0 * weightKg + 6.25 * heightCm - (double)(5 * age) + 5.0 : 10.0 * weightKg + 6.25 * heightCm - (double)(5 * age) - 161.0;
+      double caloriesBurned = getMetValue(sport) * 0.0175 * weightKg * durationMin;
+      double totalCalories = BMR + caloriesBurned;
+      if (target == "Lose weight") {
+         totalCalories = BMR * 0.85 + caloriesBurned;
+      } else if (target == "Gain muscle") {
+         totalCalories = BMR * 1.15 + caloriesBurned;
+      }
+
+      double proteinCalories = totalCalories * 0.25;
+      double carbCalories = totalCalories * 0.5;
+      double fatCalories = totalCalories * 0.25;
+      long proteinGrams = Math.round(proteinCalories / 4.0);
+      long carbGrams = Math.round(carbCalories / 4.0);
+      long fatGrams = Math.round(fatCalories / 9.0);
+      long roundedCalories = Math.round(totalCalories / 1.0);
+      System.out.println("\u0397\u03bb\u03b9\u03ba\u03af\u03b1: " + age + " \u03b5\u03c4\u03ce\u03bd");
+      System.out.println("\u0398\u03b5\u03c1\u03bc\u03af\u03b4\u03b5\u03c2 \u039a\u03b1\u03cd\u03c3\u03b7\u03c2: " + totalCalories + " kcal");
+      System.out.println("\u03a0\u03c1\u03c9\u03c4\u03b5\u0390\u03bd\u03b5\u03c2: " + proteinGrams + " \u03b3\u03c1");
+      System.out.println("\u03a5\u03b4\u03b1\u03c4\u03ac\u03bd\u03b8\u03c1\u03b1\u03ba\u03b5\u03c2: " + carbGrams + " \u03b3\u03c1");
+      System.out.println("\u039b\u03af\u03c0\u03b7: " + fatGrams + " \u03b3\u03c1");
+      return new Macros(String.valueOf(age), (double)roundedCalories, (double)proteinGrams, (double)carbGrams, (double)fatGrams, 0.0);
+   }
+
+   public static ArrayList<String> outPut(ArrayList<Macros[]> diet, ArrayList<double[]> grammarias) {
+      StringBuilder output = new StringBuilder();
+      ArrayList<String> program = new ArrayList();
+      String[] days = new String[]{"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
+      output.append("\n   Weekly Meal Plan\n\n   =================\n");
+
+      for(int i = 0; i < days.length; ++i) {
+         output.setLength(0);
+         output.append("  -----" + days[i] + "-----  \n\n");
+
+         for(int x = 1; x < 6; ++x) {
+            output.append("Meal " + x + ": \n");
+            output.append(outPut_Help(diet, grammarias, x, i));
+            output.append("\n");
+         }
+
+         program.add(output.toString());
+      }
+
+      return program;
+   }
+
+   public static String outPut_Help(ArrayList<Macros[]> diet, ArrayList<double[]> grammarias, int x, int i) {
+      StringBuilder output;
+      output = new StringBuilder();
+      Macros[] var10001;
+      int y;
+      String var6;
+      label304:
+      switch (x) {
+         case 1:
+            if (i != 0 && i != 2 && i != 4 && i != 6) {
+               var10001 = (Macros[])diet.get(1);
+               output.append("Name-> " + var10001[0].name);
+
+               for(y = 1; y < ((Macros[])diet.get(1)).length; ++y) {
+                  if (Math.round(((double[])grammarias.get(1))[y - 1] * 100.0) > 250L) {
+                     var6 = ((Macros[])diet.get(1))[y].name;
+                     output.append("\n   -" + var6 + " 165.0\u03b3\u03c1.\n");
+                  } else if (Math.round(((double[])grammarias.get(1))[y - 1] * 100.0) < 20L) {
+                     var6 = ((Macros[])diet.get(1))[y].name;
+                     output.append("\n   -" + var6 + " " + Math.round((((double[])grammarias.get(1))[y - 1] + (double)y / 10.0) * 100.0) + "\u03b3\u03c1.\n");
+                  } else {
+                     var6 = ((Macros[])diet.get(1))[y].name;
+                     output.append("\n   -" + var6 + " " + Math.round(((double[])grammarias.get(1))[y - 1] * 100.0) + "\u03b3\u03c1.\n");
+                  }
+               }
+
+               return output.toString();
+            } else {
+               var10001 = (Macros[])diet.get(0);
+               output.append("Name-> " + var10001[0].name);
+
+               for(y = 1; y < ((Macros[])diet.get(0)).length; ++y) {
+                  if (Math.round(((double[])grammarias.get(0))[y - 1] * 100.0) > 250L) {
+                     var6 = ((Macros[])diet.get(0))[y].name;
+                     output.append("\n   -" + var6 + " 180.0\u03b3\u03c1.\n");
+                  } else if (Math.round(((double[])grammarias.get(0))[y - 1] * 100.0) < 20L) {
+                     var6 = ((Macros[])diet.get(0))[y].name;
+                     output.append("\n   -" + var6 + " " + Math.round((((double[])grammarias.get(0))[y - 1] + (double)y / 10.0) * 100.0) + "\u03b3\u03c1.\n");
+                  } else {
+                     var6 = ((Macros[])diet.get(0))[y].name;
+                     output.append("\n   -" + var6 + " " + Math.round(((double[])grammarias.get(0))[y - 1] * 100.0) + "\u03b3\u03c1.\n");
+                  }
+               }
+
+               return output.toString();
+            }
+         case 2:
+            if (i != 0 && i != 2 && i != 4 && i != 6) {
+               var10001 = (Macros[])diet.get(3);
+               output.append("Name-> " + var10001[0].name);
+
+               for(y = 1; y < ((Macros[])diet.get(3)).length; ++y) {
+                  if (Math.round(((double[])grammarias.get(3))[y - 1] * 100.0) > 250L) {
+                     var6 = ((Macros[])diet.get(3))[y].name;
+                     output.append("\n   -" + var6 + " 150.0\u03b3\u03c1.\n");
+                  } else if (Math.round(((double[])grammarias.get(3))[y - 1] * 100.0) < 20L) {
+                     var6 = ((Macros[])diet.get(3))[y].name;
+                     output.append("\n   -" + var6 + " " + Math.round((((double[])grammarias.get(3))[y - 1] + (double)y / 10.0) * 100.0) + "\u03b3\u03c1.\n");
+                  } else {
+                     var6 = ((Macros[])diet.get(3))[y].name;
+                     output.append("\n   -" + var6 + " " + Math.round(((double[])grammarias.get(3))[y - 1] * 100.0) + "\u03b3\u03c1.\n");
+                  }
+               }
+
+               return output.toString();
+            } else {
+               var10001 = (Macros[])diet.get(2);
+               output.append("Name-> " + var10001[0].name);
+
+               for(y = 1; y < ((Macros[])diet.get(2)).length; ++y) {
+                  if (Math.round(((double[])grammarias.get(2))[y - 1] * 100.0) > 250L) {
+                     var6 = ((Macros[])diet.get(2))[y].name;
+                     output.append("\n   -" + var6 + " 197.0\u03b3\u03c1.\n");
+                  } else if (Math.round(((double[])grammarias.get(2))[y - 1] * 100.0) < 20L) {
+                     var6 = ((Macros[])diet.get(2))[y].name;
+                     output.append("\n   -" + var6 + " " + Math.round((((double[])grammarias.get(2))[y - 1] + (double)y / 10.0) * 100.0) + "\u03b3\u03c1.\n");
+                  } else {
+                     var6 = ((Macros[])diet.get(2))[y].name;
+                     output.append("\n   -" + var6 + " " + Math.round(((double[])grammarias.get(2))[y - 1] * 100.0) + "\u03b3\u03c1.\n");
+                  }
+               }
+
+               return output.toString();
+            }
+         case 3:
+            switch (i) {
+               case 0:
+                  var10001 = (Macros[])diet.get(8);
+                  output.append("Name-> " + var10001[0].name);
+
+                  for(y = 1; y < ((Macros[])diet.get(8)).length; ++y) {
+                     if (Math.round(((double[])grammarias.get(8))[y - 1] * 100.0) > 250L) {
+                        var6 = ((Macros[])diet.get(8))[y].name;
+                        output.append("\n   -" + var6 + " 240.0\u03b3\u03c1.\n");
+                     } else if (Math.round(((double[])grammarias.get(8))[y - 1] * 100.0) < 20L) {
+                        var6 = ((Macros[])diet.get(8))[y].name;
+                        output.append("\n   -" + var6 + " " + Math.round((((double[])grammarias.get(8))[y - 1] + (double)y / 10.0) * 100.0) + "\u03b3\u03c1.\n");
+                     } else {
+                        var6 = ((Macros[])diet.get(8))[y].name;
+                        output.append("\n   -" + var6 + " " + Math.round(((double[])grammarias.get(8))[y - 1] * 100.0) + "\u03b3\u03c1.\n");
+                     }
+                  }
+
+                  return output.toString();
+               case 1:
+                  var10001 = (Macros[])diet.get(11);
+                  output.append("Name-> " + var10001[0].name);
+
+                  for(y = 1; y < ((Macros[])diet.get(11)).length; ++y) {
+                     if (Math.round(((double[])grammarias.get(11))[y - 1] * 100.0) > 250L) {
+                        var6 = ((Macros[])diet.get(11))[y].name;
+                        output.append("\n   -" + var6 + " 215.0\u03b3\u03c1.\n");
+                     } else if (Math.round(((double[])grammarias.get(11))[y - 1] * 100.0) < 20L) {
+                        var6 = ((Macros[])diet.get(11))[y].name;
+                        output.append("\n   -" + var6 + " " + Math.round((((double[])grammarias.get(11))[y - 1] + (double)y / 10.0) * 100.0) + "\u03b3\u03c1.\n");
+                     } else {
+                        var6 = ((Macros[])diet.get(11))[y].name;
+                        output.append("\n   -" + var6 + " " + Math.round(((double[])grammarias.get(11))[y - 1] * 100.0) + "\u03b3\u03c1.\n");
+                     }
+                  }
+
+                  return output.toString();
+               case 2:
+                  var10001 = (Macros[])diet.get(14);
+                  output.append("Name-> " + var10001[0].name);
+
+                  for(y = 1; y < ((Macros[])diet.get(14)).length; ++y) {
+                     if (Math.round(((double[])grammarias.get(14))[y - 1] * 100.0) > 250L) {
+                        var6 = ((Macros[])diet.get(14))[y].name;
+                        output.append("\n   -" + var6 + " 200\u03b3\u03c1.\n");
+                     } else if (Math.round(((double[])grammarias.get(14))[y - 1] * 100.0) < 20L) {
+                        var6 = ((Macros[])diet.get(14))[y].name;
+                        output.append("\n   -" + var6 + " " + Math.round((((double[])grammarias.get(14))[y - 1] + (double)y / 10.0) * 100.0) + "\u03b3\u03c1.\n");
+                     } else {
+                        var6 = ((Macros[])diet.get(14))[y].name;
+                        output.append("\n   -" + var6 + " " + Math.round(((double[])grammarias.get(14))[y - 1] * 100.0) + "\u03b3\u03c1.\n");
+                     }
+                  }
+
+                  return output.toString();
+               case 3:
+                  var10001 = (Macros[])diet.get(12);
+                  output.append("Name-> " + var10001[0].name);
+
+                  for(y = 1; y < ((Macros[])diet.get(12)).length; ++y) {
+                     if (Math.round(((double[])grammarias.get(12))[y - 1] * 100.0) > 250L) {
+                        var6 = ((Macros[])diet.get(12))[y].name;
+                        output.append("\n   -" + var6 + " 250.0\u03b3\u03c1.\n");
+                     } else if (Math.round(((double[])grammarias.get(12))[y - 1] * 100.0) < 20L) {
+                        var6 = ((Macros[])diet.get(12))[y].name;
+                        output.append("\n   -" + var6 + " " + Math.round((((double[])grammarias.get(12))[y - 1] + (double)y / 10.0) * 100.0) + "\u03b3\u03c1.\n");
+                     } else {
+                        var6 = ((Macros[])diet.get(12))[y].name;
+                        output.append("\n   -" + var6 + " " + Math.round(((double[])grammarias.get(12))[y - 1] * 100.0) + "\u03b3\u03c1.\n");
+                     }
+                  }
+
+                  return output.toString();
+               case 4:
+                  var10001 = (Macros[])diet.get(9);
+                  output.append("Name-> " + var10001[0].name);
+
+                  for(y = 1; y < ((Macros[])diet.get(9)).length; ++y) {
+                     if (Math.round(((double[])grammarias.get(9))[y - 1] * 100.0) > 250L) {
+                        var6 = ((Macros[])diet.get(9))[y].name;
+                        output.append("\n   -" + var6 + " 215.0\u03b3\u03c1.\n");
+                     } else if (Math.round(((double[])grammarias.get(9))[y - 1] * 100.0) < 20L) {
+                        var6 = ((Macros[])diet.get(9))[y].name;
+                        output.append("\n   -" + var6 + " " + Math.round((((double[])grammarias.get(9))[y - 1] + (double)y / 10.0) * 100.0) + "\u03b3\u03c1.\n");
+                     } else {
+                        var6 = ((Macros[])diet.get(9))[y].name;
+                        output.append("\n   -" + var6 + " " + Math.round(((double[])grammarias.get(9))[y - 1] * 100.0) + "\u03b3\u03c1.\n");
+                     }
+                  }
+
+                  return output.toString();
+               case 5:
+                  var10001 = (Macros[])diet.get(13);
+                  output.append("Name-> " + var10001[0].name);
+
+                  for(y = 1; y < ((Macros[])diet.get(13)).length; ++y) {
+                     if (Math.round(((double[])grammarias.get(13))[y - 1] * 100.0) > 250L) {
+                        var6 = ((Macros[])diet.get(13))[y].name;
+                        output.append("\n   -" + var6 + " 200\u03b3\u03c1.\n");
+                     } else if (Math.round(((double[])grammarias.get(13))[y - 1] * 100.0) < 20L) {
+                        var6 = ((Macros[])diet.get(13))[y].name;
+                        output.append("\n   -" + var6 + " " + Math.round((((double[])grammarias.get(13))[y - 1] + (double)y / 10.0) * 100.0) + "\u03b3\u03c1.\n");
+                     } else {
+                        var6 = ((Macros[])diet.get(13))[y].name;
+                        output.append("\n   -" + var6 + " " + Math.round(((double[])grammarias.get(13))[y - 1] * 100.0) + "\u03b3\u03c1.\n");
+                     }
+                  }
+
+                  return output.toString();
+               case 6:
+                  var10001 = (Macros[])diet.get(10);
+                  output.append("Name-> " + var10001[0].name);
+
+                  for(y = 1; y < ((Macros[])diet.get(10)).length; ++y) {
+                     if (Math.round(((double[])grammarias.get(10))[y - 1] * 100.0) > 250L) {
+                        var6 = ((Macros[])diet.get(10))[y].name;
+                        output.append("\n   -" + var6 + " 190.0\u03b3\u03c1.\n");
+                     } else if (Math.round(((double[])grammarias.get(10))[y - 1] * 100.0) < 20L) {
+                        var6 = ((Macros[])diet.get(10))[y].name;
+                        output.append("\n   -" + var6 + " " + Math.round((((double[])grammarias.get(10))[y - 1] + (double)y / 10.0) * 100.0) + "\u03b3\u03c1.\n");
+                     } else {
+                        var6 = ((Macros[])diet.get(10))[y].name;
+                        output.append("\n   -" + var6 + " " + Math.round(((double[])grammarias.get(10))[y - 1] * 100.0) + "\u03b3\u03c1.\n");
+                     }
+                  }
+                  break label304;
+               default:
+                  return output.toString();
+            }
+         case 4:
+            if (i != 0 && i != 2 && i != 4 && i != 6) {
+               var10001 = (Macros[])diet.get(5);
+               output.append("Name-> " + var10001[0].name);
+
+               for(y = 1; y < ((Macros[])diet.get(5)).length; ++y) {
+                  if (Math.round(((double[])grammarias.get(5))[y - 1] * 100.0) > 250L) {
+                     var6 = ((Macros[])diet.get(5))[y].name;
+                     output.append("\n   -" + var6 + " 186.0\u03b3\u03c1.\n");
+                  } else if (Math.round(((double[])grammarias.get(5))[y - 1] * 100.0) < 20L) {
+                     var6 = ((Macros[])diet.get(5))[y].name;
+                     output.append("\n   -" + var6 + " " + Math.round((((double[])grammarias.get(5))[y - 1] + (double)y / 10.0) * 100.0) + "\u03b3\u03c1.\n");
+                  } else {
+                     var6 = ((Macros[])diet.get(5))[y].name;
+                     output.append("\n   -" + var6 + " " + Math.round(((double[])grammarias.get(5))[y - 1] * 100.0) + "\u03b3\u03c1.\n");
+                  }
+               }
+
+               return output.toString();
+            } else {
+               var10001 = (Macros[])diet.get(4);
+               output.append("Name-> " + var10001[0].name);
+
+               for(y = 1; y < ((Macros[])diet.get(4)).length; ++y) {
+                  if (Math.round(((double[])grammarias.get(4))[y - 1] * 100.0) > 250L) {
+                     var6 = ((Macros[])diet.get(4))[y].name;
+                     output.append("\n   -" + var6 + " 145.0\u03b3\u03c1.\n");
+                  } else if (Math.round(((double[])grammarias.get(4))[y - 1] * 100.0) < 20L) {
+                     var6 = ((Macros[])diet.get(4))[y].name;
+                     output.append("\n   -" + var6 + " " + Math.round((((double[])grammarias.get(4))[y - 1] + (double)y / 10.0) * 100.0) + "\u03b3\u03c1.\n");
+                  } else {
+                     var6 = ((Macros[])diet.get(4))[y].name;
+                     output.append("\n   -" + var6 + " " + Math.round(((double[])grammarias.get(4))[y - 1] * 100.0) + "\u03b3\u03c1.\n");
+                  }
+               }
+
+               return output.toString();
+            }
+         case 5:
+            if (i != 0 && i != 2 && i != 4 && i != 6) {
+               var10001 = (Macros[])diet.get(7);
+               output.append("Name-> " + var10001[0].name);
+
+               for(y = 1; y < ((Macros[])diet.get(7)).length; ++y) {
+                  if (Math.round(((double[])grammarias.get(7))[y - 1] * 100.0) > 250L) {
+                     var6 = ((Macros[])diet.get(7))[y].name;
+                     output.append("\n   -" + var6 + " 190.0\u03b3\u03c1.\n");
+                  } else if (Math.round(((double[])grammarias.get(7))[y - 1] * 100.0) < 20L) {
+                     var6 = ((Macros[])diet.get(7))[y].name;
+                     output.append("\n   -" + var6 + " " + Math.round((((double[])grammarias.get(7))[y - 1] + (double)y / 10.0) * 100.0) + "\u03b3\u03c1.\n");
+                  } else {
+                     var6 = ((Macros[])diet.get(7))[y].name;
+                     output.append("\n   -" + var6 + " " + Math.round(((double[])grammarias.get(7))[y - 1] * 100.0) + "\u03b3\u03c1.\n");
+                  }
+               }
+            } else {
+               var10001 = (Macros[])diet.get(6);
+               output.append("Name-> " + var10001[0].name);
+
+               for(y = 1; y < ((Macros[])diet.get(6)).length; ++y) {
+                  if (Math.round(((double[])grammarias.get(6))[y - 1] * 100.0) > 250L) {
+                     var6 = ((Macros[])diet.get(6))[y].name;
+                     output.append("\n   -" + var6 + " 196.0\u03b3\u03c1.\n");
+                  } else if (Math.round(((double[])grammarias.get(6))[y - 1] * 100.0) < 20L) {
+                     var6 = ((Macros[])diet.get(6))[y].name;
+                     output.append("\n   -" + var6 + " " + Math.round((((double[])grammarias.get(6))[y - 1] + (double)y / 10.0) * 100.0) + "\u03b3\u03c1.\n");
+                  } else {
+                     var6 = ((Macros[])diet.get(6))[y].name;
+                     output.append("\n   -" + var6 + " " + Math.round(((double[])grammarias.get(6))[y - 1] * 100.0) + "\u03b3\u03c1.\n");
+                  }
+               }
+            }
+      }
+
+      return output.toString();
+   }
+}
