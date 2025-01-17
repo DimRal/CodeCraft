@@ -120,8 +120,6 @@ public class AI {
                         success=true;
                     }// Αν πετύχει, τερματίζει
                 } catch (Exception e) {
-                    System.err.println("Προέκυψε σφάλμα: " + e.getMessage());
-                    System.out.println("Επανάληψη προσπάθειας...");
                 }
             }
         }
