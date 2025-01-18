@@ -9,7 +9,7 @@ MealPlanner
 Βήματα:
 
 -Εντοπίστε το σημείο στον κώδικα όπου ζητείται το AI Key:
-src/main/java/code/craft/AI.java     ,σειρα 188
+src/main/java/code/craft/AI.java     ,σειρα 161
 
 -πρόσθεσε στο σημειο---> put your key here 
  
